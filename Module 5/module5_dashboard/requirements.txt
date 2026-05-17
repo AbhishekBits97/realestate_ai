@@ -1,0 +1,30 @@
+# ============================================================
+# Module 5 — Streamlit Dashboard Requirements
+# ============================================================
+
+# Dashboard core
+streamlit==1.35.0
+plotly==5.22.0
+pandas==2.2.1
+numpy==1.26.4
+
+# Mapping
+pydeck==0.9.1
+
+# Utilities
+loguru==0.7.2
+
+# Optional: for loading real model outputs
+pyarrow==15.0.2
+joblib==1.4.2
+scikit-learn==1.4.2
+
+# Optional: SHAP (for real explanations)
+# shap==0.45.0
+
+# Optional: LangChain (for real chatbot)
+# langchain==0.2.0
+# langchain-anthropic==0.1.15
+
+# Optional: fonts/styling
+# Pillow==10.3.0
