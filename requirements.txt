@@ -4,3 +4,6 @@ numpy
 plotly
 pydeck
 loguru
+pyarrow
+scikit-learn
+joblib
