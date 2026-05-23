@@ -1,0 +1,62 @@
+[
+  {
+    "role": "user",
+    "content": "SS The leaf sector 85 2 bhk price",
+    "timestamp": "2026-05-10T12:30:00.200500"
+  },
+  {
+    "role": "assistant",
+    "content": "**XGBoost Price Prediction \u2014 2 BHK in Sector 56**\n\u2022 Predicted Price/sqft : \u20b98,884\n\u2022 Area                 : 1,000 sqft\n\u2022 Total Estimated Price: \u20b90.89 Cr\n\u2022 Model Confidence     : R\u00b2 = 0.87 | RMSE = \u20b9711/sqft\n\u2022 Key drivers          : Locality tier, BHK configuration, metro proximity\n\u2022 Note: \u00b18% variance expected; always cross-verify with market quotes.",
+    "timestamp": "2026-05-10T12:30:00.200500"
+  },
+  {
+    "role": "user",
+    "content": "sector 85 price",
+    "timestamp": "2026-05-10T12:30:16.903403"
+  },
+  {
+    "role": "assistant",
+    "content": "**XGBoost Price Prediction \u2014 3 BHK in Sector 56**\n\u2022 Predicted Price/sqft : \u20b99,134\n\u2022 Area                 : 1,500 sqft\n\u2022 Total Estimated Price: \u20b91.37 Cr\n\u2022 Model Confidence     : R\u00b2 = 0.87 | RMSE = \u20b9731/sqft\n\u2022 Key drivers          : Locality tier, BHK configuration, metro proximity\n\u2022 Note: \u00b18% variance expected; always cross-verify with market quotes.",
+    "timestamp": "2026-05-10T12:30:16.903403"
+  },
+  {
+    "role": "user",
+    "content": "sector 65 price",
+    "timestamp": "2026-05-10T12:30:22.341889"
+  },
+  {
+    "role": "assistant",
+    "content": "**XGBoost Price Prediction \u2014 3 BHK in Sector 56**\n\u2022 Predicted Price/sqft : \u20b99,075\n\u2022 Area                 : 1,500 sqft\n\u2022 Total Estimated Price: \u20b91.36 Cr\n\u2022 Model Confidence     : R\u00b2 = 0.87 | RMSE = \u20b9726/sqft\n\u2022 Key drivers          : Locality tier, BHK configuration, metro proximity\n\u2022 Note: \u00b18% variance expected; always cross-verify with market quotes.",
+    "timestamp": "2026-05-10T12:30:22.341889"
+  },
+  {
+    "role": "user",
+    "content": "2 bhk sector 65 price",
+    "timestamp": "2026-05-10T12:30:28.897661"
+  },
+  {
+    "role": "assistant",
+    "content": "**XGBoost Price Prediction \u2014 2 BHK in Sector 56**\n\u2022 Predicted Price/sqft : \u20b98,903\n\u2022 Area                 : 1,000 sqft\n\u2022 Total Estimated Price: \u20b90.89 Cr\n\u2022 Model Confidence     : R\u00b2 = 0.87 | RMSE = \u20b9712/sqft\n\u2022 Key drivers          : Locality tier, BHK configuration, metro proximity\n\u2022 Note: \u00b18% variance expected; always cross-verify with market quotes.",
+    "timestamp": "2026-05-10T12:30:28.897661"
+  },
+  {
+    "role": "user",
+    "content": "What is the 5-year ROI forecast for Golf Course Road?",
+    "timestamp": "2026-05-10T12:30:51.910493"
+  },
+  {
+    "role": "assistant",
+    "content": "**LSTM + Prophet 5-Year ROI Forecast \u2014 Golf Course Road**\n\n\ud83d\udcc8 Price Forecast\n\u2022 Current Avg Price/sqft : \u20b917,500\n\u2022 Projected (5yr)        : \u20b926,600/sqft\n\u2022 5-Year ROI Estimate    : 52.0%\n\u2022 CAGR                   : 10.4% per year\n\n\ud83d\udcca Key Growth Catalysts\n\u2022 Metro extension / RRTS corridor connectivity\n\u2022 IT hub expansion in surrounding sectors\n\u2022 Smart city infrastructure investment\n\n\u26a0\ufe0f  Uncertainty: Prophet 95% confidence band \u00b113% around central estimate.\nMarket conditions (RBI rate changes, GDP) could shift this significantly.",
+    "timestamp": "2026-05-10T12:30:51.910493"
+  },
+  {
+    "role": "user",
+    "content": "What is the 5-year ROI forecast for sector 85?",
+    "timestamp": "2026-05-10T12:31:04.220848"
+  },
+  {
+    "role": "assistant",
+    "content": "**LSTM + Prophet 5-Year ROI Forecast \u2014 Sector 85**\n\n\ud83d\udcc8 Price Forecast\n\u2022 Current Avg Price/sqft : \u20b99,500\n\u2022 Projected (5yr)        : \u20b913,300/sqft\n\u2022 5-Year ROI Estimate    : 40.0%\n\u2022 CAGR                   : 8.0% per year\n\n\ud83d\udcca Key Growth Catalysts\n\u2022 Metro extension / RRTS corridor connectivity\n\u2022 IT hub expansion in surrounding sectors\n\u2022 Smart city infrastructure investment\n\n\u26a0\ufe0f  Uncertainty: Prophet 95% confidence band \u00b110% around central estimate.\nMarket conditions (RBI rate changes, GDP) could shift this significantly.",
+    "timestamp": "2026-05-10T12:31:04.220848"
+  }
+]

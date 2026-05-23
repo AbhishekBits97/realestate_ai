@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Module 4 — XAI Report</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Segoe UI',sans-serif;background:#f4f6f8;color:#222;padding:2rem}
+    h1{color:#1a3a5c;border-bottom:3px solid #2563eb;padding-bottom:.5rem;margin-bottom:1.5rem}
+    h2{color:#2563eb;margin:2rem 0 .75rem}
+    h3{color:#1e40af;margin-bottom:.4rem}
+    .meta{background:#dbeafe;border-radius:8px;padding:1rem;margin-bottom:2rem;font-size:.95rem}
+    .meta span{display:inline-block;margin-right:2rem}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem;margin-bottom:2rem}
+    .card{background:#fff;border-radius:10px;padding:1.25rem;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+    .card ul{padding-left:1.2rem;margin-top:.5rem;font-size:.9rem;color:#444}
+    table{width:100%;border-collapse:collapse;background:#fff;border-radius:8px;
+           overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.07);margin-bottom:2rem}
+    th{background:#2563eb;color:#fff;padding:.7rem 1rem;text-align:left;font-size:.9rem}
+    td{padding:.6rem 1rem;border-bottom:1px solid #e5e7eb;font-size:.9rem}
+    tr:last-child td{border-bottom:none}
+    tr:hover td{background:#eff6ff}
+    .badge{display:inline-block;padding:.2rem .6rem;border-radius:999px;font-size:.8rem;font-weight:600}
+    .badge-a{background:#dcfce7;color:#15803d}
+    .badge-b{background:#fef9c3;color:#92400e}
+    .badge-c{background:#fee2e2;color:#991b1b}
+    footer{margin-top:3rem;font-size:.8rem;color:#888;text-align:center}
+  </style>
+</head>
+<body>
+<h1>🏠 Real Estate AI — Module 4 XAI Report</h1>
+<div class="meta">
+  <span>📅 Generated: 2026-05-10 19:32:58</span>
+  <span>🤖 Model: Random Forest (mock)</span>
+  <span>📦 Properties analysed: 500</span>
+  <span>⏱ Pipeline elapsed: 26.4s</span>
+  <span>📝 Log: module4_20260510_193231.log</span>
+</div>
+
+<h2>📊 Investment Grade Distribution</h2>
+<table>
+  <thead><tr><th>Grade</th><th>Count</th><th>Share</th></tr></thead>
+  <tbody><tr><td><b>B</b></td><td>500</td><td>100.0%</td></tr></tbody>
+</table>
+
+<h2>🏆 Top 10 Investment Opportunities</h2>
+<table>
+  <thead><tr><th>Locality</th><th>Grade</th><th>Score</th><th>Rec</th><th>5-Yr ROI</th></tr></thead>
+  <tbody><tr><td>Sector 56</td><td>B</td><td>53.5</td><td>Hold</td><td>0.0%</td></tr><tr><td>DLF Phase 2</td><td>B</td><td>53.5</td><td>Hold</td><td>0.0%</td></tr><tr><td>New Gurgaon</td><td>B</td><td>53.5</td><td>Hold</td><td>0.0%</td></tr><tr><td>Sector 82</td><td>B</td><td>53.5</td><td>Hold</td><td>0.0%</td></tr><tr><td>New Gurgaon</td><td>B</td><td>53.5</td><td>Hold</td><td>0.0%</td></tr><tr><td>Sohna Road</td><td>B</td><td>53.5</td><td>Hold</td><td>0.0%</td></tr><tr><td>Dwarka Expressway</td><td>B</td><td>53.5</td><td>Hold</td><td>0.0%</td></tr><tr><td>Sohna Road</td><td>B</td><td>53.5</td><td>Hold</td><td>0.0%</td></tr><tr><td>DLF Phase 3</td><td>B</td><td>53.5</td><td>Hold</td><td>0.0%</td></tr><tr><td>Sector 82</td><td>B</td><td>53.5</td><td>Hold</td><td>0.0%</td></tr></tbody>
+</table>
+
+<h2>🔍 SHAP Property Explanations</h2>
+<div class="grid">
+        <div class="card">
+          <h3>Property Index #0</h3>
+          <p><b>Predicted:</b> ₹14,047/sqft</p>
+          <p>Predicted ₹14,047/sqft (base: ₹12,827). Key price drivers: locality_median_price (+₹6,600), demand_index (+₹1,010), school_score (+₹41). Discount factors: metro_dist_km (–₹1,132), is_ready_to_move (–₹63), developer_rating (–₹15).</p>
+          <ul><li><code>locality_median_price</code> → +₹6,600/sqft</li><li><code>demand_index</code> → +₹1,010/sqft</li><li><code>school_score</code> → +₹41/sqft</li></ul>
+        </div>
+        <div class="card">
+          <h3>Property Index #1</h3>
+          <p><b>Predicted:</b> ₹16,965/sqft</p>
+          <p>Predicted ₹16,965/sqft (base: ₹12,827). Key price drivers: locality_median_price (+₹6,619), demand_index (+₹1,028), school_score (+₹41). Discount factors: metro_dist_km (–₹1,138), is_ready_to_move (–₹62), developer_rating (–₹15).</p>
+          <ul><li><code>locality_median_price</code> → +₹6,619/sqft</li><li><code>demand_index</code> → +₹1,028/sqft</li><li><code>school_score</code> → +₹41/sqft</li></ul>
+        </div>
+        <div class="card">
+          <h3>Property Index #2</h3>
+          <p><b>Predicted:</b> ₹16,717/sqft</p>
+          <p>Predicted ₹16,717/sqft (base: ₹12,827). Key price drivers: locality_median_price (+₹6,690), demand_index (+₹1,020), is_ready_to_move (+₹67). Discount factors: metro_dist_km (–₹1,092), developer_rating (–₹14), area_sqft (–₹6).</p>
+          <ul><li><code>locality_median_price</code> → +₹6,690/sqft</li><li><code>demand_index</code> → +₹1,020/sqft</li><li><code>is_ready_to_move</code> → +₹67/sqft</li></ul>
+        </div>
+        <div class="card">
+          <h3>Property Index #3</h3>
+          <p><b>Predicted:</b> ₹6,692/sqft</p>
+          <p>Predicted ₹6,692/sqft (base: ₹12,827). Key price drivers: locality_median_price (+₹6,593), demand_index (+₹1,006), school_score (+₹42). Discount factors: metro_dist_km (–₹1,140), is_ready_to_move (–₹63), developer_rating (–₹15).</p>
+          <ul><li><code>locality_median_price</code> → +₹6,593/sqft</li><li><code>demand_index</code> → +₹1,006/sqft</li><li><code>school_score</code> → +₹42/sqft</li></ul>
+        </div>
+        <div class="card">
+          <h3>Property Index #4</h3>
+          <p><b>Predicted:</b> ₹13,563/sqft</p>
+          <p>Predicted ₹13,563/sqft (base: ₹12,827). Key price drivers: locality_median_price (+₹6,398), demand_index (+₹1,020), school_score (+₹41). Discount factors: metro_dist_km (–₹847), is_ready_to_move (–₹61), developer_rating (–₹14).</p>
+          <ul><li><code>locality_median_price</code> → +₹6,398/sqft</li><li><code>demand_index</code> → +₹1,020/sqft</li><li><code>school_score</code> → +₹41/sqft</li></ul>
+        </div></div>
+
+<h2>🧪 LIME Cross-Validation</h2>
+<p>Property #0: Local R²=<b>0.108</b>  Local pred=<b>₹14,254/sqft</b></p><p>Property #1: Local R²=<b>0.536</b>  Local pred=<b>₹16,874/sqft</b></p><p>Property #2: Local R²=<b>0.130</b>  Local pred=<b>₹15,706/sqft</b></p>
+
+<h2>📁 Output Files</h2>
+<table>
+  <thead><tr><th>File</th><th>Description</th></tr></thead>
+  <tbody>
+    <tr><td>shap_summary_beeswarm.png</td><td>Global SHAP beeswarm (feature impact distribution)</td></tr>
+    <tr><td>shap_bar_importance.png</td><td>Mean absolute SHAP — feature importance bar chart</td></tr>
+    <tr><td>shap_waterfall_idx*.png</td><td>Per-property SHAP waterfall plots</td></tr>
+    <tr><td>lime_explanation_idx*.png</td><td>Per-property LIME local explanations</td></tr>
+    <tr><td>property_explanations.json</td><td>Machine-readable explanation bundle</td></tr>
+    <tr><td>listings_investment_scored.parquet</td><td>Full scored dataset</td></tr>
+    <tr><td>top_investment_opportunities.csv</td><td>Top-N filtered investment picks</td></tr>
+    <tr><td>module4_report.html</td><td>This report</td></tr>
+  </tbody>
+</table>
+
+<footer>Real Estate AI · Module 4 · Gurgaon Property Intelligence Platform · 2026</footer>
+</body>
+</html>

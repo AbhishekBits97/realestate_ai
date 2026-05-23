@@ -1,0 +1,522 @@
+{
+  "0": {
+    "property_index": 0,
+    "predicted_price_sqft": 14047.29887608446,
+    "base_value": 12827.220344239899,
+    "shap_values": {
+      "bhk": 4.741573707679556,
+      "area_sqft": -6.414407769155124,
+      "age_years": 12.063452457717196,
+      "floor": -6.29143166818141,
+      "total_floors": 22.42024878126339,
+      "parking": -1.2691553930757578,
+      "metro_dist_km": -1132.3546467371254,
+      "school_score": 41.367509501648435,
+      "hospital_score": 10.882408079117731,
+      "mall_score": 31.894844698187114,
+      "green_score": -6.278530519598776,
+      "locality_median_price": 6600.408308613569,
+      "price_trend_12m": 3.7084431081467217,
+      "inventory_months": 33.21636087987524,
+      "demand_index": 1010.1844814811724,
+      "rental_yield_pct": 9.016252974691255,
+      "has_gym": 2.9617964546063216,
+      "has_pool": 6.310373084758295,
+      "has_clubhouse": 0.8603228474538305,
+      "has_security": -0.8806237325640074,
+      "is_gated": 2.1428455812233684,
+      "is_ready_to_move": -63.415539079816575,
+      "is_rera_approved": 0.4208557295272404,
+      "developer_rating": -15.227811020935103
+    },
+    "top_positive_drivers": [
+      [
+        "locality_median_price",
+        6600.408308613569
+      ],
+      [
+        "demand_index",
+        1010.1844814811724
+      ],
+      [
+        "school_score",
+        41.367509501648435
+      ],
+      [
+        "inventory_months",
+        33.21636087987524
+      ],
+      [
+        "mall_score",
+        31.894844698187114
+      ]
+    ],
+    "top_negative_drivers": [
+      [
+        "metro_dist_km",
+        -1132.3546467371254
+      ],
+      [
+        "is_ready_to_move",
+        -63.415539079816575
+      ],
+      [
+        "developer_rating",
+        -15.227811020935103
+      ],
+      [
+        "area_sqft",
+        -6.414407769155124
+      ],
+      [
+        "floor",
+        -6.29143166818141
+      ]
+    ],
+    "natural_language_explanation": "Predicted \u20b914,047/sqft (base: \u20b912,827). Key price drivers: locality_median_price (+\u20b96,600), demand_index (+\u20b91,010), school_score (+\u20b941). Discount factors: metro_dist_km (\u2013\u20b91,132), is_ready_to_move (\u2013\u20b963), developer_rating (\u2013\u20b915).",
+    "waterfall_plot": "data\\explanations\\shap_waterfall_idx0.png",
+    "feature_values": {
+      "bhk": 3.0,
+      "area_sqft": 4681.0,
+      "age_years": 18.0,
+      "floor": 19.0,
+      "total_floors": 27.0,
+      "parking": 2.0,
+      "metro_dist_km": 6.45,
+      "school_score": 5.4,
+      "hospital_score": 3.2,
+      "mall_score": 6.3,
+      "green_score": 9.0,
+      "locality_median_price": 13210.0,
+      "price_trend_12m": 16.33,
+      "inventory_months": 7.5,
+      "demand_index": 48.0,
+      "rental_yield_pct": 3.84,
+      "has_gym": 1.0,
+      "has_pool": 1.0,
+      "has_clubhouse": 0.0,
+      "has_security": 0.0,
+      "is_gated": 0.0,
+      "is_ready_to_move": 0.0,
+      "is_rera_approved": 1.0,
+      "developer_rating": 2.8
+    },
+    "generated_at": "2026-05-10T19:32:45.358567"
+  },
+  "1": {
+    "property_index": 1,
+    "predicted_price_sqft": 16965.01192175142,
+    "base_value": 12827.220344239899,
+    "shap_values": {
+      "bhk": 4.746447967295249,
+      "area_sqft": -6.68317202513497,
+      "age_years": 12.325735662592551,
+      "floor": -5.791076790046095,
+      "total_floors": 22.657537243957684,
+      "parking": -1.2479462640471615,
+      "metro_dist_km": -1137.583484367148,
+      "school_score": 41.33523510644849,
+      "hospital_score": 10.687969825473033,
+      "mall_score": 31.644274252471064,
+      "green_score": -6.261952294237718,
+      "locality_median_price": 6619.049385169753,
+      "price_trend_12m": 3.649560166658491,
+      "inventory_months": 32.77526547363101,
+      "demand_index": 1027.863977438951,
+      "rental_yield_pct": 10.366473682795252,
+      "has_gym": 2.93843875531021,
+      "has_pool": 6.413471972214017,
+      "has_clubhouse": 1.0113250545137074,
+      "has_security": -0.859157954861381,
+      "is_gated": 2.202588397965221,
+      "is_ready_to_move": -62.18546541233851,
+      "is_rera_approved": 0.44043127333690935,
+      "developer_rating": -15.22474725963907
+    },
+    "top_positive_drivers": [
+      [
+        "locality_median_price",
+        6619.049385169753
+      ],
+      [
+        "demand_index",
+        1027.863977438951
+      ],
+      [
+        "school_score",
+        41.33523510644849
+      ],
+      [
+        "inventory_months",
+        32.77526547363101
+      ],
+      [
+        "mall_score",
+        31.644274252471064
+      ]
+    ],
+    "top_negative_drivers": [
+      [
+        "metro_dist_km",
+        -1137.583484367148
+      ],
+      [
+        "is_ready_to_move",
+        -62.18546541233851
+      ],
+      [
+        "developer_rating",
+        -15.22474725963907
+      ],
+      [
+        "area_sqft",
+        -6.68317202513497
+      ],
+      [
+        "green_score",
+        -6.261952294237718
+      ]
+    ],
+    "natural_language_explanation": "Predicted \u20b916,965/sqft (base: \u20b912,827). Key price drivers: locality_median_price (+\u20b96,619), demand_index (+\u20b91,028), school_score (+\u20b941). Discount factors: metro_dist_km (\u2013\u20b91,138), is_ready_to_move (\u2013\u20b962), developer_rating (\u2013\u20b915).",
+    "waterfall_plot": "data\\explanations\\shap_waterfall_idx1.png",
+    "feature_values": {
+      "bhk": 3.0,
+      "area_sqft": 2200.0,
+      "age_years": 19.0,
+      "floor": 9.0,
+      "total_floors": 33.0,
+      "parking": 2.0,
+      "metro_dist_km": 9.97,
+      "school_score": 8.1,
+      "hospital_score": 6.1,
+      "mall_score": 3.4,
+      "green_score": 4.3,
+      "locality_median_price": 16540.0,
+      "price_trend_12m": -3.77,
+      "inventory_months": 4.0,
+      "demand_index": 37.7,
+      "rental_yield_pct": 1.63,
+      "has_gym": 1.0,
+      "has_pool": 1.0,
+      "has_clubhouse": 1.0,
+      "has_security": 0.0,
+      "is_gated": 0.0,
+      "is_ready_to_move": 0.0,
+      "is_rera_approved": 1.0,
+      "developer_rating": 3.7
+    },
+    "generated_at": "2026-05-10T19:32:46.891520"
+  },
+  "2": {
+    "property_index": 2,
+    "predicted_price_sqft": 16716.55848878221,
+    "base_value": 12827.220344239899,
+    "shap_values": {
+      "bhk": 8.423959402096717,
+      "area_sqft": -6.4107536163791785,
+      "age_years": 11.67480954747798,
+      "floor": -3.751048033751737,
+      "total_floors": 24.04853907382701,
+      "parking": 0.3556144985527262,
+      "metro_dist_km": -1091.8802350851468,
+      "school_score": 42.79279745177962,
+      "hospital_score": 12.114531630899535,
+      "mall_score": 31.144889307970786,
+      "green_score": -4.888599155099049,
+      "locality_median_price": 6690.200405958185,
+      "price_trend_12m": 1.3033652746573727,
+      "inventory_months": 32.75542532676046,
+      "demand_index": 1020.2207668337605,
+      "rental_yield_pct": 10.30168661638853,
+      "has_gym": -3.7120145618820626,
+      "has_pool": 4.0407913910090985,
+      "has_clubhouse": 1.0113250545137074,
+      "has_security": -0.6815653003853763,
+      "is_gated": 2.16621072684198,
+      "is_ready_to_move": 67.20204100018823,
+      "is_rera_approved": 0.35769228264749,
+      "developer_rating": -14.3800349822287
+    },
+    "top_positive_drivers": [
+      [
+        "locality_median_price",
+        6690.200405958185
+      ],
+      [
+        "demand_index",
+        1020.2207668337605
+      ],
+      [
+        "is_ready_to_move",
+        67.20204100018823
+      ],
+      [
+        "school_score",
+        42.79279745177962
+      ],
+      [
+        "inventory_months",
+        32.75542532676046
+      ]
+    ],
+    "top_negative_drivers": [
+      [
+        "metro_dist_km",
+        -1091.8802350851468
+      ],
+      [
+        "developer_rating",
+        -14.3800349822287
+      ],
+      [
+        "area_sqft",
+        -6.4107536163791785
+      ],
+      [
+        "green_score",
+        -4.888599155099049
+      ],
+      [
+        "floor",
+        -3.751048033751737
+      ]
+    ],
+    "natural_language_explanation": "Predicted \u20b916,717/sqft (base: \u20b912,827). Key price drivers: locality_median_price (+\u20b96,690), demand_index (+\u20b91,020), is_ready_to_move (+\u20b967). Discount factors: metro_dist_km (\u2013\u20b91,092), developer_rating (\u2013\u20b914), area_sqft (\u2013\u20b96).",
+    "waterfall_plot": "data\\explanations\\shap_waterfall_idx2.png",
+    "feature_values": {
+      "bhk": 3.0,
+      "area_sqft": 2164.0,
+      "age_years": 16.0,
+      "floor": 18.0,
+      "total_floors": 12.0,
+      "parking": 0.0,
+      "metro_dist_km": 1.69,
+      "school_score": 6.6,
+      "hospital_score": 10.0,
+      "mall_score": 6.7,
+      "green_score": 5.7,
+      "locality_median_price": 14203.0,
+      "price_trend_12m": -4.69,
+      "inventory_months": 2.1,
+      "demand_index": 30.9,
+      "rental_yield_pct": 2.66,
+      "has_gym": 0.0,
+      "has_pool": 0.0,
+      "has_clubhouse": 1.0,
+      "has_security": 1.0,
+      "is_gated": 0.0,
+      "is_ready_to_move": 1.0,
+      "is_rera_approved": 1.0,
+      "developer_rating": 3.3
+    },
+    "generated_at": "2026-05-10T19:32:48.502554"
+  },
+  "3": {
+    "property_index": 3,
+    "predicted_price_sqft": 6692.105619316504,
+    "base_value": 12827.220344239899,
+    "shap_values": {
+      "bhk": 4.741573707679556,
+      "area_sqft": -6.238691367912272,
+      "age_years": 11.972706382341789,
+      "floor": -6.147805265729682,
+      "total_floors": 22.461882183977544,
+      "parking": 0.36685554694100697,
+      "metro_dist_km": -1139.7020101456278,
+      "school_score": 41.59529900655013,
+      "hospital_score": 10.939424078753454,
+      "mall_score": 31.919567435136898,
+      "green_score": -6.329017775623798,
+      "locality_median_price": 6593.02916181285,
+      "price_trend_12m": 3.68667177085132,
+      "inventory_months": 33.173271611317546,
+      "demand_index": 1005.8035667712069,
+      "rental_yield_pct": 8.941089982197383,
+      "has_gym": -3.7383422608176886,
+      "has_pool": 6.332926689943916,
+      "has_clubhouse": 0.8603228474538305,
+      "has_security": -0.8806237325640074,
+      "is_gated": 2.0946793303036735,
+      "is_ready_to_move": -63.390793817844106,
+      "is_rera_approved": 0.338116738837821,
+      "developer_rating": -15.060557062364516
+    },
+    "top_positive_drivers": [
+      [
+        "locality_median_price",
+        6593.02916181285
+      ],
+      [
+        "demand_index",
+        1005.8035667712069
+      ],
+      [
+        "school_score",
+        41.59529900655013
+      ],
+      [
+        "inventory_months",
+        33.173271611317546
+      ],
+      [
+        "mall_score",
+        31.919567435136898
+      ]
+    ],
+    "top_negative_drivers": [
+      [
+        "metro_dist_km",
+        -1139.7020101456278
+      ],
+      [
+        "is_ready_to_move",
+        -63.390793817844106
+      ],
+      [
+        "developer_rating",
+        -15.060557062364516
+      ],
+      [
+        "green_score",
+        -6.329017775623798
+      ],
+      [
+        "area_sqft",
+        -6.238691367912272
+      ]
+    ],
+    "natural_language_explanation": "Predicted \u20b96,692/sqft (base: \u20b912,827). Key price drivers: locality_median_price (+\u20b96,593), demand_index (+\u20b91,006), school_score (+\u20b942). Discount factors: metro_dist_km (\u2013\u20b91,140), is_ready_to_move (\u2013\u20b963), developer_rating (\u2013\u20b915).",
+    "waterfall_plot": "data\\explanations\\shap_waterfall_idx3.png",
+    "feature_values": {
+      "bhk": 3.0,
+      "area_sqft": 2999.0,
+      "age_years": 21.0,
+      "floor": 14.0,
+      "total_floors": 8.0,
+      "parking": 0.0,
+      "metro_dist_km": 11.15,
+      "school_score": 5.3,
+      "hospital_score": 3.6,
+      "mall_score": 2.1,
+      "green_score": 8.8,
+      "locality_median_price": 6093.0,
+      "price_trend_12m": 16.88,
+      "inventory_months": 16.0,
+      "demand_index": 80.7,
+      "rental_yield_pct": 4.77,
+      "has_gym": 0.0,
+      "has_pool": 0.0,
+      "has_clubhouse": 0.0,
+      "has_security": 0.0,
+      "is_gated": 1.0,
+      "is_ready_to_move": 0.0,
+      "is_rera_approved": 1.0,
+      "developer_rating": 4.7
+    },
+    "generated_at": "2026-05-10T19:32:50.003702"
+  },
+  "4": {
+    "property_index": 4,
+    "predicted_price_sqft": 13562.851803936283,
+    "base_value": 12827.220344239899,
+    "shap_values": {
+      "bhk": 4.1556327637860795,
+      "area_sqft": -8.394818526729981,
+      "age_years": 10.20068048262259,
+      "floor": -2.652899142680557,
+      "total_floors": 25.171432777508883,
+      "parking": 0.8755058048810406,
+      "metro_dist_km": -846.9262826176503,
+      "school_score": 41.35206767092657,
+      "hospital_score": 10.914433374348434,
+      "mall_score": 32.04245005568977,
+      "green_score": -6.074021645007299,
+      "locality_median_price": 6398.163339872668,
+      "price_trend_12m": 3.11617381689637,
+      "inventory_months": 40.9258357958506,
+      "demand_index": 1020.0187147433002,
+      "rental_yield_pct": 8.188259954186535,
+      "has_gym": -3.5681763807879454,
+      "has_pool": 6.520739885303362,
+      "has_clubhouse": 1.2938827958507566,
+      "has_security": 0.43296131877519795,
+      "is_gated": 2.2357505941504296,
+      "is_ready_to_move": -61.271293650323436,
+      "is_rera_approved": 1.0533541866157872,
+      "developer_rating": -14.308923659578186
+    },
+    "top_positive_drivers": [
+      [
+        "locality_median_price",
+        6398.163339872668
+      ],
+      [
+        "demand_index",
+        1020.0187147433002
+      ],
+      [
+        "school_score",
+        41.35206767092657
+      ],
+      [
+        "inventory_months",
+        40.9258357958506
+      ],
+      [
+        "mall_score",
+        32.04245005568977
+      ]
+    ],
+    "top_negative_drivers": [
+      [
+        "metro_dist_km",
+        -846.9262826176503
+      ],
+      [
+        "is_ready_to_move",
+        -61.271293650323436
+      ],
+      [
+        "developer_rating",
+        -14.308923659578186
+      ],
+      [
+        "area_sqft",
+        -8.394818526729981
+      ],
+      [
+        "green_score",
+        -6.074021645007299
+      ]
+    ],
+    "natural_language_explanation": "Predicted \u20b913,563/sqft (base: \u20b912,827). Key price drivers: locality_median_price (+\u20b96,398), demand_index (+\u20b91,020), school_score (+\u20b941). Discount factors: metro_dist_km (\u2013\u20b9847), is_ready_to_move (\u2013\u20b961), developer_rating (\u2013\u20b914).",
+    "waterfall_plot": "data\\explanations\\shap_waterfall_idx4.png",
+    "feature_values": {
+      "bhk": 2.0,
+      "area_sqft": 3887.0,
+      "age_years": 17.0,
+      "floor": 27.0,
+      "total_floors": 4.0,
+      "parking": 0.0,
+      "metro_dist_km": 0.67,
+      "school_score": 7.5,
+      "hospital_score": 9.5,
+      "mall_score": 9.3,
+      "green_score": 7.3,
+      "locality_median_price": 10844.0,
+      "price_trend_12m": 22.13,
+      "inventory_months": 1.7,
+      "demand_index": 49.2,
+      "rental_yield_pct": 2.06,
+      "has_gym": 0.0,
+      "has_pool": 1.0,
+      "has_clubhouse": 1.0,
+      "has_security": 1.0,
+      "is_gated": 1.0,
+      "is_ready_to_move": 0.0,
+      "is_rera_approved": 1.0,
+      "developer_rating": 3.9
+    },
+    "generated_at": "2026-05-10T19:32:51.410639"
+  }
+}

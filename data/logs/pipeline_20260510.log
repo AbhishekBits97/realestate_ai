@@ -1,0 +1,1243 @@
+2026-05-10 21:22:44 | INFO     | utils.helpers:setup_logger:54 | Logger initialised | log_file=data\logs\pipeline_20260510.log
+2026-05-10 21:22:44 | INFO     | __main__:main:378 | ============================================================
+2026-05-10 21:22:44 | INFO     | __main__:main:379 |   🏘️  REAL ESTATE DATA ENGINEERING PIPELINE — MODULE 1
+2026-05-10 21:22:44 | INFO     | __main__:main:380 | ============================================================
+2026-05-10 21:22:44 | INFO     | __main__:main:381 |   Cities    : ['Gurgaon']
+2026-05-10 21:22:44 | INFO     | __main__:main:382 |   Max pages : 10
+2026-05-10 21:22:44 | INFO     | __main__:main:383 |   Sources   : all
+2026-05-10 21:22:44 | INFO     | __main__:main:384 |   Started   : 2026-05-10 21:22:44
+2026-05-10 21:22:44 | INFO     | __main__:main:385 | ============================================================
+2026-05-10 21:22:44 | INFO     | __main__:scrape_city:262 | 
+--------------------------------------------------
+2026-05-10 21:22:44 | INFO     | __main__:scrape_city:263 | Scraping MagicBricks | city=Gurgaon
+2026-05-10 21:22:44 | INFO     | __main__:scrape_city:264 | --------------------------------------------------
+2026-05-10 21:22:44 | INFO     | scrapers.base_scraper:__init__:39 | [MagicBricksScraper] Scraper initialised | base_url=https://www.magicbricks.com
+2026-05-10 21:22:44 | INFO     | scrapers.magicbricks_scraper:scrape_listings:44 | [MagicBricks] Starting scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:22:44 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 3.25s (rate limiting)
+2026-05-10 21:22:48 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.magicbricks.com/property-for-sale/residential-real-estate
+2026-05-10 21:22:48 | INFO     | scrapers.magicbricks_scraper:scrape_listings:74 | [MagicBricks] Page 1: 30 listings extracted
+2026-05-10 21:22:48 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.94s (rate limiting)
+2026-05-10 21:22:51 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.magicbricks.com/property-for-sale/residential-real-estate
+2026-05-10 21:22:51 | INFO     | scrapers.magicbricks_scraper:scrape_listings:63 | [MagicBricks] No cards found on page 2. End of results.
+2026-05-10 21:22:51 | SUCCESS  | scrapers.magicbricks_scraper:scrape_listings:77 | [MagicBricks] Scrape complete | city=Gurgaon | total=30
+2026-05-10 21:22:51 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 30 records → data\raw\listings\gurgaon_magicbricks_raw_20260510_212251.json
+2026-05-10 21:22:51 | WARNING  | utils.helpers:filter_valid_listings:133 | Dropped 5 invalid listings (25 valid kept)
+2026-05-10 21:22:51 | INFO     | utils.helpers:print_pipeline_summary:184 | 
+=======================================================
+2026-05-10 21:22:51 | INFO     | utils.helpers:print_pipeline_summary:185 |   PIPELINE SUMMARY — MAGICBRICKS
+2026-05-10 21:22:51 | INFO     | utils.helpers:print_pipeline_summary:186 | =======================================================
+2026-05-10 21:22:51 | INFO     | utils.helpers:print_pipeline_summary:187 |   City         : Gurgaon
+2026-05-10 21:22:51 | INFO     | utils.helpers:print_pipeline_summary:188 |   Total scraped: 30
+2026-05-10 21:22:51 | INFO     | utils.helpers:print_pipeline_summary:189 |   Valid records: 25
+2026-05-10 21:22:51 | INFO     | utils.helpers:print_pipeline_summary:190 |   Dropped      : 5
+2026-05-10 21:22:51 | INFO     | utils.helpers:print_pipeline_summary:191 |   Output       : data/raw/listings
+2026-05-10 21:22:51 | INFO     | utils.helpers:print_pipeline_summary:192 | =======================================================
+
+2026-05-10 21:22:51 | INFO     | __main__:scrape_city:275 | 
+--------------------------------------------------
+2026-05-10 21:22:51 | INFO     | __main__:scrape_city:276 | Scraping 99acres | city=Gurgaon
+2026-05-10 21:22:51 | INFO     | __main__:scrape_city:277 | --------------------------------------------------
+2026-05-10 21:22:51 | INFO     | scrapers.base_scraper:__init__:39 | [Acres99Scraper] Scraper initialised | base_url=https://www.99acres.com
+2026-05-10 21:22:51 | INFO     | scrapers.acres99_scraper:scrape_listings:54 | [99acres] Starting scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:22:51 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.29s (rate limiting)
+2026-05-10 21:22:56 | WARNING  | scrapers.base_scraper:_fetch:98 | HTTP error 400 for URL: https://www.99acres.com/search/property/buy/gurugram-11505/results/
+2026-05-10 21:22:56 | WARNING  | scrapers.acres99_scraper:scrape_listings:67 | [99acres] Empty response on page 1, stopping.
+2026-05-10 21:22:56 | SUCCESS  | scrapers.acres99_scraper:scrape_listings:87 | [99acres] Scrape complete | city=Gurgaon | total=0
+2026-05-10 21:22:56 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 0 records → data\raw\listings\gurgaon_99acres_raw_20260510_212256.json
+2026-05-10 21:22:56 | INFO     | utils.helpers:print_pipeline_summary:184 | 
+=======================================================
+2026-05-10 21:22:56 | INFO     | utils.helpers:print_pipeline_summary:185 |   PIPELINE SUMMARY — 99ACRES
+2026-05-10 21:22:56 | INFO     | utils.helpers:print_pipeline_summary:186 | =======================================================
+2026-05-10 21:22:56 | INFO     | utils.helpers:print_pipeline_summary:187 |   City         : Gurgaon
+2026-05-10 21:22:56 | INFO     | utils.helpers:print_pipeline_summary:188 |   Total scraped: 0
+2026-05-10 21:22:56 | INFO     | utils.helpers:print_pipeline_summary:189 |   Valid records: 0
+2026-05-10 21:22:56 | INFO     | utils.helpers:print_pipeline_summary:190 |   Dropped      : 0
+2026-05-10 21:22:56 | INFO     | utils.helpers:print_pipeline_summary:191 |   Output       : data/raw/listings
+2026-05-10 21:22:56 | INFO     | utils.helpers:print_pipeline_summary:192 | =======================================================
+
+2026-05-10 21:22:56 | INFO     | __main__:scrape_city:291 | 
+--------------------------------------------------
+2026-05-10 21:22:56 | INFO     | __main__:scrape_city:292 | Scraping Housing | city=Gurgaon
+2026-05-10 21:22:56 | INFO     | __main__:scrape_city:293 | --------------------------------------------------
+2026-05-10 21:22:56 | INFO     | scrapers.base_scraper:__init__:39 | [HousingScraper] Scraper initialised | base_url=https://housing.com
+2026-05-10 21:22:56 | INFO     | scrapers.private_portal_scraper:scrape_listings:37 | [housing] Starting scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:22:56 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.04s (rate limiting)
+2026-05-10 21:22:59 | WARNING  | scrapers.base_scraper:_fetch:98 | HTTP error 406 for URL: https://housing.com/in/buy/searches/gurgaon?page=1
+2026-05-10 21:22:59 | WARNING  | scrapers.private_portal_scraper:scrape_listings:43 | [housing] Empty response on page 1, stopping.
+2026-05-10 21:22:59 | SUCCESS  | scrapers.private_portal_scraper:scrape_listings:73 | [housing] Scrape complete | city=Gurgaon | total=0
+2026-05-10 21:22:59 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 0 records → data\raw\listings\gurgaon_housing_raw_20260510_212259.json
+2026-05-10 21:22:59 | INFO     | utils.helpers:print_pipeline_summary:184 | 
+=======================================================
+2026-05-10 21:22:59 | INFO     | utils.helpers:print_pipeline_summary:185 |   PIPELINE SUMMARY — HOUSING
+2026-05-10 21:22:59 | INFO     | utils.helpers:print_pipeline_summary:186 | =======================================================
+2026-05-10 21:22:59 | INFO     | utils.helpers:print_pipeline_summary:187 |   City         : Gurgaon
+2026-05-10 21:22:59 | INFO     | utils.helpers:print_pipeline_summary:188 |   Total scraped: 0
+2026-05-10 21:22:59 | INFO     | utils.helpers:print_pipeline_summary:189 |   Valid records: 0
+2026-05-10 21:22:59 | INFO     | utils.helpers:print_pipeline_summary:190 |   Dropped      : 0
+2026-05-10 21:22:59 | INFO     | utils.helpers:print_pipeline_summary:191 |   Output       : data/raw/listings
+2026-05-10 21:22:59 | INFO     | utils.helpers:print_pipeline_summary:192 | =======================================================
+
+2026-05-10 21:22:59 | INFO     | __main__:scrape_city:291 | 
+--------------------------------------------------
+2026-05-10 21:22:59 | INFO     | __main__:scrape_city:292 | Scraping Makaan | city=Gurgaon
+2026-05-10 21:22:59 | INFO     | __main__:scrape_city:293 | --------------------------------------------------
+2026-05-10 21:22:59 | INFO     | scrapers.base_scraper:__init__:39 | [MakaanScraper] Scraper initialised | base_url=https://www.makaan.com
+2026-05-10 21:22:59 | INFO     | scrapers.private_portal_scraper:scrape_listings:37 | [makaan] Starting scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:22:59 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.92s (rate limiting)
+2026-05-10 21:23:04 | WARNING  | scrapers.base_scraper:_fetch:98 | HTTP error 502 for URL: https://www.makaan.com/gurgaon-residential-property/buy-property-in-gurgaon-city?page=1
+2026-05-10 21:23:04 | WARNING  | scrapers.private_portal_scraper:scrape_listings:43 | [makaan] Empty response on page 1, stopping.
+2026-05-10 21:23:04 | SUCCESS  | scrapers.private_portal_scraper:scrape_listings:73 | [makaan] Scrape complete | city=Gurgaon | total=0
+2026-05-10 21:23:04 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 0 records → data\raw\listings\gurgaon_makaan_raw_20260510_212304.json
+2026-05-10 21:23:04 | INFO     | utils.helpers:print_pipeline_summary:184 | 
+=======================================================
+2026-05-10 21:23:04 | INFO     | utils.helpers:print_pipeline_summary:185 |   PIPELINE SUMMARY — MAKAAN
+2026-05-10 21:23:04 | INFO     | utils.helpers:print_pipeline_summary:186 | =======================================================
+2026-05-10 21:23:04 | INFO     | utils.helpers:print_pipeline_summary:187 |   City         : Gurgaon
+2026-05-10 21:23:04 | INFO     | utils.helpers:print_pipeline_summary:188 |   Total scraped: 0
+2026-05-10 21:23:04 | INFO     | utils.helpers:print_pipeline_summary:189 |   Valid records: 0
+2026-05-10 21:23:04 | INFO     | utils.helpers:print_pipeline_summary:190 |   Dropped      : 0
+2026-05-10 21:23:04 | INFO     | utils.helpers:print_pipeline_summary:191 |   Output       : data/raw/listings
+2026-05-10 21:23:04 | INFO     | utils.helpers:print_pipeline_summary:192 | =======================================================
+
+2026-05-10 21:23:04 | INFO     | __main__:scrape_city:291 | 
+--------------------------------------------------
+2026-05-10 21:23:04 | INFO     | __main__:scrape_city:292 | Scraping CommonFloor | city=Gurgaon
+2026-05-10 21:23:04 | INFO     | __main__:scrape_city:293 | --------------------------------------------------
+2026-05-10 21:23:04 | INFO     | scrapers.base_scraper:__init__:39 | [CommonFloorScraper] Scraper initialised | base_url=https://www.commonfloor.com
+2026-05-10 21:23:04 | INFO     | scrapers.private_portal_scraper:scrape_listings:37 | [commonfloor] Starting scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:23:04 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.80s (rate limiting)
+2026-05-10 21:23:07 | WARNING  | scrapers.base_scraper:_fetch:98 | HTTP error 500 for URL: https://www.commonfloor.com/listings/gurgaon/for-sale?page=1
+2026-05-10 21:23:07 | WARNING  | scrapers.private_portal_scraper:scrape_listings:43 | [commonfloor] Empty response on page 1, stopping.
+2026-05-10 21:23:07 | SUCCESS  | scrapers.private_portal_scraper:scrape_listings:73 | [commonfloor] Scrape complete | city=Gurgaon | total=0
+2026-05-10 21:23:07 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 0 records → data\raw\listings\gurgaon_commonfloor_raw_20260510_212307.json
+2026-05-10 21:23:07 | INFO     | utils.helpers:print_pipeline_summary:184 | 
+=======================================================
+2026-05-10 21:23:07 | INFO     | utils.helpers:print_pipeline_summary:185 |   PIPELINE SUMMARY — COMMONFLOOR
+2026-05-10 21:23:07 | INFO     | utils.helpers:print_pipeline_summary:186 | =======================================================
+2026-05-10 21:23:07 | INFO     | utils.helpers:print_pipeline_summary:187 |   City         : Gurgaon
+2026-05-10 21:23:07 | INFO     | utils.helpers:print_pipeline_summary:188 |   Total scraped: 0
+2026-05-10 21:23:07 | INFO     | utils.helpers:print_pipeline_summary:189 |   Valid records: 0
+2026-05-10 21:23:07 | INFO     | utils.helpers:print_pipeline_summary:190 |   Dropped      : 0
+2026-05-10 21:23:07 | INFO     | utils.helpers:print_pipeline_summary:191 |   Output       : data/raw/listings
+2026-05-10 21:23:07 | INFO     | utils.helpers:print_pipeline_summary:192 | =======================================================
+
+2026-05-10 21:23:07 | INFO     | __main__:scrape_city:291 | 
+--------------------------------------------------
+2026-05-10 21:23:07 | INFO     | __main__:scrape_city:292 | Scraping NoBroker | city=Gurgaon
+2026-05-10 21:23:07 | INFO     | __main__:scrape_city:293 | --------------------------------------------------
+2026-05-10 21:23:07 | INFO     | scrapers.base_scraper:__init__:39 | [NoBrokerScraper] Scraper initialised | base_url=https://www.nobroker.in
+2026-05-10 21:23:07 | INFO     | scrapers.private_portal_scraper:scrape_listings:37 | [nobroker] Starting scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:23:07 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.65s (rate limiting)
+2026-05-10 21:23:12 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.nobroker.in/property/sale/gurgaon?pageNo=1
+2026-05-10 21:23:12 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [nobroker] Page 1: 0 listings extracted
+2026-05-10 21:23:12 | SUCCESS  | scrapers.private_portal_scraper:scrape_listings:73 | [nobroker] Scrape complete | city=Gurgaon | total=0
+2026-05-10 21:23:12 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 0 records → data\raw\listings\gurgaon_nobroker_raw_20260510_212312.json
+2026-05-10 21:23:12 | INFO     | utils.helpers:print_pipeline_summary:184 | 
+=======================================================
+2026-05-10 21:23:12 | INFO     | utils.helpers:print_pipeline_summary:185 |   PIPELINE SUMMARY — NOBROKER
+2026-05-10 21:23:12 | INFO     | utils.helpers:print_pipeline_summary:186 | =======================================================
+2026-05-10 21:23:12 | INFO     | utils.helpers:print_pipeline_summary:187 |   City         : Gurgaon
+2026-05-10 21:23:12 | INFO     | utils.helpers:print_pipeline_summary:188 |   Total scraped: 0
+2026-05-10 21:23:12 | INFO     | utils.helpers:print_pipeline_summary:189 |   Valid records: 0
+2026-05-10 21:23:12 | INFO     | utils.helpers:print_pipeline_summary:190 |   Dropped      : 0
+2026-05-10 21:23:12 | INFO     | utils.helpers:print_pipeline_summary:191 |   Output       : data/raw/listings
+2026-05-10 21:23:12 | INFO     | utils.helpers:print_pipeline_summary:192 | =======================================================
+
+2026-05-10 21:23:12 | INFO     | __main__:scrape_city:291 | 
+--------------------------------------------------
+2026-05-10 21:23:12 | INFO     | __main__:scrape_city:292 | Scraping SquareYards | city=Gurgaon
+2026-05-10 21:23:12 | INFO     | __main__:scrape_city:293 | --------------------------------------------------
+2026-05-10 21:23:12 | INFO     | scrapers.base_scraper:__init__:39 | [SquareYardsScraper] Scraper initialised | base_url=https://www.squareyards.com
+2026-05-10 21:23:12 | INFO     | scrapers.private_portal_scraper:scrape_listings:37 | [squareyards] Starting scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:23:12 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 3.76s (rate limiting)
+2026-05-10 21:23:16 | WARNING  | scrapers.base_scraper:_fetch:98 | HTTP error 404 for URL: https://www.squareyards.com/sale-property-in-gurgaon?page=1
+2026-05-10 21:23:16 | WARNING  | scrapers.private_portal_scraper:scrape_listings:43 | [squareyards] Empty response on page 1, stopping.
+2026-05-10 21:23:16 | SUCCESS  | scrapers.private_portal_scraper:scrape_listings:73 | [squareyards] Scrape complete | city=Gurgaon | total=0
+2026-05-10 21:23:16 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 0 records → data\raw\listings\gurgaon_squareyards_raw_20260510_212316.json
+2026-05-10 21:23:16 | INFO     | utils.helpers:print_pipeline_summary:184 | 
+=======================================================
+2026-05-10 21:23:16 | INFO     | utils.helpers:print_pipeline_summary:185 |   PIPELINE SUMMARY — SQUAREYARDS
+2026-05-10 21:23:16 | INFO     | utils.helpers:print_pipeline_summary:186 | =======================================================
+2026-05-10 21:23:16 | INFO     | utils.helpers:print_pipeline_summary:187 |   City         : Gurgaon
+2026-05-10 21:23:16 | INFO     | utils.helpers:print_pipeline_summary:188 |   Total scraped: 0
+2026-05-10 21:23:16 | INFO     | utils.helpers:print_pipeline_summary:189 |   Valid records: 0
+2026-05-10 21:23:16 | INFO     | utils.helpers:print_pipeline_summary:190 |   Dropped      : 0
+2026-05-10 21:23:16 | INFO     | utils.helpers:print_pipeline_summary:191 |   Output       : data/raw/listings
+2026-05-10 21:23:16 | INFO     | utils.helpers:print_pipeline_summary:192 | =======================================================
+
+2026-05-10 21:23:16 | INFO     | __main__:scrape_city:291 | 
+--------------------------------------------------
+2026-05-10 21:23:16 | INFO     | __main__:scrape_city:292 | Scraping PropTiger | city=Gurgaon
+2026-05-10 21:23:16 | INFO     | __main__:scrape_city:293 | --------------------------------------------------
+2026-05-10 21:23:17 | INFO     | scrapers.base_scraper:__init__:39 | [PropTigerScraper] Scraper initialised | base_url=https://www.proptiger.com
+2026-05-10 21:23:17 | INFO     | scrapers.private_portal_scraper:scrape_listings:37 | [proptiger] Starting scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:23:17 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 3.47s (rate limiting)
+2026-05-10 21:23:20 | WARNING  | scrapers.base_scraper:_fetch:98 | HTTP error 404 for URL: https://www.proptiger.com/gurgaon/property-for-sale?page=1
+2026-05-10 21:23:20 | WARNING  | scrapers.private_portal_scraper:scrape_listings:43 | [proptiger] Empty response on page 1, stopping.
+2026-05-10 21:23:20 | SUCCESS  | scrapers.private_portal_scraper:scrape_listings:73 | [proptiger] Scrape complete | city=Gurgaon | total=0
+2026-05-10 21:23:20 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 0 records → data\raw\listings\gurgaon_proptiger_raw_20260510_212320.json
+2026-05-10 21:23:20 | INFO     | utils.helpers:print_pipeline_summary:184 | 
+=======================================================
+2026-05-10 21:23:20 | INFO     | utils.helpers:print_pipeline_summary:185 |   PIPELINE SUMMARY — PROPTIGER
+2026-05-10 21:23:20 | INFO     | utils.helpers:print_pipeline_summary:186 | =======================================================
+2026-05-10 21:23:20 | INFO     | utils.helpers:print_pipeline_summary:187 |   City         : Gurgaon
+2026-05-10 21:23:20 | INFO     | utils.helpers:print_pipeline_summary:188 |   Total scraped: 0
+2026-05-10 21:23:20 | INFO     | utils.helpers:print_pipeline_summary:189 |   Valid records: 0
+2026-05-10 21:23:20 | INFO     | utils.helpers:print_pipeline_summary:190 |   Dropped      : 0
+2026-05-10 21:23:20 | INFO     | utils.helpers:print_pipeline_summary:191 |   Output       : data/raw/listings
+2026-05-10 21:23:20 | INFO     | utils.helpers:print_pipeline_summary:192 | =======================================================
+
+2026-05-10 21:23:20 | INFO     | __main__:scrape_city:291 | 
+--------------------------------------------------
+2026-05-10 21:23:20 | INFO     | __main__:scrape_city:292 | Scraping RealEstateIndia | city=Gurgaon
+2026-05-10 21:23:20 | INFO     | __main__:scrape_city:293 | --------------------------------------------------
+2026-05-10 21:23:20 | INFO     | scrapers.base_scraper:__init__:39 | [RealEstateIndiaScraper] Scraper initialised | base_url=https://www.realestateindia.com
+2026-05-10 21:23:20 | INFO     | scrapers.private_portal_scraper:scrape_listings:37 | [realestateindia] Starting scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:23:20 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.20s (rate limiting)
+2026-05-10 21:23:27 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.realestateindia.com/gurgaon-property/residential-property-for-sale.htm?page=1
+2026-05-10 21:23:27 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [realestateindia] Page 1: 20 listings extracted
+2026-05-10 21:23:27 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.60s (rate limiting)
+2026-05-10 21:23:30 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.realestateindia.com/gurgaon-property/residential-property-for-sale.htm?page=2
+2026-05-10 21:23:30 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [realestateindia] Page 2: 20 listings extracted
+2026-05-10 21:23:30 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.84s (rate limiting)
+2026-05-10 21:23:35 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.realestateindia.com/gurgaon-property/residential-property-for-sale.htm?page=3
+2026-05-10 21:23:35 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [realestateindia] Page 3: 20 listings extracted
+2026-05-10 21:23:35 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 3.10s (rate limiting)
+2026-05-10 21:23:43 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.realestateindia.com/gurgaon-property/residential-property-for-sale.htm?page=4
+2026-05-10 21:23:43 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [realestateindia] Page 4: 20 listings extracted
+2026-05-10 21:23:43 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.08s (rate limiting)
+2026-05-10 21:23:47 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.realestateindia.com/gurgaon-property/residential-property-for-sale.htm?page=5
+2026-05-10 21:23:47 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [realestateindia] Page 5: 20 listings extracted
+2026-05-10 21:23:47 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.41s (rate limiting)
+2026-05-10 21:23:49 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.realestateindia.com/gurgaon-property/residential-property-for-sale.htm?page=6
+2026-05-10 21:23:50 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [realestateindia] Page 6: 20 listings extracted
+2026-05-10 21:23:50 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.72s (rate limiting)
+2026-05-10 21:23:54 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.realestateindia.com/gurgaon-property/residential-property-for-sale.htm?page=7
+2026-05-10 21:23:54 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [realestateindia] Page 7: 20 listings extracted
+2026-05-10 21:23:54 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.02s (rate limiting)
+2026-05-10 21:23:59 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.realestateindia.com/gurgaon-property/residential-property-for-sale.htm?page=8
+2026-05-10 21:23:59 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [realestateindia] Page 8: 20 listings extracted
+2026-05-10 21:23:59 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 3.95s (rate limiting)
+2026-05-10 21:24:03 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.realestateindia.com/gurgaon-property/residential-property-for-sale.htm?page=9
+2026-05-10 21:24:03 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [realestateindia] Page 9: 20 listings extracted
+2026-05-10 21:24:03 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.62s (rate limiting)
+2026-05-10 21:24:07 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.realestateindia.com/gurgaon-property/residential-property-for-sale.htm?page=10
+2026-05-10 21:24:08 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [realestateindia] Page 10: 20 listings extracted
+2026-05-10 21:24:08 | SUCCESS  | scrapers.private_portal_scraper:scrape_listings:73 | [realestateindia] Scrape complete | city=Gurgaon | total=200
+2026-05-10 21:24:08 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 200 records → data\raw\listings\gurgaon_realestateindia_raw_20260510_212408.json
+2026-05-10 21:24:08 | WARNING  | utils.helpers:filter_valid_listings:133 | Dropped 200 invalid listings (0 valid kept)
+2026-05-10 21:24:08 | INFO     | utils.helpers:print_pipeline_summary:184 | 
+=======================================================
+2026-05-10 21:24:08 | INFO     | utils.helpers:print_pipeline_summary:185 |   PIPELINE SUMMARY — REALESTATEINDIA
+2026-05-10 21:24:08 | INFO     | utils.helpers:print_pipeline_summary:186 | =======================================================
+2026-05-10 21:24:08 | INFO     | utils.helpers:print_pipeline_summary:187 |   City         : Gurgaon
+2026-05-10 21:24:08 | INFO     | utils.helpers:print_pipeline_summary:188 |   Total scraped: 200
+2026-05-10 21:24:08 | INFO     | utils.helpers:print_pipeline_summary:189 |   Valid records: 0
+2026-05-10 21:24:08 | INFO     | utils.helpers:print_pipeline_summary:190 |   Dropped      : 200
+2026-05-10 21:24:08 | INFO     | utils.helpers:print_pipeline_summary:191 |   Output       : data/raw/listings
+2026-05-10 21:24:08 | INFO     | utils.helpers:print_pipeline_summary:192 | =======================================================
+
+2026-05-10 21:24:08 | INFO     | __main__:scrape_city:314 | 
+--------------------------------------------------
+2026-05-10 21:24:08 | INFO     | __main__:scrape_city:315 | Collecting registry data from Haryana RERA | city=Gurgaon
+2026-05-10 21:24:08 | INFO     | __main__:scrape_city:316 | --------------------------------------------------
+2026-05-10 21:24:08 | INFO     | scrapers.base_scraper:__init__:39 | [HaryanaReraScraper] Scraper initialised | base_url=https://haryanarera.gov.in
+2026-05-10 21:24:08 | INFO     | scrapers.rera_scraper:scrape_listings:27 | [haryana_rera] Starting registry scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:24:08 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 3.35s (rate limiting)
+2026-05-10 21:24:11 | WARNING  | scrapers.base_scraper:_fetch:98 | HTTP error 404 for URL: https://haryanarera.gov.in/projectSearch?projectName=&promoterName=&page=1
+2026-05-10 21:24:11 | WARNING  | scrapers.rera_scraper:scrape_listings:33 | [haryana_rera] Empty/blocked response on page 1, stopping.
+2026-05-10 21:24:11 | SUCCESS  | scrapers.rera_scraper:scrape_listings:55 | [haryana_rera] Registry scrape complete | city=Gurgaon | total=0
+2026-05-10 21:24:11 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 0 records → data\raw\registry\gurgaon_haryana_rera_registry_raw_20260510_212411.json
+2026-05-10 21:24:11 | INFO     | __main__:scrape_city:329 | Haryana RERA: 0 registry records saved separately
+2026-05-10 21:24:11 | INFO     | __main__:scrape_city:314 | 
+--------------------------------------------------
+2026-05-10 21:24:11 | INFO     | __main__:scrape_city:315 | Collecting registry data from Delhi RERA | city=Gurgaon
+2026-05-10 21:24:11 | INFO     | __main__:scrape_city:316 | --------------------------------------------------
+2026-05-10 21:24:11 | INFO     | scrapers.base_scraper:__init__:39 | [DelhiReraScraper] Scraper initialised | base_url=https://rera.delhi.gov.in
+2026-05-10 21:24:11 | INFO     | scrapers.rera_scraper:scrape_listings:27 | [delhi_rera] Starting registry scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:24:11 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 3.14s (rate limiting)
+2026-05-10 21:24:14 | ERROR    | scrapers.base_scraper:_fetch:101 | Request failed: HTTPSConnectionPool(host='rera.delhi.gov.in', port=443): Max retries exceeded with url: /registered_projects.php?page=1 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1002)'))) | URL: https://rera.delhi.gov.in/registered_projects.php?page=1
+2026-05-10 21:24:16 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 3.50s (rate limiting)
+2026-05-10 21:24:20 | ERROR    | scrapers.base_scraper:_fetch:101 | Request failed: HTTPSConnectionPool(host='rera.delhi.gov.in', port=443): Max retries exceeded with url: /registered_projects.php?page=1 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1002)'))) | URL: https://rera.delhi.gov.in/registered_projects.php?page=1
+2026-05-10 21:24:22 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 3.46s (rate limiting)
+2026-05-10 21:24:25 | ERROR    | scrapers.base_scraper:_fetch:101 | Request failed: HTTPSConnectionPool(host='rera.delhi.gov.in', port=443): Max retries exceeded with url: /registered_projects.php?page=1 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1002)'))) | URL: https://rera.delhi.gov.in/registered_projects.php?page=1
+2026-05-10 21:24:25 | ERROR    | __main__:scrape_city:321 | Delhi RERA registry scrape failed: HTTPSConnectionPool(host='rera.delhi.gov.in', port=443): Max retries exceeded with url: /registered_projects.php?page=1 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1002)')))
+2026-05-10 21:24:25 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 0 records → data\raw\registry\gurgaon_delhi_rera_registry_raw_20260510_212425.json
+2026-05-10 21:24:25 | INFO     | __main__:scrape_city:329 | Delhi RERA: 0 registry records saved separately
+2026-05-10 21:24:25 | INFO     | __main__:scrape_city:314 | 
+--------------------------------------------------
+2026-05-10 21:24:25 | INFO     | __main__:scrape_city:315 | Collecting registry data from UP RERA | city=Gurgaon
+2026-05-10 21:24:25 | INFO     | __main__:scrape_city:316 | --------------------------------------------------
+2026-05-10 21:24:25 | INFO     | scrapers.base_scraper:__init__:39 | [UpReraScraper] Scraper initialised | base_url=https://www.up-rera.in
+2026-05-10 21:24:25 | INFO     | scrapers.rera_scraper:scrape_listings:27 | [up_rera] Starting registry scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:24:25 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.73s (rate limiting)
+2026-05-10 21:24:32 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.up-rera.in/projects?page=1
+2026-05-10 21:24:32 | INFO     | scrapers.rera_scraper:scrape_listings:50 | [up_rera] Page 1: 1 registry records extracted
+2026-05-10 21:24:32 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.45s (rate limiting)
+2026-05-10 21:24:37 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.up-rera.in/projects?page=2
+2026-05-10 21:24:37 | INFO     | scrapers.rera_scraper:scrape_listings:50 | [up_rera] Page 2: 1 registry records extracted
+2026-05-10 21:24:37 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.39s (rate limiting)
+2026-05-10 21:24:43 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.up-rera.in/projects?page=3
+2026-05-10 21:24:43 | INFO     | scrapers.rera_scraper:scrape_listings:50 | [up_rera] Page 3: 1 registry records extracted
+2026-05-10 21:24:43 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 3.15s (rate limiting)
+2026-05-10 21:24:47 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.up-rera.in/projects?page=4
+2026-05-10 21:24:47 | INFO     | scrapers.rera_scraper:scrape_listings:50 | [up_rera] Page 4: 1 registry records extracted
+2026-05-10 21:24:47 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.28s (rate limiting)
+2026-05-10 21:24:50 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.up-rera.in/projects?page=5
+2026-05-10 21:24:50 | INFO     | scrapers.rera_scraper:scrape_listings:50 | [up_rera] Page 5: 1 registry records extracted
+2026-05-10 21:24:50 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.43s (rate limiting)
+2026-05-10 21:24:56 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.up-rera.in/projects?page=6
+2026-05-10 21:24:56 | INFO     | scrapers.rera_scraper:scrape_listings:50 | [up_rera] Page 6: 1 registry records extracted
+2026-05-10 21:24:56 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 3.24s (rate limiting)
+2026-05-10 21:25:00 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.up-rera.in/projects?page=7
+2026-05-10 21:25:00 | INFO     | scrapers.rera_scraper:scrape_listings:50 | [up_rera] Page 7: 1 registry records extracted
+2026-05-10 21:25:00 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.89s (rate limiting)
+2026-05-10 21:25:03 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.up-rera.in/projects?page=8
+2026-05-10 21:25:03 | INFO     | scrapers.rera_scraper:scrape_listings:50 | [up_rera] Page 8: 1 registry records extracted
+2026-05-10 21:25:03 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.52s (rate limiting)
+2026-05-10 21:25:07 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.up-rera.in/projects?page=9
+2026-05-10 21:25:07 | INFO     | scrapers.rera_scraper:scrape_listings:50 | [up_rera] Page 9: 1 registry records extracted
+2026-05-10 21:25:07 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 3.75s (rate limiting)
+2026-05-10 21:25:12 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.up-rera.in/projects?page=10
+2026-05-10 21:25:12 | INFO     | scrapers.rera_scraper:scrape_listings:50 | [up_rera] Page 10: 1 registry records extracted
+2026-05-10 21:25:12 | SUCCESS  | scrapers.rera_scraper:scrape_listings:55 | [up_rera] Registry scrape complete | city=Gurgaon | total=10
+2026-05-10 21:25:12 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 10 records → data\raw\registry\gurgaon_up_rera_registry_raw_20260510_212512.json
+2026-05-10 21:25:12 | INFO     | __main__:scrape_city:329 | UP RERA: 10 registry records saved separately
+2026-05-10 21:25:12 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 10 records → data\raw\registry\gurgaon_all_registry_sources_20260510_212512.json
+2026-05-10 21:25:12 | SUCCESS  | __main__:scrape_city:337 | Gurgaon: 10 government registry records saved -> data\raw\registry\gurgaon_all_registry_sources_20260510_212512.json
+2026-05-10 21:25:12 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 25 records → data\raw\listings\gurgaon_all_sources_20260510_212512.json
+2026-05-10 21:25:12 | SUCCESS  | __main__:scrape_city:344 | Gurgaon: 25 total valid listings saved -> data\raw\listings\gurgaon_all_sources_20260510_212512.json
+2026-05-10 21:25:12 | INFO     | __main__:main:396 | 
+⚡ Launching Spark processing pipeline...
+2026-05-10 21:38:46 | INFO     | utils.helpers:setup_logger:54 | Logger initialised | log_file=data\logs\pipeline_20260510.log
+2026-05-10 21:38:46 | INFO     | __main__:main:378 | ============================================================
+2026-05-10 21:38:46 | INFO     | __main__:main:379 |   🏘️  REAL ESTATE DATA ENGINEERING PIPELINE — MODULE 1
+2026-05-10 21:38:46 | INFO     | __main__:main:380 | ============================================================
+2026-05-10 21:38:46 | INFO     | __main__:main:381 |   Cities    : ['Gurgaon']
+2026-05-10 21:38:46 | INFO     | __main__:main:382 |   Max pages : 10
+2026-05-10 21:38:46 | INFO     | __main__:main:383 |   Sources   : all
+2026-05-10 21:38:46 | INFO     | __main__:main:384 |   Started   : 2026-05-10 21:38:46
+2026-05-10 21:38:46 | INFO     | __main__:main:385 | ============================================================
+2026-05-10 21:38:46 | INFO     | __main__:scrape_city:262 | 
+--------------------------------------------------
+2026-05-10 21:38:46 | INFO     | __main__:scrape_city:263 | Scraping MagicBricks | city=Gurgaon
+2026-05-10 21:38:46 | INFO     | __main__:scrape_city:264 | --------------------------------------------------
+2026-05-10 21:38:46 | INFO     | scrapers.base_scraper:__init__:39 | [MagicBricksScraper] Scraper initialised | base_url=https://www.magicbricks.com
+2026-05-10 21:38:46 | INFO     | scrapers.magicbricks_scraper:scrape_listings:44 | [MagicBricks] Starting scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:38:46 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.43s (rate limiting)
+2026-05-10 21:38:49 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.magicbricks.com/property-for-sale/residential-real-estate
+2026-05-10 21:38:49 | INFO     | scrapers.magicbricks_scraper:scrape_listings:74 | [MagicBricks] Page 1: 30 listings extracted
+2026-05-10 21:38:49 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.34s (rate limiting)
+2026-05-10 21:38:54 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.magicbricks.com/property-for-sale/residential-real-estate
+2026-05-10 21:38:54 | INFO     | scrapers.magicbricks_scraper:scrape_listings:63 | [MagicBricks] No cards found on page 2. End of results.
+2026-05-10 21:38:54 | SUCCESS  | scrapers.magicbricks_scraper:scrape_listings:77 | [MagicBricks] Scrape complete | city=Gurgaon | total=30
+2026-05-10 21:38:54 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 30 records → data\raw\listings\gurgaon_magicbricks_raw_20260510_213854.json
+2026-05-10 21:38:54 | WARNING  | utils.helpers:filter_valid_listings:133 | Dropped 5 invalid listings (25 valid kept)
+2026-05-10 21:38:54 | INFO     | utils.helpers:print_pipeline_summary:184 | 
+=======================================================
+2026-05-10 21:38:54 | INFO     | utils.helpers:print_pipeline_summary:185 |   PIPELINE SUMMARY — MAGICBRICKS
+2026-05-10 21:38:54 | INFO     | utils.helpers:print_pipeline_summary:186 | =======================================================
+2026-05-10 21:38:54 | INFO     | utils.helpers:print_pipeline_summary:187 |   City         : Gurgaon
+2026-05-10 21:38:54 | INFO     | utils.helpers:print_pipeline_summary:188 |   Total scraped: 30
+2026-05-10 21:38:54 | INFO     | utils.helpers:print_pipeline_summary:189 |   Valid records: 25
+2026-05-10 21:38:54 | INFO     | utils.helpers:print_pipeline_summary:190 |   Dropped      : 5
+2026-05-10 21:38:54 | INFO     | utils.helpers:print_pipeline_summary:191 |   Output       : data/raw/listings
+2026-05-10 21:38:54 | INFO     | utils.helpers:print_pipeline_summary:192 | =======================================================
+
+2026-05-10 21:38:54 | INFO     | __main__:scrape_city:275 | 
+--------------------------------------------------
+2026-05-10 21:38:54 | INFO     | __main__:scrape_city:276 | Scraping 99acres | city=Gurgaon
+2026-05-10 21:38:54 | INFO     | __main__:scrape_city:277 | --------------------------------------------------
+2026-05-10 21:38:54 | INFO     | scrapers.base_scraper:__init__:39 | [Acres99Scraper] Scraper initialised | base_url=https://www.99acres.com
+2026-05-10 21:38:54 | INFO     | scrapers.acres99_scraper:scrape_listings:54 | [99acres] Starting scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:38:54 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 3.66s (rate limiting)
+2026-05-10 21:38:58 | WARNING  | scrapers.base_scraper:_fetch:98 | HTTP error 403 for URL: https://www.99acres.com/search/property/buy/gurugram-11505/results/
+2026-05-10 21:38:58 | WARNING  | scrapers.acres99_scraper:scrape_listings:67 | [99acres] Empty response on page 1, stopping.
+2026-05-10 21:38:58 | SUCCESS  | scrapers.acres99_scraper:scrape_listings:87 | [99acres] Scrape complete | city=Gurgaon | total=0
+2026-05-10 21:38:58 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 0 records → data\raw\listings\gurgaon_99acres_raw_20260510_213858.json
+2026-05-10 21:38:58 | INFO     | utils.helpers:print_pipeline_summary:184 | 
+=======================================================
+2026-05-10 21:38:58 | INFO     | utils.helpers:print_pipeline_summary:185 |   PIPELINE SUMMARY — 99ACRES
+2026-05-10 21:38:58 | INFO     | utils.helpers:print_pipeline_summary:186 | =======================================================
+2026-05-10 21:38:58 | INFO     | utils.helpers:print_pipeline_summary:187 |   City         : Gurgaon
+2026-05-10 21:38:58 | INFO     | utils.helpers:print_pipeline_summary:188 |   Total scraped: 0
+2026-05-10 21:38:58 | INFO     | utils.helpers:print_pipeline_summary:189 |   Valid records: 0
+2026-05-10 21:38:58 | INFO     | utils.helpers:print_pipeline_summary:190 |   Dropped      : 0
+2026-05-10 21:38:58 | INFO     | utils.helpers:print_pipeline_summary:191 |   Output       : data/raw/listings
+2026-05-10 21:38:58 | INFO     | utils.helpers:print_pipeline_summary:192 | =======================================================
+
+2026-05-10 21:38:58 | INFO     | __main__:scrape_city:291 | 
+--------------------------------------------------
+2026-05-10 21:38:58 | INFO     | __main__:scrape_city:292 | Scraping Housing | city=Gurgaon
+2026-05-10 21:38:58 | INFO     | __main__:scrape_city:293 | --------------------------------------------------
+2026-05-10 21:38:58 | INFO     | scrapers.base_scraper:__init__:39 | [HousingScraper] Scraper initialised | base_url=https://housing.com
+2026-05-10 21:38:58 | INFO     | scrapers.private_portal_scraper:scrape_listings:37 | [housing] Starting scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:38:58 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.81s (rate limiting)
+2026-05-10 21:39:04 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://housing.com/in/buy/searches/gurgaon?page=1
+2026-05-10 21:39:04 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [housing] Page 1: 0 listings extracted
+2026-05-10 21:39:04 | SUCCESS  | scrapers.private_portal_scraper:scrape_listings:73 | [housing] Scrape complete | city=Gurgaon | total=0
+2026-05-10 21:39:04 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 0 records → data\raw\listings\gurgaon_housing_raw_20260510_213904.json
+2026-05-10 21:39:04 | INFO     | utils.helpers:print_pipeline_summary:184 | 
+=======================================================
+2026-05-10 21:39:04 | INFO     | utils.helpers:print_pipeline_summary:185 |   PIPELINE SUMMARY — HOUSING
+2026-05-10 21:39:04 | INFO     | utils.helpers:print_pipeline_summary:186 | =======================================================
+2026-05-10 21:39:04 | INFO     | utils.helpers:print_pipeline_summary:187 |   City         : Gurgaon
+2026-05-10 21:39:04 | INFO     | utils.helpers:print_pipeline_summary:188 |   Total scraped: 0
+2026-05-10 21:39:04 | INFO     | utils.helpers:print_pipeline_summary:189 |   Valid records: 0
+2026-05-10 21:39:04 | INFO     | utils.helpers:print_pipeline_summary:190 |   Dropped      : 0
+2026-05-10 21:39:04 | INFO     | utils.helpers:print_pipeline_summary:191 |   Output       : data/raw/listings
+2026-05-10 21:39:04 | INFO     | utils.helpers:print_pipeline_summary:192 | =======================================================
+
+2026-05-10 21:39:04 | INFO     | __main__:scrape_city:291 | 
+--------------------------------------------------
+2026-05-10 21:39:04 | INFO     | __main__:scrape_city:292 | Scraping Makaan | city=Gurgaon
+2026-05-10 21:39:04 | INFO     | __main__:scrape_city:293 | --------------------------------------------------
+2026-05-10 21:39:04 | INFO     | scrapers.base_scraper:__init__:39 | [MakaanScraper] Scraper initialised | base_url=https://www.makaan.com
+2026-05-10 21:39:04 | INFO     | scrapers.private_portal_scraper:scrape_listings:37 | [makaan] Starting scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:39:04 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.72s (rate limiting)
+2026-05-10 21:39:11 | WARNING  | scrapers.base_scraper:_fetch:98 | HTTP error 502 for URL: https://www.makaan.com/gurgaon-residential-property/buy-property-in-gurgaon-city?page=1
+2026-05-10 21:39:11 | WARNING  | scrapers.private_portal_scraper:scrape_listings:43 | [makaan] Empty response on page 1, stopping.
+2026-05-10 21:39:11 | SUCCESS  | scrapers.private_portal_scraper:scrape_listings:73 | [makaan] Scrape complete | city=Gurgaon | total=0
+2026-05-10 21:39:11 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 0 records → data\raw\listings\gurgaon_makaan_raw_20260510_213911.json
+2026-05-10 21:39:11 | INFO     | utils.helpers:print_pipeline_summary:184 | 
+=======================================================
+2026-05-10 21:39:11 | INFO     | utils.helpers:print_pipeline_summary:185 |   PIPELINE SUMMARY — MAKAAN
+2026-05-10 21:39:11 | INFO     | utils.helpers:print_pipeline_summary:186 | =======================================================
+2026-05-10 21:39:11 | INFO     | utils.helpers:print_pipeline_summary:187 |   City         : Gurgaon
+2026-05-10 21:39:11 | INFO     | utils.helpers:print_pipeline_summary:188 |   Total scraped: 0
+2026-05-10 21:39:11 | INFO     | utils.helpers:print_pipeline_summary:189 |   Valid records: 0
+2026-05-10 21:39:11 | INFO     | utils.helpers:print_pipeline_summary:190 |   Dropped      : 0
+2026-05-10 21:39:11 | INFO     | utils.helpers:print_pipeline_summary:191 |   Output       : data/raw/listings
+2026-05-10 21:39:11 | INFO     | utils.helpers:print_pipeline_summary:192 | =======================================================
+
+2026-05-10 21:39:11 | INFO     | __main__:scrape_city:291 | 
+--------------------------------------------------
+2026-05-10 21:39:11 | INFO     | __main__:scrape_city:292 | Scraping CommonFloor | city=Gurgaon
+2026-05-10 21:39:11 | INFO     | __main__:scrape_city:293 | --------------------------------------------------
+2026-05-10 21:39:11 | INFO     | scrapers.base_scraper:__init__:39 | [CommonFloorScraper] Scraper initialised | base_url=https://www.commonfloor.com
+2026-05-10 21:39:11 | INFO     | scrapers.private_portal_scraper:scrape_listings:37 | [commonfloor] Starting scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:39:11 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.14s (rate limiting)
+2026-05-10 21:39:17 | WARNING  | scrapers.base_scraper:_fetch:98 | HTTP error 500 for URL: https://www.commonfloor.com/listings/gurgaon/for-sale?page=1
+2026-05-10 21:39:17 | WARNING  | scrapers.private_portal_scraper:scrape_listings:43 | [commonfloor] Empty response on page 1, stopping.
+2026-05-10 21:39:17 | SUCCESS  | scrapers.private_portal_scraper:scrape_listings:73 | [commonfloor] Scrape complete | city=Gurgaon | total=0
+2026-05-10 21:39:17 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 0 records → data\raw\listings\gurgaon_commonfloor_raw_20260510_213917.json
+2026-05-10 21:39:17 | INFO     | utils.helpers:print_pipeline_summary:184 | 
+=======================================================
+2026-05-10 21:39:17 | INFO     | utils.helpers:print_pipeline_summary:185 |   PIPELINE SUMMARY — COMMONFLOOR
+2026-05-10 21:39:17 | INFO     | utils.helpers:print_pipeline_summary:186 | =======================================================
+2026-05-10 21:39:17 | INFO     | utils.helpers:print_pipeline_summary:187 |   City         : Gurgaon
+2026-05-10 21:39:17 | INFO     | utils.helpers:print_pipeline_summary:188 |   Total scraped: 0
+2026-05-10 21:39:17 | INFO     | utils.helpers:print_pipeline_summary:189 |   Valid records: 0
+2026-05-10 21:39:17 | INFO     | utils.helpers:print_pipeline_summary:190 |   Dropped      : 0
+2026-05-10 21:39:17 | INFO     | utils.helpers:print_pipeline_summary:191 |   Output       : data/raw/listings
+2026-05-10 21:39:17 | INFO     | utils.helpers:print_pipeline_summary:192 | =======================================================
+
+2026-05-10 21:39:17 | INFO     | __main__:scrape_city:291 | 
+--------------------------------------------------
+2026-05-10 21:39:17 | INFO     | __main__:scrape_city:292 | Scraping NoBroker | city=Gurgaon
+2026-05-10 21:39:17 | INFO     | __main__:scrape_city:293 | --------------------------------------------------
+2026-05-10 21:39:17 | INFO     | scrapers.base_scraper:__init__:39 | [NoBrokerScraper] Scraper initialised | base_url=https://www.nobroker.in
+2026-05-10 21:39:17 | INFO     | scrapers.private_portal_scraper:scrape_listings:37 | [nobroker] Starting scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:39:17 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.35s (rate limiting)
+2026-05-10 21:39:19 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.nobroker.in/property/sale/gurgaon?pageNo=1
+2026-05-10 21:39:19 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [nobroker] Page 1: 0 listings extracted
+2026-05-10 21:39:19 | SUCCESS  | scrapers.private_portal_scraper:scrape_listings:73 | [nobroker] Scrape complete | city=Gurgaon | total=0
+2026-05-10 21:39:19 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 0 records → data\raw\listings\gurgaon_nobroker_raw_20260510_213919.json
+2026-05-10 21:39:19 | INFO     | utils.helpers:print_pipeline_summary:184 | 
+=======================================================
+2026-05-10 21:39:19 | INFO     | utils.helpers:print_pipeline_summary:185 |   PIPELINE SUMMARY — NOBROKER
+2026-05-10 21:39:19 | INFO     | utils.helpers:print_pipeline_summary:186 | =======================================================
+2026-05-10 21:39:19 | INFO     | utils.helpers:print_pipeline_summary:187 |   City         : Gurgaon
+2026-05-10 21:39:19 | INFO     | utils.helpers:print_pipeline_summary:188 |   Total scraped: 0
+2026-05-10 21:39:19 | INFO     | utils.helpers:print_pipeline_summary:189 |   Valid records: 0
+2026-05-10 21:39:19 | INFO     | utils.helpers:print_pipeline_summary:190 |   Dropped      : 0
+2026-05-10 21:39:19 | INFO     | utils.helpers:print_pipeline_summary:191 |   Output       : data/raw/listings
+2026-05-10 21:39:19 | INFO     | utils.helpers:print_pipeline_summary:192 | =======================================================
+
+2026-05-10 21:39:19 | INFO     | __main__:scrape_city:291 | 
+--------------------------------------------------
+2026-05-10 21:39:19 | INFO     | __main__:scrape_city:292 | Scraping SquareYards | city=Gurgaon
+2026-05-10 21:39:19 | INFO     | __main__:scrape_city:293 | --------------------------------------------------
+2026-05-10 21:39:19 | INFO     | scrapers.base_scraper:__init__:39 | [SquareYardsScraper] Scraper initialised | base_url=https://www.squareyards.com
+2026-05-10 21:39:19 | INFO     | scrapers.private_portal_scraper:scrape_listings:37 | [squareyards] Starting scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:39:19 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.39s (rate limiting)
+2026-05-10 21:39:22 | WARNING  | scrapers.base_scraper:_fetch:98 | HTTP error 404 for URL: https://www.squareyards.com/sale-property-in-gurgaon?page=1
+2026-05-10 21:39:22 | WARNING  | scrapers.private_portal_scraper:scrape_listings:43 | [squareyards] Empty response on page 1, stopping.
+2026-05-10 21:39:22 | SUCCESS  | scrapers.private_portal_scraper:scrape_listings:73 | [squareyards] Scrape complete | city=Gurgaon | total=0
+2026-05-10 21:39:22 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 0 records → data\raw\listings\gurgaon_squareyards_raw_20260510_213922.json
+2026-05-10 21:39:22 | INFO     | utils.helpers:print_pipeline_summary:184 | 
+=======================================================
+2026-05-10 21:39:22 | INFO     | utils.helpers:print_pipeline_summary:185 |   PIPELINE SUMMARY — SQUAREYARDS
+2026-05-10 21:39:22 | INFO     | utils.helpers:print_pipeline_summary:186 | =======================================================
+2026-05-10 21:39:22 | INFO     | utils.helpers:print_pipeline_summary:187 |   City         : Gurgaon
+2026-05-10 21:39:22 | INFO     | utils.helpers:print_pipeline_summary:188 |   Total scraped: 0
+2026-05-10 21:39:22 | INFO     | utils.helpers:print_pipeline_summary:189 |   Valid records: 0
+2026-05-10 21:39:22 | INFO     | utils.helpers:print_pipeline_summary:190 |   Dropped      : 0
+2026-05-10 21:39:22 | INFO     | utils.helpers:print_pipeline_summary:191 |   Output       : data/raw/listings
+2026-05-10 21:39:22 | INFO     | utils.helpers:print_pipeline_summary:192 | =======================================================
+
+2026-05-10 21:39:22 | INFO     | __main__:scrape_city:291 | 
+--------------------------------------------------
+2026-05-10 21:39:22 | INFO     | __main__:scrape_city:292 | Scraping PropTiger | city=Gurgaon
+2026-05-10 21:39:22 | INFO     | __main__:scrape_city:293 | --------------------------------------------------
+2026-05-10 21:39:22 | INFO     | scrapers.base_scraper:__init__:39 | [PropTigerScraper] Scraper initialised | base_url=https://www.proptiger.com
+2026-05-10 21:39:22 | INFO     | scrapers.private_portal_scraper:scrape_listings:37 | [proptiger] Starting scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:39:22 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 3.93s (rate limiting)
+2026-05-10 21:39:27 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.proptiger.com/gurgaon/property-for-sale?page=1
+2026-05-10 21:39:27 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [proptiger] Page 1: 0 listings extracted
+2026-05-10 21:39:27 | SUCCESS  | scrapers.private_portal_scraper:scrape_listings:73 | [proptiger] Scrape complete | city=Gurgaon | total=0
+2026-05-10 21:39:27 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 0 records → data\raw\listings\gurgaon_proptiger_raw_20260510_213927.json
+2026-05-10 21:39:27 | INFO     | utils.helpers:print_pipeline_summary:184 | 
+=======================================================
+2026-05-10 21:39:27 | INFO     | utils.helpers:print_pipeline_summary:185 |   PIPELINE SUMMARY — PROPTIGER
+2026-05-10 21:39:27 | INFO     | utils.helpers:print_pipeline_summary:186 | =======================================================
+2026-05-10 21:39:27 | INFO     | utils.helpers:print_pipeline_summary:187 |   City         : Gurgaon
+2026-05-10 21:39:27 | INFO     | utils.helpers:print_pipeline_summary:188 |   Total scraped: 0
+2026-05-10 21:39:27 | INFO     | utils.helpers:print_pipeline_summary:189 |   Valid records: 0
+2026-05-10 21:39:27 | INFO     | utils.helpers:print_pipeline_summary:190 |   Dropped      : 0
+2026-05-10 21:39:27 | INFO     | utils.helpers:print_pipeline_summary:191 |   Output       : data/raw/listings
+2026-05-10 21:39:27 | INFO     | utils.helpers:print_pipeline_summary:192 | =======================================================
+
+2026-05-10 21:39:27 | INFO     | __main__:scrape_city:291 | 
+--------------------------------------------------
+2026-05-10 21:39:27 | INFO     | __main__:scrape_city:292 | Scraping RealEstateIndia | city=Gurgaon
+2026-05-10 21:39:27 | INFO     | __main__:scrape_city:293 | --------------------------------------------------
+2026-05-10 21:39:27 | INFO     | scrapers.base_scraper:__init__:39 | [RealEstateIndiaScraper] Scraper initialised | base_url=https://www.realestateindia.com
+2026-05-10 21:39:27 | INFO     | scrapers.private_portal_scraper:scrape_listings:37 | [realestateindia] Starting scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:39:27 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.80s (rate limiting)
+2026-05-10 21:39:32 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.realestateindia.com/gurgaon-property/residential-property-for-sale.htm?page=1
+2026-05-10 21:39:33 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [realestateindia] Page 1: 20 listings extracted
+2026-05-10 21:39:33 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.28s (rate limiting)
+2026-05-10 21:39:35 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.realestateindia.com/gurgaon-property/residential-property-for-sale.htm?page=2
+2026-05-10 21:39:35 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [realestateindia] Page 2: 20 listings extracted
+2026-05-10 21:39:35 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.35s (rate limiting)
+2026-05-10 21:39:39 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.realestateindia.com/gurgaon-property/residential-property-for-sale.htm?page=3
+2026-05-10 21:39:39 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [realestateindia] Page 3: 20 listings extracted
+2026-05-10 21:39:39 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.29s (rate limiting)
+2026-05-10 21:39:44 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.realestateindia.com/gurgaon-property/residential-property-for-sale.htm?page=4
+2026-05-10 21:39:44 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [realestateindia] Page 4: 20 listings extracted
+2026-05-10 21:39:44 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.73s (rate limiting)
+2026-05-10 21:39:47 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.realestateindia.com/gurgaon-property/residential-property-for-sale.htm?page=5
+2026-05-10 21:39:47 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [realestateindia] Page 5: 20 listings extracted
+2026-05-10 21:39:47 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.40s (rate limiting)
+2026-05-10 21:39:51 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.realestateindia.com/gurgaon-property/residential-property-for-sale.htm?page=6
+2026-05-10 21:39:51 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [realestateindia] Page 6: 20 listings extracted
+2026-05-10 21:39:51 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.89s (rate limiting)
+2026-05-10 21:39:54 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.realestateindia.com/gurgaon-property/residential-property-for-sale.htm?page=7
+2026-05-10 21:39:54 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [realestateindia] Page 7: 20 listings extracted
+2026-05-10 21:39:54 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.14s (rate limiting)
+2026-05-10 21:39:57 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.realestateindia.com/gurgaon-property/residential-property-for-sale.htm?page=8
+2026-05-10 21:39:57 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [realestateindia] Page 8: 20 listings extracted
+2026-05-10 21:39:57 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.68s (rate limiting)
+2026-05-10 21:40:02 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.realestateindia.com/gurgaon-property/residential-property-for-sale.htm?page=9
+2026-05-10 21:40:02 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [realestateindia] Page 9: 20 listings extracted
+2026-05-10 21:40:02 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.60s (rate limiting)
+2026-05-10 21:40:08 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.realestateindia.com/gurgaon-property/residential-property-for-sale.htm?page=10
+2026-05-10 21:40:08 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [realestateindia] Page 10: 20 listings extracted
+2026-05-10 21:40:08 | SUCCESS  | scrapers.private_portal_scraper:scrape_listings:73 | [realestateindia] Scrape complete | city=Gurgaon | total=200
+2026-05-10 21:40:08 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 200 records → data\raw\listings\gurgaon_realestateindia_raw_20260510_214008.json
+2026-05-10 21:40:08 | WARNING  | utils.helpers:filter_valid_listings:133 | Dropped 200 invalid listings (0 valid kept)
+2026-05-10 21:40:08 | INFO     | utils.helpers:print_pipeline_summary:184 | 
+=======================================================
+2026-05-10 21:40:08 | INFO     | utils.helpers:print_pipeline_summary:185 |   PIPELINE SUMMARY — REALESTATEINDIA
+2026-05-10 21:40:08 | INFO     | utils.helpers:print_pipeline_summary:186 | =======================================================
+2026-05-10 21:40:08 | INFO     | utils.helpers:print_pipeline_summary:187 |   City         : Gurgaon
+2026-05-10 21:40:08 | INFO     | utils.helpers:print_pipeline_summary:188 |   Total scraped: 200
+2026-05-10 21:40:08 | INFO     | utils.helpers:print_pipeline_summary:189 |   Valid records: 0
+2026-05-10 21:40:08 | INFO     | utils.helpers:print_pipeline_summary:190 |   Dropped      : 200
+2026-05-10 21:40:08 | INFO     | utils.helpers:print_pipeline_summary:191 |   Output       : data/raw/listings
+2026-05-10 21:40:08 | INFO     | utils.helpers:print_pipeline_summary:192 | =======================================================
+
+2026-05-10 21:40:08 | INFO     | __main__:scrape_city:314 | 
+--------------------------------------------------
+2026-05-10 21:40:08 | INFO     | __main__:scrape_city:315 | Collecting registry data from Haryana RERA | city=Gurgaon
+2026-05-10 21:40:08 | INFO     | __main__:scrape_city:316 | --------------------------------------------------
+2026-05-10 21:40:08 | INFO     | scrapers.base_scraper:__init__:39 | [HaryanaReraScraper] Scraper initialised | base_url=https://haryanarera.gov.in
+2026-05-10 21:40:08 | INFO     | scrapers.rera_scraper:scrape_listings:27 | [haryana_rera] Starting registry scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:40:08 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.63s (rate limiting)
+2026-05-10 21:40:13 | WARNING  | scrapers.base_scraper:_fetch:98 | HTTP error 404 for URL: https://haryanarera.gov.in/projectSearch?projectName=&promoterName=&page=1
+2026-05-10 21:40:13 | WARNING  | scrapers.rera_scraper:scrape_listings:33 | [haryana_rera] Empty/blocked response on page 1, stopping.
+2026-05-10 21:40:13 | SUCCESS  | scrapers.rera_scraper:scrape_listings:55 | [haryana_rera] Registry scrape complete | city=Gurgaon | total=0
+2026-05-10 21:40:13 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 0 records → data\raw\registry\gurgaon_haryana_rera_registry_raw_20260510_214013.json
+2026-05-10 21:40:13 | INFO     | __main__:scrape_city:329 | Haryana RERA: 0 registry records saved separately
+2026-05-10 21:40:13 | INFO     | __main__:scrape_city:314 | 
+--------------------------------------------------
+2026-05-10 21:40:13 | INFO     | __main__:scrape_city:315 | Collecting registry data from Delhi RERA | city=Gurgaon
+2026-05-10 21:40:13 | INFO     | __main__:scrape_city:316 | --------------------------------------------------
+2026-05-10 21:40:13 | INFO     | scrapers.base_scraper:__init__:39 | [DelhiReraScraper] Scraper initialised | base_url=https://rera.delhi.gov.in
+2026-05-10 21:40:13 | INFO     | scrapers.rera_scraper:scrape_listings:27 | [delhi_rera] Starting registry scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:40:13 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 3.86s (rate limiting)
+2026-05-10 21:40:17 | ERROR    | scrapers.base_scraper:_fetch:101 | Request failed: HTTPSConnectionPool(host='rera.delhi.gov.in', port=443): Max retries exceeded with url: /registered_projects.php?page=1 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1002)'))) | URL: https://rera.delhi.gov.in/registered_projects.php?page=1
+2026-05-10 21:40:19 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.20s (rate limiting)
+2026-05-10 21:40:23 | ERROR    | scrapers.base_scraper:_fetch:101 | Request failed: HTTPSConnectionPool(host='rera.delhi.gov.in', port=443): Max retries exceeded with url: /registered_projects.php?page=1 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1002)'))) | URL: https://rera.delhi.gov.in/registered_projects.php?page=1
+2026-05-10 21:40:25 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.70s (rate limiting)
+2026-05-10 21:40:30 | ERROR    | scrapers.base_scraper:_fetch:101 | Request failed: HTTPSConnectionPool(host='rera.delhi.gov.in', port=443): Max retries exceeded with url: /registered_projects.php?page=1 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1002)'))) | URL: https://rera.delhi.gov.in/registered_projects.php?page=1
+2026-05-10 21:40:30 | ERROR    | __main__:scrape_city:321 | Delhi RERA registry scrape failed: HTTPSConnectionPool(host='rera.delhi.gov.in', port=443): Max retries exceeded with url: /registered_projects.php?page=1 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1002)')))
+2026-05-10 21:40:30 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 0 records → data\raw\registry\gurgaon_delhi_rera_registry_raw_20260510_214030.json
+2026-05-10 21:40:30 | INFO     | __main__:scrape_city:329 | Delhi RERA: 0 registry records saved separately
+2026-05-10 21:40:30 | INFO     | __main__:scrape_city:314 | 
+--------------------------------------------------
+2026-05-10 21:40:30 | INFO     | __main__:scrape_city:315 | Collecting registry data from UP RERA | city=Gurgaon
+2026-05-10 21:40:30 | INFO     | __main__:scrape_city:316 | --------------------------------------------------
+2026-05-10 21:40:30 | INFO     | scrapers.base_scraper:__init__:39 | [UpReraScraper] Scraper initialised | base_url=https://www.up-rera.in
+2026-05-10 21:40:30 | INFO     | scrapers.rera_scraper:scrape_listings:27 | [up_rera] Starting registry scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:40:30 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.31s (rate limiting)
+2026-05-10 21:40:34 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.up-rera.in/projects?page=1
+2026-05-10 21:40:34 | INFO     | scrapers.rera_scraper:scrape_listings:50 | [up_rera] Page 1: 1 registry records extracted
+2026-05-10 21:40:34 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.83s (rate limiting)
+2026-05-10 21:40:37 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.up-rera.in/projects?page=2
+2026-05-10 21:40:37 | INFO     | scrapers.rera_scraper:scrape_listings:50 | [up_rera] Page 2: 1 registry records extracted
+2026-05-10 21:40:37 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.15s (rate limiting)
+2026-05-10 21:40:41 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.up-rera.in/projects?page=3
+2026-05-10 21:40:41 | INFO     | scrapers.rera_scraper:scrape_listings:50 | [up_rera] Page 3: 1 registry records extracted
+2026-05-10 21:40:41 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.73s (rate limiting)
+2026-05-10 21:40:46 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.up-rera.in/projects?page=4
+2026-05-10 21:40:46 | INFO     | scrapers.rera_scraper:scrape_listings:50 | [up_rera] Page 4: 1 registry records extracted
+2026-05-10 21:40:46 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.65s (rate limiting)
+2026-05-10 21:40:52 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.up-rera.in/projects?page=5
+2026-05-10 21:40:52 | INFO     | scrapers.rera_scraper:scrape_listings:50 | [up_rera] Page 5: 1 registry records extracted
+2026-05-10 21:40:52 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.78s (rate limiting)
+2026-05-10 21:40:57 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.up-rera.in/projects?page=6
+2026-05-10 21:40:57 | INFO     | scrapers.rera_scraper:scrape_listings:50 | [up_rera] Page 6: 1 registry records extracted
+2026-05-10 21:40:57 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 3.68s (rate limiting)
+2026-05-10 21:41:02 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.up-rera.in/projects?page=7
+2026-05-10 21:41:02 | INFO     | scrapers.rera_scraper:scrape_listings:50 | [up_rera] Page 7: 1 registry records extracted
+2026-05-10 21:41:02 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.85s (rate limiting)
+2026-05-10 21:41:06 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.up-rera.in/projects?page=8
+2026-05-10 21:41:06 | INFO     | scrapers.rera_scraper:scrape_listings:50 | [up_rera] Page 8: 1 registry records extracted
+2026-05-10 21:41:06 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.04s (rate limiting)
+2026-05-10 21:41:11 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.up-rera.in/projects?page=9
+2026-05-10 21:41:11 | INFO     | scrapers.rera_scraper:scrape_listings:50 | [up_rera] Page 9: 1 registry records extracted
+2026-05-10 21:41:11 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.21s (rate limiting)
+2026-05-10 21:41:14 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.up-rera.in/projects?page=10
+2026-05-10 21:41:14 | INFO     | scrapers.rera_scraper:scrape_listings:50 | [up_rera] Page 10: 1 registry records extracted
+2026-05-10 21:41:14 | SUCCESS  | scrapers.rera_scraper:scrape_listings:55 | [up_rera] Registry scrape complete | city=Gurgaon | total=10
+2026-05-10 21:41:14 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 10 records → data\raw\registry\gurgaon_up_rera_registry_raw_20260510_214114.json
+2026-05-10 21:41:14 | INFO     | __main__:scrape_city:329 | UP RERA: 10 registry records saved separately
+2026-05-10 21:41:14 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 10 records → data\raw\registry\gurgaon_all_registry_sources_20260510_214114.json
+2026-05-10 21:41:14 | SUCCESS  | __main__:scrape_city:337 | Gurgaon: 10 government registry records saved -> data\raw\registry\gurgaon_all_registry_sources_20260510_214114.json
+2026-05-10 21:41:14 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 25 records → data\raw\listings\gurgaon_all_sources_20260510_214114.json
+2026-05-10 21:41:14 | SUCCESS  | __main__:scrape_city:344 | Gurgaon: 25 total valid listings saved -> data\raw\listings\gurgaon_all_sources_20260510_214114.json
+2026-05-10 21:41:14 | INFO     | __main__:main:396 | 
+⚡ Launching Spark processing pipeline...
+2026-05-10 21:47:33 | INFO     | utils.helpers:setup_logger:54 | Logger initialised | log_file=data\logs\pipeline_20260510.log
+2026-05-10 21:47:33 | INFO     | __main__:main:378 | ============================================================
+2026-05-10 21:47:33 | INFO     | __main__:main:379 |   🏘️  REAL ESTATE DATA ENGINEERING PIPELINE — MODULE 1
+2026-05-10 21:47:33 | INFO     | __main__:main:380 | ============================================================
+2026-05-10 21:47:33 | INFO     | __main__:main:381 |   Cities    : ['Gurgaon']
+2026-05-10 21:47:33 | INFO     | __main__:main:382 |   Max pages : 10
+2026-05-10 21:47:33 | INFO     | __main__:main:383 |   Sources   : all
+2026-05-10 21:47:33 | INFO     | __main__:main:384 |   Started   : 2026-05-10 21:47:33
+2026-05-10 21:47:33 | INFO     | __main__:main:385 | ============================================================
+2026-05-10 21:47:33 | INFO     | __main__:scrape_city:262 | 
+--------------------------------------------------
+2026-05-10 21:47:33 | INFO     | __main__:scrape_city:263 | Scraping MagicBricks | city=Gurgaon
+2026-05-10 21:47:33 | INFO     | __main__:scrape_city:264 | --------------------------------------------------
+2026-05-10 21:47:33 | INFO     | scrapers.base_scraper:__init__:39 | [MagicBricksScraper] Scraper initialised | base_url=https://www.magicbricks.com
+2026-05-10 21:47:33 | INFO     | scrapers.magicbricks_scraper:scrape_listings:44 | [MagicBricks] Starting scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:47:33 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.25s (rate limiting)
+2026-05-10 21:47:38 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.magicbricks.com/property-for-sale/residential-real-estate
+2026-05-10 21:47:38 | INFO     | scrapers.magicbricks_scraper:scrape_listings:74 | [MagicBricks] Page 1: 30 listings extracted
+2026-05-10 21:47:38 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.59s (rate limiting)
+2026-05-10 21:47:41 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.magicbricks.com/property-for-sale/residential-real-estate
+2026-05-10 21:47:41 | INFO     | scrapers.magicbricks_scraper:scrape_listings:74 | [MagicBricks] Page 2: 30 listings extracted
+2026-05-10 21:47:41 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.44s (rate limiting)
+2026-05-10 21:47:46 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.magicbricks.com/property-for-sale/residential-real-estate
+2026-05-10 21:47:46 | INFO     | scrapers.magicbricks_scraper:scrape_listings:63 | [MagicBricks] No cards found on page 3. End of results.
+2026-05-10 21:47:46 | SUCCESS  | scrapers.magicbricks_scraper:scrape_listings:77 | [MagicBricks] Scrape complete | city=Gurgaon | total=60
+2026-05-10 21:47:46 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 60 records → data\raw\listings\gurgaon_magicbricks_raw_20260510_214746.json
+2026-05-10 21:47:46 | WARNING  | utils.helpers:filter_valid_listings:133 | Dropped 6 invalid listings (54 valid kept)
+2026-05-10 21:47:46 | INFO     | utils.helpers:print_pipeline_summary:184 | 
+=======================================================
+2026-05-10 21:47:46 | INFO     | utils.helpers:print_pipeline_summary:185 |   PIPELINE SUMMARY — MAGICBRICKS
+2026-05-10 21:47:46 | INFO     | utils.helpers:print_pipeline_summary:186 | =======================================================
+2026-05-10 21:47:46 | INFO     | utils.helpers:print_pipeline_summary:187 |   City         : Gurgaon
+2026-05-10 21:47:46 | INFO     | utils.helpers:print_pipeline_summary:188 |   Total scraped: 60
+2026-05-10 21:47:46 | INFO     | utils.helpers:print_pipeline_summary:189 |   Valid records: 54
+2026-05-10 21:47:46 | INFO     | utils.helpers:print_pipeline_summary:190 |   Dropped      : 6
+2026-05-10 21:47:46 | INFO     | utils.helpers:print_pipeline_summary:191 |   Output       : data/raw/listings
+2026-05-10 21:47:46 | INFO     | utils.helpers:print_pipeline_summary:192 | =======================================================
+
+2026-05-10 21:47:46 | INFO     | __main__:scrape_city:275 | 
+--------------------------------------------------
+2026-05-10 21:47:46 | INFO     | __main__:scrape_city:276 | Scraping 99acres | city=Gurgaon
+2026-05-10 21:47:46 | INFO     | __main__:scrape_city:277 | --------------------------------------------------
+2026-05-10 21:47:46 | INFO     | scrapers.base_scraper:__init__:39 | [Acres99Scraper] Scraper initialised | base_url=https://www.99acres.com
+2026-05-10 21:47:46 | INFO     | scrapers.acres99_scraper:scrape_listings:54 | [99acres] Starting scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:47:46 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 3.02s (rate limiting)
+2026-05-10 21:47:49 | WARNING  | scrapers.base_scraper:_fetch:98 | HTTP error 403 for URL: https://www.99acres.com/search/property/buy/gurugram-11505/results/
+2026-05-10 21:47:49 | WARNING  | scrapers.acres99_scraper:scrape_listings:67 | [99acres] Empty response on page 1, stopping.
+2026-05-10 21:47:49 | SUCCESS  | scrapers.acres99_scraper:scrape_listings:87 | [99acres] Scrape complete | city=Gurgaon | total=0
+2026-05-10 21:47:49 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 0 records → data\raw\listings\gurgaon_99acres_raw_20260510_214749.json
+2026-05-10 21:47:49 | INFO     | utils.helpers:print_pipeline_summary:184 | 
+=======================================================
+2026-05-10 21:47:49 | INFO     | utils.helpers:print_pipeline_summary:185 |   PIPELINE SUMMARY — 99ACRES
+2026-05-10 21:47:49 | INFO     | utils.helpers:print_pipeline_summary:186 | =======================================================
+2026-05-10 21:47:49 | INFO     | utils.helpers:print_pipeline_summary:187 |   City         : Gurgaon
+2026-05-10 21:47:49 | INFO     | utils.helpers:print_pipeline_summary:188 |   Total scraped: 0
+2026-05-10 21:47:49 | INFO     | utils.helpers:print_pipeline_summary:189 |   Valid records: 0
+2026-05-10 21:47:49 | INFO     | utils.helpers:print_pipeline_summary:190 |   Dropped      : 0
+2026-05-10 21:47:49 | INFO     | utils.helpers:print_pipeline_summary:191 |   Output       : data/raw/listings
+2026-05-10 21:47:49 | INFO     | utils.helpers:print_pipeline_summary:192 | =======================================================
+
+2026-05-10 21:47:49 | INFO     | __main__:scrape_city:291 | 
+--------------------------------------------------
+2026-05-10 21:47:49 | INFO     | __main__:scrape_city:292 | Scraping Housing | city=Gurgaon
+2026-05-10 21:47:49 | INFO     | __main__:scrape_city:293 | --------------------------------------------------
+2026-05-10 21:47:49 | INFO     | scrapers.base_scraper:__init__:39 | [HousingScraper] Scraper initialised | base_url=https://housing.com
+2026-05-10 21:47:49 | INFO     | scrapers.private_portal_scraper:scrape_listings:37 | [housing] Starting scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:47:49 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.22s (rate limiting)
+2026-05-10 21:47:54 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://housing.com/in/buy/searches/gurgaon?page=1
+2026-05-10 21:47:54 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [housing] Page 1: 0 listings extracted
+2026-05-10 21:47:54 | SUCCESS  | scrapers.private_portal_scraper:scrape_listings:73 | [housing] Scrape complete | city=Gurgaon | total=0
+2026-05-10 21:47:54 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 0 records → data\raw\listings\gurgaon_housing_raw_20260510_214754.json
+2026-05-10 21:47:54 | INFO     | utils.helpers:print_pipeline_summary:184 | 
+=======================================================
+2026-05-10 21:47:54 | INFO     | utils.helpers:print_pipeline_summary:185 |   PIPELINE SUMMARY — HOUSING
+2026-05-10 21:47:54 | INFO     | utils.helpers:print_pipeline_summary:186 | =======================================================
+2026-05-10 21:47:54 | INFO     | utils.helpers:print_pipeline_summary:187 |   City         : Gurgaon
+2026-05-10 21:47:54 | INFO     | utils.helpers:print_pipeline_summary:188 |   Total scraped: 0
+2026-05-10 21:47:54 | INFO     | utils.helpers:print_pipeline_summary:189 |   Valid records: 0
+2026-05-10 21:47:54 | INFO     | utils.helpers:print_pipeline_summary:190 |   Dropped      : 0
+2026-05-10 21:47:54 | INFO     | utils.helpers:print_pipeline_summary:191 |   Output       : data/raw/listings
+2026-05-10 21:47:54 | INFO     | utils.helpers:print_pipeline_summary:192 | =======================================================
+
+2026-05-10 21:47:54 | INFO     | __main__:scrape_city:291 | 
+--------------------------------------------------
+2026-05-10 21:47:54 | INFO     | __main__:scrape_city:292 | Scraping Makaan | city=Gurgaon
+2026-05-10 21:47:54 | INFO     | __main__:scrape_city:293 | --------------------------------------------------
+2026-05-10 21:47:54 | INFO     | scrapers.base_scraper:__init__:39 | [MakaanScraper] Scraper initialised | base_url=https://www.makaan.com
+2026-05-10 21:47:54 | INFO     | scrapers.private_portal_scraper:scrape_listings:37 | [makaan] Starting scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:47:54 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 3.66s (rate limiting)
+2026-05-10 21:48:02 | WARNING  | scrapers.base_scraper:_fetch:98 | HTTP error 504 for URL: https://www.makaan.com/gurgaon-residential-property/buy-property-in-gurgaon-city?page=1
+2026-05-10 21:48:02 | WARNING  | scrapers.private_portal_scraper:scrape_listings:43 | [makaan] Empty response on page 1, stopping.
+2026-05-10 21:48:02 | SUCCESS  | scrapers.private_portal_scraper:scrape_listings:73 | [makaan] Scrape complete | city=Gurgaon | total=0
+2026-05-10 21:48:02 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 0 records → data\raw\listings\gurgaon_makaan_raw_20260510_214802.json
+2026-05-10 21:48:02 | INFO     | utils.helpers:print_pipeline_summary:184 | 
+=======================================================
+2026-05-10 21:48:02 | INFO     | utils.helpers:print_pipeline_summary:185 |   PIPELINE SUMMARY — MAKAAN
+2026-05-10 21:48:02 | INFO     | utils.helpers:print_pipeline_summary:186 | =======================================================
+2026-05-10 21:48:02 | INFO     | utils.helpers:print_pipeline_summary:187 |   City         : Gurgaon
+2026-05-10 21:48:02 | INFO     | utils.helpers:print_pipeline_summary:188 |   Total scraped: 0
+2026-05-10 21:48:02 | INFO     | utils.helpers:print_pipeline_summary:189 |   Valid records: 0
+2026-05-10 21:48:02 | INFO     | utils.helpers:print_pipeline_summary:190 |   Dropped      : 0
+2026-05-10 21:48:02 | INFO     | utils.helpers:print_pipeline_summary:191 |   Output       : data/raw/listings
+2026-05-10 21:48:02 | INFO     | utils.helpers:print_pipeline_summary:192 | =======================================================
+
+2026-05-10 21:48:02 | INFO     | __main__:scrape_city:291 | 
+--------------------------------------------------
+2026-05-10 21:48:02 | INFO     | __main__:scrape_city:292 | Scraping CommonFloor | city=Gurgaon
+2026-05-10 21:48:02 | INFO     | __main__:scrape_city:293 | --------------------------------------------------
+2026-05-10 21:48:02 | INFO     | scrapers.base_scraper:__init__:39 | [CommonFloorScraper] Scraper initialised | base_url=https://www.commonfloor.com
+2026-05-10 21:48:02 | INFO     | scrapers.private_portal_scraper:scrape_listings:37 | [commonfloor] Starting scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:48:02 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.30s (rate limiting)
+2026-05-10 21:48:05 | WARNING  | scrapers.base_scraper:_fetch:98 | HTTP error 404 for URL: https://www.commonfloor.com/listings/gurgaon/for-sale?page=1
+2026-05-10 21:48:05 | WARNING  | scrapers.private_portal_scraper:scrape_listings:43 | [commonfloor] Empty response on page 1, stopping.
+2026-05-10 21:48:05 | SUCCESS  | scrapers.private_portal_scraper:scrape_listings:73 | [commonfloor] Scrape complete | city=Gurgaon | total=0
+2026-05-10 21:48:05 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 0 records → data\raw\listings\gurgaon_commonfloor_raw_20260510_214805.json
+2026-05-10 21:48:05 | INFO     | utils.helpers:print_pipeline_summary:184 | 
+=======================================================
+2026-05-10 21:48:05 | INFO     | utils.helpers:print_pipeline_summary:185 |   PIPELINE SUMMARY — COMMONFLOOR
+2026-05-10 21:48:05 | INFO     | utils.helpers:print_pipeline_summary:186 | =======================================================
+2026-05-10 21:48:05 | INFO     | utils.helpers:print_pipeline_summary:187 |   City         : Gurgaon
+2026-05-10 21:48:05 | INFO     | utils.helpers:print_pipeline_summary:188 |   Total scraped: 0
+2026-05-10 21:48:05 | INFO     | utils.helpers:print_pipeline_summary:189 |   Valid records: 0
+2026-05-10 21:48:05 | INFO     | utils.helpers:print_pipeline_summary:190 |   Dropped      : 0
+2026-05-10 21:48:05 | INFO     | utils.helpers:print_pipeline_summary:191 |   Output       : data/raw/listings
+2026-05-10 21:48:05 | INFO     | utils.helpers:print_pipeline_summary:192 | =======================================================
+
+2026-05-10 21:48:05 | INFO     | __main__:scrape_city:291 | 
+--------------------------------------------------
+2026-05-10 21:48:05 | INFO     | __main__:scrape_city:292 | Scraping NoBroker | city=Gurgaon
+2026-05-10 21:48:05 | INFO     | __main__:scrape_city:293 | --------------------------------------------------
+2026-05-10 21:48:05 | INFO     | scrapers.base_scraper:__init__:39 | [NoBrokerScraper] Scraper initialised | base_url=https://www.nobroker.in
+2026-05-10 21:48:05 | INFO     | scrapers.private_portal_scraper:scrape_listings:37 | [nobroker] Starting scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:48:05 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 3.66s (rate limiting)
+2026-05-10 21:48:09 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.nobroker.in/property/sale/gurgaon?pageNo=1
+2026-05-10 21:48:09 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [nobroker] Page 1: 0 listings extracted
+2026-05-10 21:48:09 | SUCCESS  | scrapers.private_portal_scraper:scrape_listings:73 | [nobroker] Scrape complete | city=Gurgaon | total=0
+2026-05-10 21:48:09 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 0 records → data\raw\listings\gurgaon_nobroker_raw_20260510_214809.json
+2026-05-10 21:48:09 | INFO     | utils.helpers:print_pipeline_summary:184 | 
+=======================================================
+2026-05-10 21:48:09 | INFO     | utils.helpers:print_pipeline_summary:185 |   PIPELINE SUMMARY — NOBROKER
+2026-05-10 21:48:09 | INFO     | utils.helpers:print_pipeline_summary:186 | =======================================================
+2026-05-10 21:48:09 | INFO     | utils.helpers:print_pipeline_summary:187 |   City         : Gurgaon
+2026-05-10 21:48:09 | INFO     | utils.helpers:print_pipeline_summary:188 |   Total scraped: 0
+2026-05-10 21:48:09 | INFO     | utils.helpers:print_pipeline_summary:189 |   Valid records: 0
+2026-05-10 21:48:09 | INFO     | utils.helpers:print_pipeline_summary:190 |   Dropped      : 0
+2026-05-10 21:48:09 | INFO     | utils.helpers:print_pipeline_summary:191 |   Output       : data/raw/listings
+2026-05-10 21:48:09 | INFO     | utils.helpers:print_pipeline_summary:192 | =======================================================
+
+2026-05-10 21:48:09 | INFO     | __main__:scrape_city:291 | 
+--------------------------------------------------
+2026-05-10 21:48:09 | INFO     | __main__:scrape_city:292 | Scraping SquareYards | city=Gurgaon
+2026-05-10 21:48:09 | INFO     | __main__:scrape_city:293 | --------------------------------------------------
+2026-05-10 21:48:09 | INFO     | scrapers.base_scraper:__init__:39 | [SquareYardsScraper] Scraper initialised | base_url=https://www.squareyards.com
+2026-05-10 21:48:09 | INFO     | scrapers.private_portal_scraper:scrape_listings:37 | [squareyards] Starting scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:48:09 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.47s (rate limiting)
+2026-05-10 21:48:12 | WARNING  | scrapers.base_scraper:_fetch:98 | HTTP error 404 for URL: https://www.squareyards.com/sale-property-in-gurgaon?page=1
+2026-05-10 21:48:12 | WARNING  | scrapers.private_portal_scraper:scrape_listings:43 | [squareyards] Empty response on page 1, stopping.
+2026-05-10 21:48:12 | SUCCESS  | scrapers.private_portal_scraper:scrape_listings:73 | [squareyards] Scrape complete | city=Gurgaon | total=0
+2026-05-10 21:48:12 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 0 records → data\raw\listings\gurgaon_squareyards_raw_20260510_214812.json
+2026-05-10 21:48:12 | INFO     | utils.helpers:print_pipeline_summary:184 | 
+=======================================================
+2026-05-10 21:48:12 | INFO     | utils.helpers:print_pipeline_summary:185 |   PIPELINE SUMMARY — SQUAREYARDS
+2026-05-10 21:48:12 | INFO     | utils.helpers:print_pipeline_summary:186 | =======================================================
+2026-05-10 21:48:12 | INFO     | utils.helpers:print_pipeline_summary:187 |   City         : Gurgaon
+2026-05-10 21:48:12 | INFO     | utils.helpers:print_pipeline_summary:188 |   Total scraped: 0
+2026-05-10 21:48:12 | INFO     | utils.helpers:print_pipeline_summary:189 |   Valid records: 0
+2026-05-10 21:48:12 | INFO     | utils.helpers:print_pipeline_summary:190 |   Dropped      : 0
+2026-05-10 21:48:12 | INFO     | utils.helpers:print_pipeline_summary:191 |   Output       : data/raw/listings
+2026-05-10 21:48:12 | INFO     | utils.helpers:print_pipeline_summary:192 | =======================================================
+
+2026-05-10 21:48:12 | INFO     | __main__:scrape_city:291 | 
+--------------------------------------------------
+2026-05-10 21:48:12 | INFO     | __main__:scrape_city:292 | Scraping PropTiger | city=Gurgaon
+2026-05-10 21:48:12 | INFO     | __main__:scrape_city:293 | --------------------------------------------------
+2026-05-10 21:48:12 | INFO     | scrapers.base_scraper:__init__:39 | [PropTigerScraper] Scraper initialised | base_url=https://www.proptiger.com
+2026-05-10 21:48:12 | INFO     | scrapers.private_portal_scraper:scrape_listings:37 | [proptiger] Starting scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:48:12 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.10s (rate limiting)
+2026-05-10 21:48:15 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.proptiger.com/gurgaon/property-for-sale?page=1
+2026-05-10 21:48:15 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [proptiger] Page 1: 0 listings extracted
+2026-05-10 21:48:15 | SUCCESS  | scrapers.private_portal_scraper:scrape_listings:73 | [proptiger] Scrape complete | city=Gurgaon | total=0
+2026-05-10 21:48:15 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 0 records → data\raw\listings\gurgaon_proptiger_raw_20260510_214815.json
+2026-05-10 21:48:15 | INFO     | utils.helpers:print_pipeline_summary:184 | 
+=======================================================
+2026-05-10 21:48:15 | INFO     | utils.helpers:print_pipeline_summary:185 |   PIPELINE SUMMARY — PROPTIGER
+2026-05-10 21:48:15 | INFO     | utils.helpers:print_pipeline_summary:186 | =======================================================
+2026-05-10 21:48:15 | INFO     | utils.helpers:print_pipeline_summary:187 |   City         : Gurgaon
+2026-05-10 21:48:15 | INFO     | utils.helpers:print_pipeline_summary:188 |   Total scraped: 0
+2026-05-10 21:48:15 | INFO     | utils.helpers:print_pipeline_summary:189 |   Valid records: 0
+2026-05-10 21:48:15 | INFO     | utils.helpers:print_pipeline_summary:190 |   Dropped      : 0
+2026-05-10 21:48:15 | INFO     | utils.helpers:print_pipeline_summary:191 |   Output       : data/raw/listings
+2026-05-10 21:48:15 | INFO     | utils.helpers:print_pipeline_summary:192 | =======================================================
+
+2026-05-10 21:48:15 | INFO     | __main__:scrape_city:291 | 
+--------------------------------------------------
+2026-05-10 21:48:15 | INFO     | __main__:scrape_city:292 | Scraping RealEstateIndia | city=Gurgaon
+2026-05-10 21:48:15 | INFO     | __main__:scrape_city:293 | --------------------------------------------------
+2026-05-10 21:48:15 | INFO     | scrapers.base_scraper:__init__:39 | [RealEstateIndiaScraper] Scraper initialised | base_url=https://www.realestateindia.com
+2026-05-10 21:48:15 | INFO     | scrapers.private_portal_scraper:scrape_listings:37 | [realestateindia] Starting scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:48:15 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 3.06s (rate limiting)
+2026-05-10 21:48:19 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.realestateindia.com/gurgaon-property/residential-property-for-sale.htm?page=1
+2026-05-10 21:48:19 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [realestateindia] Page 1: 20 listings extracted
+2026-05-10 21:48:19 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.41s (rate limiting)
+2026-05-10 21:48:21 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.realestateindia.com/gurgaon-property/residential-property-for-sale.htm?page=2
+2026-05-10 21:48:21 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [realestateindia] Page 2: 20 listings extracted
+2026-05-10 21:48:21 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.56s (rate limiting)
+2026-05-10 21:48:26 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.realestateindia.com/gurgaon-property/residential-property-for-sale.htm?page=3
+2026-05-10 21:48:26 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [realestateindia] Page 3: 20 listings extracted
+2026-05-10 21:48:26 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.81s (rate limiting)
+2026-05-10 21:48:29 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.realestateindia.com/gurgaon-property/residential-property-for-sale.htm?page=4
+2026-05-10 21:48:29 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [realestateindia] Page 4: 20 listings extracted
+2026-05-10 21:48:29 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 3.76s (rate limiting)
+2026-05-10 21:48:33 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.realestateindia.com/gurgaon-property/residential-property-for-sale.htm?page=5
+2026-05-10 21:48:33 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [realestateindia] Page 5: 20 listings extracted
+2026-05-10 21:48:33 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.81s (rate limiting)
+2026-05-10 21:48:38 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.realestateindia.com/gurgaon-property/residential-property-for-sale.htm?page=6
+2026-05-10 21:48:38 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [realestateindia] Page 6: 20 listings extracted
+2026-05-10 21:48:38 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.71s (rate limiting)
+2026-05-10 21:48:41 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.realestateindia.com/gurgaon-property/residential-property-for-sale.htm?page=7
+2026-05-10 21:48:41 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [realestateindia] Page 7: 20 listings extracted
+2026-05-10 21:48:41 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 3.42s (rate limiting)
+2026-05-10 21:48:45 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.realestateindia.com/gurgaon-property/residential-property-for-sale.htm?page=8
+2026-05-10 21:48:45 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [realestateindia] Page 8: 20 listings extracted
+2026-05-10 21:48:45 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.20s (rate limiting)
+2026-05-10 21:48:47 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.realestateindia.com/gurgaon-property/residential-property-for-sale.htm?page=9
+2026-05-10 21:48:47 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [realestateindia] Page 9: 20 listings extracted
+2026-05-10 21:48:47 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.90s (rate limiting)
+2026-05-10 21:48:52 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.realestateindia.com/gurgaon-property/residential-property-for-sale.htm?page=10
+2026-05-10 21:48:53 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [realestateindia] Page 10: 20 listings extracted
+2026-05-10 21:48:53 | SUCCESS  | scrapers.private_portal_scraper:scrape_listings:73 | [realestateindia] Scrape complete | city=Gurgaon | total=200
+2026-05-10 21:48:53 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 200 records → data\raw\listings\gurgaon_realestateindia_raw_20260510_214853.json
+2026-05-10 21:48:53 | WARNING  | utils.helpers:filter_valid_listings:133 | Dropped 200 invalid listings (0 valid kept)
+2026-05-10 21:48:53 | INFO     | utils.helpers:print_pipeline_summary:184 | 
+=======================================================
+2026-05-10 21:48:53 | INFO     | utils.helpers:print_pipeline_summary:185 |   PIPELINE SUMMARY — REALESTATEINDIA
+2026-05-10 21:48:53 | INFO     | utils.helpers:print_pipeline_summary:186 | =======================================================
+2026-05-10 21:48:53 | INFO     | utils.helpers:print_pipeline_summary:187 |   City         : Gurgaon
+2026-05-10 21:48:53 | INFO     | utils.helpers:print_pipeline_summary:188 |   Total scraped: 200
+2026-05-10 21:48:53 | INFO     | utils.helpers:print_pipeline_summary:189 |   Valid records: 0
+2026-05-10 21:48:53 | INFO     | utils.helpers:print_pipeline_summary:190 |   Dropped      : 200
+2026-05-10 21:48:53 | INFO     | utils.helpers:print_pipeline_summary:191 |   Output       : data/raw/listings
+2026-05-10 21:48:53 | INFO     | utils.helpers:print_pipeline_summary:192 | =======================================================
+
+2026-05-10 21:48:53 | INFO     | __main__:scrape_city:314 | 
+--------------------------------------------------
+2026-05-10 21:48:53 | INFO     | __main__:scrape_city:315 | Collecting registry data from Haryana RERA | city=Gurgaon
+2026-05-10 21:48:53 | INFO     | __main__:scrape_city:316 | --------------------------------------------------
+2026-05-10 21:48:53 | INFO     | scrapers.base_scraper:__init__:39 | [HaryanaReraScraper] Scraper initialised | base_url=https://haryanarera.gov.in
+2026-05-10 21:48:53 | INFO     | scrapers.rera_scraper:scrape_listings:27 | [haryana_rera] Starting registry scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:48:53 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.43s (rate limiting)
+2026-05-10 21:48:55 | WARNING  | scrapers.base_scraper:_fetch:98 | HTTP error 404 for URL: https://haryanarera.gov.in/projectSearch?projectName=&promoterName=&page=1
+2026-05-10 21:48:55 | WARNING  | scrapers.rera_scraper:scrape_listings:33 | [haryana_rera] Empty/blocked response on page 1, stopping.
+2026-05-10 21:48:55 | SUCCESS  | scrapers.rera_scraper:scrape_listings:55 | [haryana_rera] Registry scrape complete | city=Gurgaon | total=0
+2026-05-10 21:48:55 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 0 records → data\raw\registry\gurgaon_haryana_rera_registry_raw_20260510_214855.json
+2026-05-10 21:48:55 | INFO     | __main__:scrape_city:329 | Haryana RERA: 0 registry records saved separately
+2026-05-10 21:48:55 | INFO     | __main__:scrape_city:314 | 
+--------------------------------------------------
+2026-05-10 21:48:55 | INFO     | __main__:scrape_city:315 | Collecting registry data from Delhi RERA | city=Gurgaon
+2026-05-10 21:48:55 | INFO     | __main__:scrape_city:316 | --------------------------------------------------
+2026-05-10 21:48:55 | INFO     | scrapers.base_scraper:__init__:39 | [DelhiReraScraper] Scraper initialised | base_url=https://rera.delhi.gov.in
+2026-05-10 21:48:55 | INFO     | scrapers.rera_scraper:scrape_listings:27 | [delhi_rera] Starting registry scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:48:55 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.21s (rate limiting)
+2026-05-10 21:48:59 | ERROR    | scrapers.base_scraper:_fetch:101 | Request failed: HTTPSConnectionPool(host='rera.delhi.gov.in', port=443): Max retries exceeded with url: /registered_projects.php?page=1 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1002)'))) | URL: https://rera.delhi.gov.in/registered_projects.php?page=1
+2026-05-10 21:49:01 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 3.64s (rate limiting)
+2026-05-10 21:49:05 | ERROR    | scrapers.base_scraper:_fetch:101 | Request failed: HTTPSConnectionPool(host='rera.delhi.gov.in', port=443): Max retries exceeded with url: /registered_projects.php?page=1 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1002)'))) | URL: https://rera.delhi.gov.in/registered_projects.php?page=1
+2026-05-10 21:49:07 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.29s (rate limiting)
+2026-05-10 21:49:11 | ERROR    | scrapers.base_scraper:_fetch:101 | Request failed: HTTPSConnectionPool(host='rera.delhi.gov.in', port=443): Max retries exceeded with url: /registered_projects.php?page=1 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1002)'))) | URL: https://rera.delhi.gov.in/registered_projects.php?page=1
+2026-05-10 21:49:11 | ERROR    | __main__:scrape_city:321 | Delhi RERA registry scrape failed: HTTPSConnectionPool(host='rera.delhi.gov.in', port=443): Max retries exceeded with url: /registered_projects.php?page=1 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1002)')))
+2026-05-10 21:49:11 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 0 records → data\raw\registry\gurgaon_delhi_rera_registry_raw_20260510_214911.json
+2026-05-10 21:49:11 | INFO     | __main__:scrape_city:329 | Delhi RERA: 0 registry records saved separately
+2026-05-10 21:49:11 | INFO     | __main__:scrape_city:314 | 
+--------------------------------------------------
+2026-05-10 21:49:11 | INFO     | __main__:scrape_city:315 | Collecting registry data from UP RERA | city=Gurgaon
+2026-05-10 21:49:11 | INFO     | __main__:scrape_city:316 | --------------------------------------------------
+2026-05-10 21:49:11 | INFO     | scrapers.base_scraper:__init__:39 | [UpReraScraper] Scraper initialised | base_url=https://www.up-rera.in
+2026-05-10 21:49:11 | INFO     | scrapers.rera_scraper:scrape_listings:27 | [up_rera] Starting registry scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:49:11 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 3.97s (rate limiting)
+2026-05-10 21:49:17 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.up-rera.in/projects?page=1
+2026-05-10 21:49:17 | INFO     | scrapers.rera_scraper:scrape_listings:50 | [up_rera] Page 1: 1 registry records extracted
+2026-05-10 21:49:17 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 3.47s (rate limiting)
+2026-05-10 21:49:21 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.up-rera.in/projects?page=2
+2026-05-10 21:49:21 | INFO     | scrapers.rera_scraper:scrape_listings:50 | [up_rera] Page 2: 1 registry records extracted
+2026-05-10 21:49:21 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.45s (rate limiting)
+2026-05-10 21:49:25 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.up-rera.in/projects?page=3
+2026-05-10 21:49:25 | INFO     | scrapers.rera_scraper:scrape_listings:50 | [up_rera] Page 3: 1 registry records extracted
+2026-05-10 21:49:25 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.63s (rate limiting)
+2026-05-10 21:49:30 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.up-rera.in/projects?page=4
+2026-05-10 21:49:30 | INFO     | scrapers.rera_scraper:scrape_listings:50 | [up_rera] Page 4: 1 registry records extracted
+2026-05-10 21:49:30 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.11s (rate limiting)
+2026-05-10 21:49:35 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.up-rera.in/projects?page=5
+2026-05-10 21:49:35 | INFO     | scrapers.rera_scraper:scrape_listings:50 | [up_rera] Page 5: 1 registry records extracted
+2026-05-10 21:49:35 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.12s (rate limiting)
+2026-05-10 21:49:40 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.up-rera.in/projects?page=6
+2026-05-10 21:49:40 | INFO     | scrapers.rera_scraper:scrape_listings:50 | [up_rera] Page 6: 1 registry records extracted
+2026-05-10 21:49:40 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.53s (rate limiting)
+2026-05-10 21:49:44 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.up-rera.in/projects?page=7
+2026-05-10 21:49:44 | INFO     | scrapers.rera_scraper:scrape_listings:50 | [up_rera] Page 7: 1 registry records extracted
+2026-05-10 21:49:44 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.56s (rate limiting)
+2026-05-10 21:49:49 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.up-rera.in/projects?page=8
+2026-05-10 21:49:49 | INFO     | scrapers.rera_scraper:scrape_listings:50 | [up_rera] Page 8: 1 registry records extracted
+2026-05-10 21:49:49 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.44s (rate limiting)
+2026-05-10 21:50:02 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.up-rera.in/projects?page=9
+2026-05-10 21:50:02 | INFO     | scrapers.rera_scraper:scrape_listings:50 | [up_rera] Page 9: 1 registry records extracted
+2026-05-10 21:50:02 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.88s (rate limiting)
+2026-05-10 21:50:05 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.up-rera.in/projects?page=10
+2026-05-10 21:50:06 | INFO     | scrapers.rera_scraper:scrape_listings:50 | [up_rera] Page 10: 1 registry records extracted
+2026-05-10 21:50:06 | SUCCESS  | scrapers.rera_scraper:scrape_listings:55 | [up_rera] Registry scrape complete | city=Gurgaon | total=10
+2026-05-10 21:50:06 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 10 records → data\raw\registry\gurgaon_up_rera_registry_raw_20260510_215006.json
+2026-05-10 21:50:06 | INFO     | __main__:scrape_city:329 | UP RERA: 10 registry records saved separately
+2026-05-10 21:50:06 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 10 records → data\raw\registry\gurgaon_all_registry_sources_20260510_215006.json
+2026-05-10 21:50:06 | SUCCESS  | __main__:scrape_city:337 | Gurgaon: 10 government registry records saved -> data\raw\registry\gurgaon_all_registry_sources_20260510_215006.json
+2026-05-10 21:50:06 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 54 records → data\raw\listings\gurgaon_all_sources_20260510_215006.json
+2026-05-10 21:50:06 | SUCCESS  | __main__:scrape_city:344 | Gurgaon: 54 total valid listings saved -> data\raw\listings\gurgaon_all_sources_20260510_215006.json
+2026-05-10 21:50:06 | INFO     | __main__:main:396 | 
+⚡ Launching Spark processing pipeline...
+2026-05-10 21:55:47 | INFO     | utils.helpers:setup_logger:54 | Logger initialised | log_file=data\logs\pipeline_20260510.log
+2026-05-10 21:55:47 | INFO     | __main__:main:378 | ============================================================
+2026-05-10 21:55:47 | INFO     | __main__:main:379 |   🏘️  REAL ESTATE DATA ENGINEERING PIPELINE — MODULE 1
+2026-05-10 21:55:47 | INFO     | __main__:main:380 | ============================================================
+2026-05-10 21:55:47 | INFO     | __main__:main:381 |   Cities    : ['Gurgaon']
+2026-05-10 21:55:47 | INFO     | __main__:main:382 |   Max pages : 10
+2026-05-10 21:55:47 | INFO     | __main__:main:383 |   Sources   : all
+2026-05-10 21:55:47 | INFO     | __main__:main:384 |   Started   : 2026-05-10 21:55:47
+2026-05-10 21:55:47 | INFO     | __main__:main:385 | ============================================================
+2026-05-10 21:55:47 | INFO     | __main__:scrape_city:262 | 
+--------------------------------------------------
+2026-05-10 21:55:47 | INFO     | __main__:scrape_city:263 | Scraping MagicBricks | city=Gurgaon
+2026-05-10 21:55:47 | INFO     | __main__:scrape_city:264 | --------------------------------------------------
+2026-05-10 21:55:47 | INFO     | scrapers.base_scraper:__init__:39 | [MagicBricksScraper] Scraper initialised | base_url=https://www.magicbricks.com
+2026-05-10 21:55:47 | INFO     | scrapers.magicbricks_scraper:scrape_listings:44 | [MagicBricks] Starting scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:55:47 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.13s (rate limiting)
+2026-05-10 21:55:52 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.magicbricks.com/property-for-sale/residential-real-estate
+2026-05-10 21:55:52 | INFO     | scrapers.magicbricks_scraper:scrape_listings:63 | [MagicBricks] No cards found on page 1. End of results.
+2026-05-10 21:55:52 | SUCCESS  | scrapers.magicbricks_scraper:scrape_listings:77 | [MagicBricks] Scrape complete | city=Gurgaon | total=0
+2026-05-10 21:55:52 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 0 records → data\raw\listings\gurgaon_magicbricks_raw_20260510_215552.json
+2026-05-10 21:55:52 | INFO     | utils.helpers:print_pipeline_summary:184 | 
+=======================================================
+2026-05-10 21:55:52 | INFO     | utils.helpers:print_pipeline_summary:185 |   PIPELINE SUMMARY — MAGICBRICKS
+2026-05-10 21:55:52 | INFO     | utils.helpers:print_pipeline_summary:186 | =======================================================
+2026-05-10 21:55:52 | INFO     | utils.helpers:print_pipeline_summary:187 |   City         : Gurgaon
+2026-05-10 21:55:52 | INFO     | utils.helpers:print_pipeline_summary:188 |   Total scraped: 0
+2026-05-10 21:55:52 | INFO     | utils.helpers:print_pipeline_summary:189 |   Valid records: 0
+2026-05-10 21:55:52 | INFO     | utils.helpers:print_pipeline_summary:190 |   Dropped      : 0
+2026-05-10 21:55:52 | INFO     | utils.helpers:print_pipeline_summary:191 |   Output       : data/raw/listings
+2026-05-10 21:55:52 | INFO     | utils.helpers:print_pipeline_summary:192 | =======================================================
+
+2026-05-10 21:55:52 | INFO     | __main__:scrape_city:275 | 
+--------------------------------------------------
+2026-05-10 21:55:52 | INFO     | __main__:scrape_city:276 | Scraping 99acres | city=Gurgaon
+2026-05-10 21:55:52 | INFO     | __main__:scrape_city:277 | --------------------------------------------------
+2026-05-10 21:55:52 | INFO     | scrapers.base_scraper:__init__:39 | [Acres99Scraper] Scraper initialised | base_url=https://www.99acres.com
+2026-05-10 21:55:52 | INFO     | scrapers.acres99_scraper:scrape_listings:54 | [99acres] Starting scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:55:52 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.59s (rate limiting)
+2026-05-10 21:55:56 | WARNING  | scrapers.base_scraper:_fetch:98 | HTTP error 403 for URL: https://www.99acres.com/search/property/buy/gurugram-11505/results/
+2026-05-10 21:55:56 | WARNING  | scrapers.acres99_scraper:scrape_listings:67 | [99acres] Empty response on page 1, stopping.
+2026-05-10 21:55:56 | SUCCESS  | scrapers.acres99_scraper:scrape_listings:87 | [99acres] Scrape complete | city=Gurgaon | total=0
+2026-05-10 21:55:56 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 0 records → data\raw\listings\gurgaon_99acres_raw_20260510_215556.json
+2026-05-10 21:55:56 | INFO     | utils.helpers:print_pipeline_summary:184 | 
+=======================================================
+2026-05-10 21:55:56 | INFO     | utils.helpers:print_pipeline_summary:185 |   PIPELINE SUMMARY — 99ACRES
+2026-05-10 21:55:56 | INFO     | utils.helpers:print_pipeline_summary:186 | =======================================================
+2026-05-10 21:55:56 | INFO     | utils.helpers:print_pipeline_summary:187 |   City         : Gurgaon
+2026-05-10 21:55:56 | INFO     | utils.helpers:print_pipeline_summary:188 |   Total scraped: 0
+2026-05-10 21:55:56 | INFO     | utils.helpers:print_pipeline_summary:189 |   Valid records: 0
+2026-05-10 21:55:56 | INFO     | utils.helpers:print_pipeline_summary:190 |   Dropped      : 0
+2026-05-10 21:55:56 | INFO     | utils.helpers:print_pipeline_summary:191 |   Output       : data/raw/listings
+2026-05-10 21:55:56 | INFO     | utils.helpers:print_pipeline_summary:192 | =======================================================
+
+2026-05-10 21:55:56 | INFO     | __main__:scrape_city:291 | 
+--------------------------------------------------
+2026-05-10 21:55:56 | INFO     | __main__:scrape_city:292 | Scraping Housing | city=Gurgaon
+2026-05-10 21:55:56 | INFO     | __main__:scrape_city:293 | --------------------------------------------------
+2026-05-10 21:55:56 | INFO     | scrapers.base_scraper:__init__:39 | [HousingScraper] Scraper initialised | base_url=https://housing.com
+2026-05-10 21:55:56 | INFO     | scrapers.private_portal_scraper:scrape_listings:37 | [housing] Starting scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:55:56 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 3.21s (rate limiting)
+2026-05-10 21:56:00 | WARNING  | scrapers.base_scraper:_fetch:98 | HTTP error 406 for URL: https://housing.com/in/buy/searches/gurgaon?page=1
+2026-05-10 21:56:00 | WARNING  | scrapers.private_portal_scraper:scrape_listings:43 | [housing] Empty response on page 1, stopping.
+2026-05-10 21:56:00 | SUCCESS  | scrapers.private_portal_scraper:scrape_listings:73 | [housing] Scrape complete | city=Gurgaon | total=0
+2026-05-10 21:56:00 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 0 records → data\raw\listings\gurgaon_housing_raw_20260510_215600.json
+2026-05-10 21:56:00 | INFO     | utils.helpers:print_pipeline_summary:184 | 
+=======================================================
+2026-05-10 21:56:00 | INFO     | utils.helpers:print_pipeline_summary:185 |   PIPELINE SUMMARY — HOUSING
+2026-05-10 21:56:00 | INFO     | utils.helpers:print_pipeline_summary:186 | =======================================================
+2026-05-10 21:56:00 | INFO     | utils.helpers:print_pipeline_summary:187 |   City         : Gurgaon
+2026-05-10 21:56:00 | INFO     | utils.helpers:print_pipeline_summary:188 |   Total scraped: 0
+2026-05-10 21:56:00 | INFO     | utils.helpers:print_pipeline_summary:189 |   Valid records: 0
+2026-05-10 21:56:00 | INFO     | utils.helpers:print_pipeline_summary:190 |   Dropped      : 0
+2026-05-10 21:56:00 | INFO     | utils.helpers:print_pipeline_summary:191 |   Output       : data/raw/listings
+2026-05-10 21:56:00 | INFO     | utils.helpers:print_pipeline_summary:192 | =======================================================
+
+2026-05-10 21:56:00 | INFO     | __main__:scrape_city:291 | 
+--------------------------------------------------
+2026-05-10 21:56:00 | INFO     | __main__:scrape_city:292 | Scraping Makaan | city=Gurgaon
+2026-05-10 21:56:00 | INFO     | __main__:scrape_city:293 | --------------------------------------------------
+2026-05-10 21:56:00 | INFO     | scrapers.base_scraper:__init__:39 | [MakaanScraper] Scraper initialised | base_url=https://www.makaan.com
+2026-05-10 21:56:00 | INFO     | scrapers.private_portal_scraper:scrape_listings:37 | [makaan] Starting scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:56:00 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.11s (rate limiting)
+2026-05-10 21:56:06 | WARNING  | scrapers.base_scraper:_fetch:98 | HTTP error 504 for URL: https://www.makaan.com/gurgaon-residential-property/buy-property-in-gurgaon-city?page=1
+2026-05-10 21:56:06 | WARNING  | scrapers.private_portal_scraper:scrape_listings:43 | [makaan] Empty response on page 1, stopping.
+2026-05-10 21:56:06 | SUCCESS  | scrapers.private_portal_scraper:scrape_listings:73 | [makaan] Scrape complete | city=Gurgaon | total=0
+2026-05-10 21:56:06 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 0 records → data\raw\listings\gurgaon_makaan_raw_20260510_215606.json
+2026-05-10 21:56:06 | INFO     | utils.helpers:print_pipeline_summary:184 | 
+=======================================================
+2026-05-10 21:56:06 | INFO     | utils.helpers:print_pipeline_summary:185 |   PIPELINE SUMMARY — MAKAAN
+2026-05-10 21:56:06 | INFO     | utils.helpers:print_pipeline_summary:186 | =======================================================
+2026-05-10 21:56:06 | INFO     | utils.helpers:print_pipeline_summary:187 |   City         : Gurgaon
+2026-05-10 21:56:06 | INFO     | utils.helpers:print_pipeline_summary:188 |   Total scraped: 0
+2026-05-10 21:56:06 | INFO     | utils.helpers:print_pipeline_summary:189 |   Valid records: 0
+2026-05-10 21:56:06 | INFO     | utils.helpers:print_pipeline_summary:190 |   Dropped      : 0
+2026-05-10 21:56:06 | INFO     | utils.helpers:print_pipeline_summary:191 |   Output       : data/raw/listings
+2026-05-10 21:56:06 | INFO     | utils.helpers:print_pipeline_summary:192 | =======================================================
+
+2026-05-10 21:56:06 | INFO     | __main__:scrape_city:291 | 
+--------------------------------------------------
+2026-05-10 21:56:06 | INFO     | __main__:scrape_city:292 | Scraping CommonFloor | city=Gurgaon
+2026-05-10 21:56:06 | INFO     | __main__:scrape_city:293 | --------------------------------------------------
+2026-05-10 21:56:06 | INFO     | scrapers.base_scraper:__init__:39 | [CommonFloorScraper] Scraper initialised | base_url=https://www.commonfloor.com
+2026-05-10 21:56:06 | INFO     | scrapers.private_portal_scraper:scrape_listings:37 | [commonfloor] Starting scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:56:06 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.15s (rate limiting)
+2026-05-10 21:56:11 | WARNING  | scrapers.base_scraper:_fetch:98 | HTTP error 404 for URL: https://www.commonfloor.com/listings/gurgaon/for-sale?page=1
+2026-05-10 21:56:11 | WARNING  | scrapers.private_portal_scraper:scrape_listings:43 | [commonfloor] Empty response on page 1, stopping.
+2026-05-10 21:56:11 | SUCCESS  | scrapers.private_portal_scraper:scrape_listings:73 | [commonfloor] Scrape complete | city=Gurgaon | total=0
+2026-05-10 21:56:11 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 0 records → data\raw\listings\gurgaon_commonfloor_raw_20260510_215611.json
+2026-05-10 21:56:11 | INFO     | utils.helpers:print_pipeline_summary:184 | 
+=======================================================
+2026-05-10 21:56:11 | INFO     | utils.helpers:print_pipeline_summary:185 |   PIPELINE SUMMARY — COMMONFLOOR
+2026-05-10 21:56:11 | INFO     | utils.helpers:print_pipeline_summary:186 | =======================================================
+2026-05-10 21:56:11 | INFO     | utils.helpers:print_pipeline_summary:187 |   City         : Gurgaon
+2026-05-10 21:56:11 | INFO     | utils.helpers:print_pipeline_summary:188 |   Total scraped: 0
+2026-05-10 21:56:11 | INFO     | utils.helpers:print_pipeline_summary:189 |   Valid records: 0
+2026-05-10 21:56:11 | INFO     | utils.helpers:print_pipeline_summary:190 |   Dropped      : 0
+2026-05-10 21:56:11 | INFO     | utils.helpers:print_pipeline_summary:191 |   Output       : data/raw/listings
+2026-05-10 21:56:11 | INFO     | utils.helpers:print_pipeline_summary:192 | =======================================================
+
+2026-05-10 21:56:11 | INFO     | __main__:scrape_city:291 | 
+--------------------------------------------------
+2026-05-10 21:56:11 | INFO     | __main__:scrape_city:292 | Scraping NoBroker | city=Gurgaon
+2026-05-10 21:56:11 | INFO     | __main__:scrape_city:293 | --------------------------------------------------
+2026-05-10 21:56:11 | INFO     | scrapers.base_scraper:__init__:39 | [NoBrokerScraper] Scraper initialised | base_url=https://www.nobroker.in
+2026-05-10 21:56:11 | INFO     | scrapers.private_portal_scraper:scrape_listings:37 | [nobroker] Starting scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:56:11 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.88s (rate limiting)
+2026-05-10 21:56:14 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.nobroker.in/property/sale/gurgaon?pageNo=1
+2026-05-10 21:56:14 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [nobroker] Page 1: 0 listings extracted
+2026-05-10 21:56:14 | SUCCESS  | scrapers.private_portal_scraper:scrape_listings:73 | [nobroker] Scrape complete | city=Gurgaon | total=0
+2026-05-10 21:56:14 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 0 records → data\raw\listings\gurgaon_nobroker_raw_20260510_215614.json
+2026-05-10 21:56:14 | INFO     | utils.helpers:print_pipeline_summary:184 | 
+=======================================================
+2026-05-10 21:56:14 | INFO     | utils.helpers:print_pipeline_summary:185 |   PIPELINE SUMMARY — NOBROKER
+2026-05-10 21:56:14 | INFO     | utils.helpers:print_pipeline_summary:186 | =======================================================
+2026-05-10 21:56:14 | INFO     | utils.helpers:print_pipeline_summary:187 |   City         : Gurgaon
+2026-05-10 21:56:14 | INFO     | utils.helpers:print_pipeline_summary:188 |   Total scraped: 0
+2026-05-10 21:56:14 | INFO     | utils.helpers:print_pipeline_summary:189 |   Valid records: 0
+2026-05-10 21:56:14 | INFO     | utils.helpers:print_pipeline_summary:190 |   Dropped      : 0
+2026-05-10 21:56:14 | INFO     | utils.helpers:print_pipeline_summary:191 |   Output       : data/raw/listings
+2026-05-10 21:56:14 | INFO     | utils.helpers:print_pipeline_summary:192 | =======================================================
+
+2026-05-10 21:56:14 | INFO     | __main__:scrape_city:291 | 
+--------------------------------------------------
+2026-05-10 21:56:14 | INFO     | __main__:scrape_city:292 | Scraping SquareYards | city=Gurgaon
+2026-05-10 21:56:14 | INFO     | __main__:scrape_city:293 | --------------------------------------------------
+2026-05-10 21:56:14 | INFO     | scrapers.base_scraper:__init__:39 | [SquareYardsScraper] Scraper initialised | base_url=https://www.squareyards.com
+2026-05-10 21:56:14 | INFO     | scrapers.private_portal_scraper:scrape_listings:37 | [squareyards] Starting scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:56:14 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.08s (rate limiting)
+2026-05-10 21:56:19 | WARNING  | scrapers.base_scraper:_fetch:98 | HTTP error 404 for URL: https://www.squareyards.com/sale-property-in-gurgaon?page=1
+2026-05-10 21:56:19 | WARNING  | scrapers.private_portal_scraper:scrape_listings:43 | [squareyards] Empty response on page 1, stopping.
+2026-05-10 21:56:19 | SUCCESS  | scrapers.private_portal_scraper:scrape_listings:73 | [squareyards] Scrape complete | city=Gurgaon | total=0
+2026-05-10 21:56:19 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 0 records → data\raw\listings\gurgaon_squareyards_raw_20260510_215619.json
+2026-05-10 21:56:19 | INFO     | utils.helpers:print_pipeline_summary:184 | 
+=======================================================
+2026-05-10 21:56:19 | INFO     | utils.helpers:print_pipeline_summary:185 |   PIPELINE SUMMARY — SQUAREYARDS
+2026-05-10 21:56:19 | INFO     | utils.helpers:print_pipeline_summary:186 | =======================================================
+2026-05-10 21:56:19 | INFO     | utils.helpers:print_pipeline_summary:187 |   City         : Gurgaon
+2026-05-10 21:56:19 | INFO     | utils.helpers:print_pipeline_summary:188 |   Total scraped: 0
+2026-05-10 21:56:19 | INFO     | utils.helpers:print_pipeline_summary:189 |   Valid records: 0
+2026-05-10 21:56:19 | INFO     | utils.helpers:print_pipeline_summary:190 |   Dropped      : 0
+2026-05-10 21:56:19 | INFO     | utils.helpers:print_pipeline_summary:191 |   Output       : data/raw/listings
+2026-05-10 21:56:19 | INFO     | utils.helpers:print_pipeline_summary:192 | =======================================================
+
+2026-05-10 21:56:19 | INFO     | __main__:scrape_city:291 | 
+--------------------------------------------------
+2026-05-10 21:56:19 | INFO     | __main__:scrape_city:292 | Scraping PropTiger | city=Gurgaon
+2026-05-10 21:56:19 | INFO     | __main__:scrape_city:293 | --------------------------------------------------
+2026-05-10 21:56:19 | INFO     | scrapers.base_scraper:__init__:39 | [PropTigerScraper] Scraper initialised | base_url=https://www.proptiger.com
+2026-05-10 21:56:19 | INFO     | scrapers.private_portal_scraper:scrape_listings:37 | [proptiger] Starting scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:56:19 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.07s (rate limiting)
+2026-05-10 21:56:22 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.proptiger.com/gurgaon/property-for-sale?page=1
+2026-05-10 21:56:22 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [proptiger] Page 1: 0 listings extracted
+2026-05-10 21:56:22 | SUCCESS  | scrapers.private_portal_scraper:scrape_listings:73 | [proptiger] Scrape complete | city=Gurgaon | total=0
+2026-05-10 21:56:22 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 0 records → data\raw\listings\gurgaon_proptiger_raw_20260510_215622.json
+2026-05-10 21:56:22 | INFO     | utils.helpers:print_pipeline_summary:184 | 
+=======================================================
+2026-05-10 21:56:22 | INFO     | utils.helpers:print_pipeline_summary:185 |   PIPELINE SUMMARY — PROPTIGER
+2026-05-10 21:56:22 | INFO     | utils.helpers:print_pipeline_summary:186 | =======================================================
+2026-05-10 21:56:22 | INFO     | utils.helpers:print_pipeline_summary:187 |   City         : Gurgaon
+2026-05-10 21:56:22 | INFO     | utils.helpers:print_pipeline_summary:188 |   Total scraped: 0
+2026-05-10 21:56:22 | INFO     | utils.helpers:print_pipeline_summary:189 |   Valid records: 0
+2026-05-10 21:56:22 | INFO     | utils.helpers:print_pipeline_summary:190 |   Dropped      : 0
+2026-05-10 21:56:22 | INFO     | utils.helpers:print_pipeline_summary:191 |   Output       : data/raw/listings
+2026-05-10 21:56:22 | INFO     | utils.helpers:print_pipeline_summary:192 | =======================================================
+
+2026-05-10 21:56:22 | INFO     | __main__:scrape_city:291 | 
+--------------------------------------------------
+2026-05-10 21:56:22 | INFO     | __main__:scrape_city:292 | Scraping RealEstateIndia | city=Gurgaon
+2026-05-10 21:56:22 | INFO     | __main__:scrape_city:293 | --------------------------------------------------
+2026-05-10 21:56:22 | INFO     | scrapers.base_scraper:__init__:39 | [RealEstateIndiaScraper] Scraper initialised | base_url=https://www.realestateindia.com
+2026-05-10 21:56:22 | INFO     | scrapers.private_portal_scraper:scrape_listings:37 | [realestateindia] Starting scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:56:22 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.71s (rate limiting)
+2026-05-10 21:56:27 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.realestateindia.com/gurgaon-property/residential-property-for-sale.htm?page=1
+2026-05-10 21:56:27 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [realestateindia] Page 1: 20 listings extracted
+2026-05-10 21:56:27 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 3.44s (rate limiting)
+2026-05-10 21:56:31 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.realestateindia.com/gurgaon-property/residential-property-for-sale.htm?page=2
+2026-05-10 21:56:31 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [realestateindia] Page 2: 20 listings extracted
+2026-05-10 21:56:31 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.45s (rate limiting)
+2026-05-10 21:56:33 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.realestateindia.com/gurgaon-property/residential-property-for-sale.htm?page=3
+2026-05-10 21:56:33 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [realestateindia] Page 3: 20 listings extracted
+2026-05-10 21:56:33 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 3.22s (rate limiting)
+2026-05-10 21:56:37 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.realestateindia.com/gurgaon-property/residential-property-for-sale.htm?page=4
+2026-05-10 21:56:37 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [realestateindia] Page 4: 20 listings extracted
+2026-05-10 21:56:37 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 3.93s (rate limiting)
+2026-05-10 21:56:41 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.realestateindia.com/gurgaon-property/residential-property-for-sale.htm?page=5
+2026-05-10 21:56:41 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [realestateindia] Page 5: 20 listings extracted
+2026-05-10 21:56:41 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.66s (rate limiting)
+2026-05-10 21:56:46 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.realestateindia.com/gurgaon-property/residential-property-for-sale.htm?page=6
+2026-05-10 21:56:46 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [realestateindia] Page 6: 20 listings extracted
+2026-05-10 21:56:46 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 3.30s (rate limiting)
+2026-05-10 21:56:49 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.realestateindia.com/gurgaon-property/residential-property-for-sale.htm?page=7
+2026-05-10 21:56:49 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [realestateindia] Page 7: 20 listings extracted
+2026-05-10 21:56:49 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 3.26s (rate limiting)
+2026-05-10 21:56:53 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.realestateindia.com/gurgaon-property/residential-property-for-sale.htm?page=8
+2026-05-10 21:56:53 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [realestateindia] Page 8: 20 listings extracted
+2026-05-10 21:56:53 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.97s (rate limiting)
+2026-05-10 21:56:56 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.realestateindia.com/gurgaon-property/residential-property-for-sale.htm?page=9
+2026-05-10 21:56:56 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [realestateindia] Page 9: 20 listings extracted
+2026-05-10 21:56:56 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 3.72s (rate limiting)
+2026-05-10 21:57:00 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.realestateindia.com/gurgaon-property/residential-property-for-sale.htm?page=10
+2026-05-10 21:57:00 | INFO     | scrapers.private_portal_scraper:scrape_listings:67 | [realestateindia] Page 10: 20 listings extracted
+2026-05-10 21:57:00 | SUCCESS  | scrapers.private_portal_scraper:scrape_listings:73 | [realestateindia] Scrape complete | city=Gurgaon | total=200
+2026-05-10 21:57:00 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 200 records → data\raw\listings\gurgaon_realestateindia_raw_20260510_215700.json
+2026-05-10 21:57:00 | WARNING  | utils.helpers:filter_valid_listings:133 | Dropped 200 invalid listings (0 valid kept)
+2026-05-10 21:57:00 | INFO     | utils.helpers:print_pipeline_summary:184 | 
+=======================================================
+2026-05-10 21:57:00 | INFO     | utils.helpers:print_pipeline_summary:185 |   PIPELINE SUMMARY — REALESTATEINDIA
+2026-05-10 21:57:00 | INFO     | utils.helpers:print_pipeline_summary:186 | =======================================================
+2026-05-10 21:57:00 | INFO     | utils.helpers:print_pipeline_summary:187 |   City         : Gurgaon
+2026-05-10 21:57:00 | INFO     | utils.helpers:print_pipeline_summary:188 |   Total scraped: 200
+2026-05-10 21:57:00 | INFO     | utils.helpers:print_pipeline_summary:189 |   Valid records: 0
+2026-05-10 21:57:00 | INFO     | utils.helpers:print_pipeline_summary:190 |   Dropped      : 200
+2026-05-10 21:57:00 | INFO     | utils.helpers:print_pipeline_summary:191 |   Output       : data/raw/listings
+2026-05-10 21:57:00 | INFO     | utils.helpers:print_pipeline_summary:192 | =======================================================
+
+2026-05-10 21:57:00 | INFO     | __main__:scrape_city:314 | 
+--------------------------------------------------
+2026-05-10 21:57:00 | INFO     | __main__:scrape_city:315 | Collecting registry data from Haryana RERA | city=Gurgaon
+2026-05-10 21:57:00 | INFO     | __main__:scrape_city:316 | --------------------------------------------------
+2026-05-10 21:57:00 | INFO     | scrapers.base_scraper:__init__:39 | [HaryanaReraScraper] Scraper initialised | base_url=https://haryanarera.gov.in
+2026-05-10 21:57:00 | INFO     | scrapers.rera_scraper:scrape_listings:27 | [haryana_rera] Starting registry scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:57:00 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.90s (rate limiting)
+2026-05-10 21:57:05 | WARNING  | scrapers.base_scraper:_fetch:98 | HTTP error 404 for URL: https://haryanarera.gov.in/projectSearch?projectName=&promoterName=&page=1
+2026-05-10 21:57:05 | WARNING  | scrapers.rera_scraper:scrape_listings:33 | [haryana_rera] Empty/blocked response on page 1, stopping.
+2026-05-10 21:57:05 | SUCCESS  | scrapers.rera_scraper:scrape_listings:55 | [haryana_rera] Registry scrape complete | city=Gurgaon | total=0
+2026-05-10 21:57:05 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 0 records → data\raw\registry\gurgaon_haryana_rera_registry_raw_20260510_215705.json
+2026-05-10 21:57:05 | INFO     | __main__:scrape_city:329 | Haryana RERA: 0 registry records saved separately
+2026-05-10 21:57:05 | INFO     | __main__:scrape_city:314 | 
+--------------------------------------------------
+2026-05-10 21:57:05 | INFO     | __main__:scrape_city:315 | Collecting registry data from Delhi RERA | city=Gurgaon
+2026-05-10 21:57:05 | INFO     | __main__:scrape_city:316 | --------------------------------------------------
+2026-05-10 21:57:05 | INFO     | scrapers.base_scraper:__init__:39 | [DelhiReraScraper] Scraper initialised | base_url=https://rera.delhi.gov.in
+2026-05-10 21:57:05 | INFO     | scrapers.rera_scraper:scrape_listings:27 | [delhi_rera] Starting registry scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:57:05 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.32s (rate limiting)
+2026-05-10 21:57:07 | ERROR    | scrapers.base_scraper:_fetch:101 | Request failed: HTTPSConnectionPool(host='rera.delhi.gov.in', port=443): Max retries exceeded with url: /registered_projects.php?page=1 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1002)'))) | URL: https://rera.delhi.gov.in/registered_projects.php?page=1
+2026-05-10 21:57:09 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.85s (rate limiting)
+2026-05-10 21:57:12 | ERROR    | scrapers.base_scraper:_fetch:101 | Request failed: HTTPSConnectionPool(host='rera.delhi.gov.in', port=443): Max retries exceeded with url: /registered_projects.php?page=1 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1002)'))) | URL: https://rera.delhi.gov.in/registered_projects.php?page=1
+2026-05-10 21:57:14 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.72s (rate limiting)
+2026-05-10 21:57:17 | ERROR    | scrapers.base_scraper:_fetch:101 | Request failed: HTTPSConnectionPool(host='rera.delhi.gov.in', port=443): Max retries exceeded with url: /registered_projects.php?page=1 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1002)'))) | URL: https://rera.delhi.gov.in/registered_projects.php?page=1
+2026-05-10 21:57:17 | ERROR    | __main__:scrape_city:321 | Delhi RERA registry scrape failed: HTTPSConnectionPool(host='rera.delhi.gov.in', port=443): Max retries exceeded with url: /registered_projects.php?page=1 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1002)')))
+2026-05-10 21:57:17 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 0 records → data\raw\registry\gurgaon_delhi_rera_registry_raw_20260510_215717.json
+2026-05-10 21:57:17 | INFO     | __main__:scrape_city:329 | Delhi RERA: 0 registry records saved separately
+2026-05-10 21:57:17 | INFO     | __main__:scrape_city:314 | 
+--------------------------------------------------
+2026-05-10 21:57:17 | INFO     | __main__:scrape_city:315 | Collecting registry data from UP RERA | city=Gurgaon
+2026-05-10 21:57:17 | INFO     | __main__:scrape_city:316 | --------------------------------------------------
+2026-05-10 21:57:17 | INFO     | scrapers.base_scraper:__init__:39 | [UpReraScraper] Scraper initialised | base_url=https://www.up-rera.in
+2026-05-10 21:57:17 | INFO     | scrapers.rera_scraper:scrape_listings:27 | [up_rera] Starting registry scrape | city=Gurgaon | max_pages=10
+2026-05-10 21:57:17 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 3.81s (rate limiting)
+2026-05-10 21:57:23 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.up-rera.in/projects?page=1
+2026-05-10 21:57:23 | INFO     | scrapers.rera_scraper:scrape_listings:50 | [up_rera] Page 1: 1 registry records extracted
+2026-05-10 21:57:23 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 3.24s (rate limiting)
+2026-05-10 21:57:27 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.up-rera.in/projects?page=2
+2026-05-10 21:57:27 | INFO     | scrapers.rera_scraper:scrape_listings:50 | [up_rera] Page 2: 1 registry records extracted
+2026-05-10 21:57:27 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.70s (rate limiting)
+2026-05-10 21:57:30 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.up-rera.in/projects?page=3
+2026-05-10 21:57:30 | INFO     | scrapers.rera_scraper:scrape_listings:50 | [up_rera] Page 3: 1 registry records extracted
+2026-05-10 21:57:30 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.31s (rate limiting)
+2026-05-10 21:57:34 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.up-rera.in/projects?page=4
+2026-05-10 21:57:34 | INFO     | scrapers.rera_scraper:scrape_listings:50 | [up_rera] Page 4: 1 registry records extracted
+2026-05-10 21:57:34 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.69s (rate limiting)
+2026-05-10 21:57:39 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.up-rera.in/projects?page=5
+2026-05-10 21:57:39 | INFO     | scrapers.rera_scraper:scrape_listings:50 | [up_rera] Page 5: 1 registry records extracted
+2026-05-10 21:57:39 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.77s (rate limiting)
+2026-05-10 21:57:43 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.up-rera.in/projects?page=6
+2026-05-10 21:57:43 | INFO     | scrapers.rera_scraper:scrape_listings:50 | [up_rera] Page 6: 1 registry records extracted
+2026-05-10 21:57:43 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 3.06s (rate limiting)
+2026-05-10 21:57:47 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.up-rera.in/projects?page=7
+2026-05-10 21:57:47 | INFO     | scrapers.rera_scraper:scrape_listings:50 | [up_rera] Page 7: 1 registry records extracted
+2026-05-10 21:57:47 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 3.59s (rate limiting)
+2026-05-10 21:57:51 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.up-rera.in/projects?page=8
+2026-05-10 21:57:51 | INFO     | scrapers.rera_scraper:scrape_listings:50 | [up_rera] Page 8: 1 registry records extracted
+2026-05-10 21:57:51 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 4.64s (rate limiting)
+2026-05-10 21:57:57 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.up-rera.in/projects?page=9
+2026-05-10 21:57:57 | INFO     | scrapers.rera_scraper:scrape_listings:50 | [up_rera] Page 9: 1 registry records extracted
+2026-05-10 21:57:57 | DEBUG    | scrapers.base_scraper:_respectful_delay:65 | Sleeping 2.82s (rate limiting)
+2026-05-10 21:58:01 | INFO     | scrapers.base_scraper:_fetch:94 | Fetched [200] → https://www.up-rera.in/projects?page=10
+2026-05-10 21:58:01 | INFO     | scrapers.rera_scraper:scrape_listings:50 | [up_rera] Page 10: 1 registry records extracted
+2026-05-10 21:58:01 | SUCCESS  | scrapers.rera_scraper:scrape_listings:55 | [up_rera] Registry scrape complete | city=Gurgaon | total=10
+2026-05-10 21:58:01 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 10 records → data\raw\registry\gurgaon_up_rera_registry_raw_20260510_215801.json
+2026-05-10 21:58:01 | INFO     | __main__:scrape_city:329 | UP RERA: 10 registry records saved separately
+2026-05-10 21:58:01 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 10 records → data\raw\registry\gurgaon_all_registry_sources_20260510_215801.json
+2026-05-10 21:58:01 | SUCCESS  | __main__:scrape_city:337 | Gurgaon: 10 government registry records saved -> data\raw\registry\gurgaon_all_registry_sources_20260510_215801.json
+2026-05-10 21:58:01 | SUCCESS  | utils.helpers:save_listings_json:84 | Saved 0 records → data\raw\listings\gurgaon_all_sources_20260510_215801.json
+2026-05-10 21:58:01 | SUCCESS  | __main__:scrape_city:344 | Gurgaon: 0 total valid listings saved -> data\raw\listings\gurgaon_all_sources_20260510_215801.json
+2026-05-10 21:58:01 | INFO     | __main__:main:396 | 
+⚡ Launching Spark processing pipeline...

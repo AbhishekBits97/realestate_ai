@@ -1,0 +1,127 @@
+2026-05-10 13:33:07 | INFO     | banner:217 — 
+════════════════════════════════════════════════════════════════
+2026-05-10 13:33:07 | INFO     | banner:218 —   MODULE 4 — XAI + CHATBOT PIPELINE
+2026-05-10 13:33:07 | INFO     | banner:219 — ════════════════════════════════════════════════════════════════
+2026-05-10 13:33:07 | INFO     | main:1352 —   Started  : 2026-05-10 13:33:07
+2026-05-10 13:33:07 | INFO     | main:1353 —   Mock mode: False
+2026-05-10 13:33:07 | INFO     | main:1354 —   Seed     : 42
+2026-05-10 13:33:07 | INFO     | main:1355 —   Log      : data\explanations\module4_20260510_133307.log
+2026-05-10 13:33:07 | INFO     | banner:217 — 
+════════════════════════════════════════════════════════════════
+2026-05-10 13:33:07 | INFO     | banner:218 —   ENVIRONMENT VALIDATION
+2026-05-10 13:33:07 | INFO     | banner:219 — ════════════════════════════════════════════════════════════════
+2026-05-10 13:33:07 | INFO     | validate_environment:181 — Python   : 3.11.3
+2026-05-10 13:33:07 | INFO     | validate_environment:182 — Platform : Windows-10-10.0.26200-SP0
+2026-05-10 13:33:07 | INFO     | validate_environment:189 —   ✅  numpy                (required)  pip install numpy
+2026-05-10 13:33:07 | INFO     | validate_environment:189 —   ✅  pandas               (required)  pip install pandas
+2026-05-10 13:33:07 | INFO     | validate_environment:189 —   ✅  sklearn              (required)  pip install scikit-learn
+2026-05-10 13:33:07 | INFO     | validate_environment:189 —   ✅  loguru               (required)  pip install loguru
+2026-05-10 13:33:07 | INFO     | validate_environment:189 —   ✅  joblib               (required)  pip install joblib
+2026-05-10 13:33:07 | INFO     | validate_environment:193 — 
+2026-05-10 13:33:07 | INFO     | validate_environment:198 —   ✅  shap                 (optional)  pip install shap
+2026-05-10 13:33:07 | INFO     | validate_environment:198 —   ✅  lime                 (optional)  pip install lime
+2026-05-10 13:33:07 | INFO     | validate_environment:198 —   ✅  xgboost              (optional)  pip install xgboost
+2026-05-10 13:33:07 | INFO     | validate_environment:198 —   ⚠️   lightgbm             (optional)  pip install lightgbm
+2026-05-10 13:33:07 | INFO     | validate_environment:198 —   ⚠️   catboost             (optional)  pip install catboost
+2026-05-10 13:33:07 | INFO     | validate_environment:198 —   ✅  matplotlib           (optional)  pip install matplotlib
+2026-05-10 13:33:07 | INFO     | validate_environment:198 —   ⚠️   seaborn              (optional)  pip install seaborn
+2026-05-10 13:33:07 | INFO     | validate_environment:198 —   ⚠️   plotly               (optional)  pip install plotly
+2026-05-10 13:33:07 | INFO     | validate_environment:198 —   ✅  langchain            (optional)  pip install langchain
+2026-05-10 13:33:07 | INFO     | validate_environment:198 —   ⚠️   fastapi              (optional)  pip install fastapi
+2026-05-10 13:33:07 | INFO     | validate_environment:198 —   ⚠️   uvicorn              (optional)  pip install uvicorn
+2026-05-10 13:33:07 | INFO     | validate_environment:198 —   ✅  rich                 (optional)  pip install rich
+2026-05-10 13:33:07 | INFO     | validate_environment:198 —   ⚠️   prophet              (optional)  pip install prophet
+2026-05-10 13:33:07 | INFO     | validate_environment:198 —   ⚠️   jinja2               (optional)  pip install jinja2
+2026-05-10 13:33:07 | SUCCESS  | validate_environment:205 — 
+All required packages present.
+2026-05-10 13:33:07 | INFO     | banner:217 — 
+════════════════════════════════════════════════════════════════
+2026-05-10 13:33:07 | INFO     | banner:218 —   Loading Data & Models
+2026-05-10 13:33:07 | INFO     | banner:219 — ════════════════════════════════════════════════════════════════
+2026-05-10 13:33:07 | INFO     | section:223 — 
+── Loading Feature Matrix ─────────────────────────────────
+2026-05-10 13:33:07 | WARNING  | load_feature_matrix:247 — Feature matrix not found at 'data\features\feature_matrix.parquet' — falling back to mock data
+2026-05-10 13:33:07 | INFO     | load_feature_matrix:251 — Generated mock dataset: (500, 29)
+2026-05-10 13:33:10 | INFO     | make_train_test_split:385 — Split: train=400  test=100  features=24
+2026-05-10 13:33:10 | INFO     | section:223 — 
+── Loading / Training Model ───────────────────────────────
+2026-05-10 13:33:10 | WARNING  | load_or_train_model:431 — No saved models found — training lightweight RF for demonstration
+2026-05-10 13:33:10 | INFO     | load_or_train_model:453 — Mock RF — R²=0.953  MAE=₹662/sqft
+2026-05-10 13:33:10 | INFO     | banner:217 — 
+════════════════════════════════════════════════════════════════
+2026-05-10 13:33:10 | INFO     | banner:218 —   XAI Pipeline
+2026-05-10 13:33:10 | INFO     | banner:219 — ════════════════════════════════════════════════════════════════
+2026-05-10 13:33:10 | INFO     | section:223 — 
+── SHAP Explainability Engine ─────────────────────────────
+2026-05-10 13:33:12 | INFO     | __init__:230 — [SHAP] Explainer initialised | model_type=tree | features=24
+2026-05-10 13:33:12 | INFO     | build_explainer:247 — [SHAP] Building tree explainer on 400 samples...
+2026-05-10 13:33:12 | WARNING  | run_shap_pipeline:519 — Custom SHAPExplainer error: Model type not yet supported by TreeExplainer: <class 'sklearn.pipeline.Pipeline'>
+2026-05-10 13:33:12 | INFO     | _build_shap_explainer:576 — Using TreeExplainer (fast, exact for tree models)
+2026-05-10 13:33:12 | INFO     | run_shap_pipeline:535 — Computing SHAP values for 100 test samples …
+2026-05-10 13:33:13 | INFO     | _log_property_explanation:684 —   Property #0 [SHAP-raw]
+2026-05-10 13:33:13 | INFO     | _log_property_explanation:685 —     Predicted   : ₹14,047/sqft
+2026-05-10 13:33:13 | INFO     | _log_property_explanation:686 —     Explanation : Predicted ₹14,047/sqft (base: ₹12,827). Key price drivers: locality_median_price (+₹6,600), demand_index (+₹1,010), school_score (+₹41). Dis…
+2026-05-10 13:33:13 | INFO     | _log_property_explanation:684 —   Property #1 [SHAP-raw]
+2026-05-10 13:33:13 | INFO     | _log_property_explanation:685 —     Predicted   : ₹16,965/sqft
+2026-05-10 13:33:13 | INFO     | _log_property_explanation:686 —     Explanation : Predicted ₹16,965/sqft (base: ₹12,827). Key price drivers: locality_median_price (+₹6,619), demand_index (+₹1,028), school_score (+₹41). Dis…
+2026-05-10 13:33:14 | INFO     | _log_property_explanation:684 —   Property #2 [SHAP-raw]
+2026-05-10 13:33:14 | INFO     | _log_property_explanation:685 —     Predicted   : ₹16,717/sqft
+2026-05-10 13:33:14 | INFO     | _log_property_explanation:686 —     Explanation : Predicted ₹16,717/sqft (base: ₹12,827). Key price drivers: locality_median_price (+₹6,690), demand_index (+₹1,020), is_ready_to_move (+₹67).…
+2026-05-10 13:33:14 | INFO     | _log_property_explanation:684 —   Property #3 [SHAP-raw]
+2026-05-10 13:33:14 | INFO     | _log_property_explanation:685 —     Predicted   : ₹6,692/sqft
+2026-05-10 13:33:14 | INFO     | _log_property_explanation:686 —     Explanation : Predicted ₹6,692/sqft (base: ₹12,827). Key price drivers: locality_median_price (+₹6,593), demand_index (+₹1,006), school_score (+₹42). Disc…
+2026-05-10 13:33:15 | INFO     | _log_property_explanation:684 —   Property #4 [SHAP-raw]
+2026-05-10 13:33:15 | INFO     | _log_property_explanation:685 —     Predicted   : ₹13,563/sqft
+2026-05-10 13:33:15 | INFO     | _log_property_explanation:686 —     Explanation : Predicted ₹13,563/sqft (base: ₹12,827). Key price drivers: locality_median_price (+₹6,398), demand_index (+₹1,020), school_score (+₹41). Dis…
+2026-05-10 13:33:15 | DEBUG    | _save_shap_global_plots:659 — Saved: shap_summary_beeswarm.png
+2026-05-10 13:33:16 | DEBUG    | _save_shap_global_plots:659 — Saved: shap_bar_importance.png
+2026-05-10 13:33:16 | INFO     | _save_explanations_json:678 — Explanations saved: data\explanations\property_explanations.json
+2026-05-10 13:33:16 | SUCCESS  | run_shap_pipeline:551 — [SHAP raw] ✅  5.6s
+2026-05-10 13:33:16 | INFO     | section:223 — 
+── LIME Cross-Validation ──────────────────────────────────
+2026-05-10 13:33:16 | INFO     | __init__:100 — [LIME] Explainer initialised | features=24 | samples=500
+2026-05-10 13:33:16 | DEBUG    | explain_property:131 — [LIME] Explaining instance | shape=(24,)
+2026-05-10 13:33:16 | INFO     | plot_explanation:267 — [LIME] Plot saved → data\explanations\lime_explanation_idx0.png
+2026-05-10 13:33:16 | INFO     | run_lime_pipeline:732 —   Property #0  local_R²=0.108  local_pred=₹14,254/sqft
+2026-05-10 13:33:16 | INFO     | compare_with_shap:302 — [LIME vs SHAP] Agreement: 0% | Common features: set()
+2026-05-10 13:33:16 | INFO     | run_lime_pipeline:738 —     SHAP–LIME agreement: 0%
+2026-05-10 13:33:16 | DEBUG    | explain_property:131 — [LIME] Explaining instance | shape=(24,)
+2026-05-10 13:33:17 | INFO     | plot_explanation:267 — [LIME] Plot saved → data\explanations\lime_explanation_idx1.png
+2026-05-10 13:33:17 | INFO     | run_lime_pipeline:732 —   Property #1  local_R²=0.536  local_pred=₹16,874/sqft
+2026-05-10 13:33:17 | INFO     | compare_with_shap:302 — [LIME vs SHAP] Agreement: 0% | Common features: set()
+2026-05-10 13:33:17 | INFO     | run_lime_pipeline:738 —     SHAP–LIME agreement: 0%
+2026-05-10 13:33:17 | DEBUG    | explain_property:131 — [LIME] Explaining instance | shape=(24,)
+2026-05-10 13:33:17 | INFO     | plot_explanation:267 — [LIME] Plot saved → data\explanations\lime_explanation_idx2.png
+2026-05-10 13:33:17 | INFO     | run_lime_pipeline:732 —   Property #2  local_R²=0.130  local_pred=₹15,706/sqft
+2026-05-10 13:33:17 | INFO     | compare_with_shap:302 — [LIME vs SHAP] Agreement: 0% | Common features: set()
+2026-05-10 13:33:17 | INFO     | run_lime_pipeline:738 —     SHAP–LIME agreement: 0%
+2026-05-10 13:33:17 | SUCCESS  | run_lime_pipeline:742 — [LIME custom] ✅  1.5s
+2026-05-10 13:33:17 | INFO     | section:223 — 
+── Investment Scoring & Grading ───────────────────────────
+2026-05-10 13:33:17 | INFO     | __init__:84 — [InvestmentScorer] Initialised
+2026-05-10 13:33:17 | INFO     | transform:188 — [InvestmentScorer] Scoring 500 properties...
+2026-05-10 13:33:17 | SUCCESS  | transform:210 — [InvestmentScorer] ✅ All properties scored
+2026-05-10 13:33:17 | INFO     | _print_grade_distribution:329 — 
+  Investment Grade Distribution:
+2026-05-10 13:33:17 | INFO     | _print_grade_distribution:332 —     Grade B  :   500 properties (100.0%)
+2026-05-10 13:33:17 | INFO     | _print_grade_distribution:334 —     Mean Investment Score: 53.5
+2026-05-10 13:33:17 | INFO     | top_properties:252 — [InvestmentScorer] Top 10 properties selected from 0 qualifying
+2026-05-10 13:33:17 | INFO     | _log_top_properties:910 — 
+  🏆 Top 0 Investment Opportunities:
+2026-05-10 13:33:17 | INFO     | _log_top_properties:911 —   Locality                  Grade Score  Rec          ROI5yr  
+2026-05-10 13:33:17 | INFO     | _log_top_properties:912 —   ─────────────────────────────────────────────────────────────────
+2026-05-10 13:33:17 | INFO     | _save_scored_data:930 — 
+  Grade distribution:
+investment_grade
+B    500
+2026-05-10 13:33:17 | SUCCESS  | run_investment_scoring:841 — [InvestmentScorer custom] ✅  0.2s
+2026-05-10 13:33:17 | INFO     | section:223 — 
+── Generating HTML Report ─────────────────────────────────
+2026-05-10 13:33:17 | SUCCESS  | generate_html_report:1087 — HTML report saved: data\explanations\module4_report.html  (0.0s)
+2026-05-10 13:33:17 | INFO     | section:223 — 
+── Launching Real Estate Advisor Chatbot ──────────────────
+2026-05-10 13:33:20 | WARNING  | <module>:48 — LangChain not installed. Run: pip install langchain langchain-anthropic
+2026-05-10 13:33:20 | INFO     | __init__:99 — [Tools] Real estate tools initialised
+2026-05-10 13:33:20 | WARNING  | __init__:374 — [Chatbot] LangChain not available — using rule-based fallback
+2026-05-10 13:33:20 | INFO     | __init__:375 — [Chatbot] Real Estate Advisor initialised
+2026-05-10 13:33:20 | SUCCESS  | launch_chatbot:1124 — Agent initialised
