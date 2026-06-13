@@ -53,7 +53,7 @@ def load_dashboard_data(
     """
     np.random.seed(42)
 
-    # ── Try loading real data
+    # â”€â”€ Try loading real data
     df = None
     for path in [scored_path, feature_path]:
         if Path(path).exists():
@@ -67,22 +67,22 @@ def load_dashboard_data(
     if df is None:
         df = _generate_mock_listings(n=800)
 
-    # ── Ensure required columns
+    # â”€â”€ Ensure required columns
     df = _ensure_columns(df)
 
-    # ── Locality summary stats
+    # â”€â”€ Locality summary stats
     locality_stats = _compute_locality_stats(df)
 
-    # ── Time series (monthly price trends per locality)
+    # â”€â”€ Time series (monthly price trends per locality)
     time_series = _generate_time_series()
 
-    # ── ROI forecasts
+    # â”€â”€ ROI forecasts
     roi_forecasts = _generate_roi_forecasts()
 
-    # ── Market KPIs
+    # â”€â”€ Market KPIs
     kpis = _compute_kpis(df)
 
-    # ── SHAP feature importance (mock or real)
+    # â”€â”€ SHAP feature importance (mock or real)
     shap_importance = _load_shap_importance()
 
     return {
@@ -97,7 +97,7 @@ def load_dashboard_data(
     }
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 def _generate_mock_listings(n: int = 800) -> pd.DataFrame:
     np.random.seed(42)
     locality_choices = np.random.choice(LOCALITIES, n, p=[
@@ -195,8 +195,84 @@ def _ensure_columns(df: pd.DataFrame) -> pd.DataFrame:
     for col, val in defaults.items():
         if col not in df.columns:
             df[col] = val
+
+    df = _repair_livability_scores(df)
+
     df["investment_risk_score"] = df["investment_risk_score"].clip(0, 100)
     df["livability_index"]      = df["livability_index"].clip(0, 100)
+    return df
+
+
+def _score_from_distance(series: pd.Series, excellent: float, good: float, fair: float, max_dist: float) -> pd.Series:
+    """Convert distance in km to a 0-100 convenience score."""
+    dist = pd.to_numeric(series, errors="coerce").replace([np.inf, -np.inf], np.nan)
+    score = pd.Series(0.0, index=series.index)
+
+    excellent_mask = dist <= excellent
+    good_mask = (dist > excellent) & (dist <= good)
+    fair_mask = (dist > good) & (dist <= fair)
+    poor_mask = (dist > fair) & (dist <= max_dist)
+
+    score.loc[excellent_mask] = 100 - (dist.loc[excellent_mask] / excellent) * 15
+    score.loc[good_mask] = 85 - ((dist.loc[good_mask] - excellent) / (good - excellent)) * 25
+    score.loc[fair_mask] = 60 - ((dist.loc[fair_mask] - good) / (fair - good)) * 30
+    score.loc[poor_mask] = 30 - ((dist.loc[poor_mask] - fair) / (max_dist - fair)) * 30
+    return score.clip(0, 100).fillna(0)
+
+
+def _normalise_score(series: pd.Series, default: float = 50.0) -> pd.Series:
+    """Return an existing score column on a clean 0-100 scale."""
+    values = pd.to_numeric(series, errors="coerce").replace([np.inf, -np.inf], np.nan)
+    if values.notna().sum() == 0:
+        return pd.Series(default, index=series.index)
+    if values.max() <= 1.0:
+        values = values * 100
+    return values.fillna(values.median()).clip(0, 100)
+
+
+def _repair_livability_scores(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Rebuild livability when upstream Module 2/4 output is missing or all zero.
+    Keeps genuine non-zero livability values unchanged.
+    """
+    livability = pd.to_numeric(df.get("livability_index", pd.Series(0, index=df.index)), errors="coerce")
+    if livability.fillna(0).gt(0).mean() > 0.25:
+        return df
+
+    healthcare = _score_from_distance(df.get("dist_nearest_hospital_km", pd.Series(np.nan, index=df.index)), 0.5, 2.0, 5.0, 10.0)
+    education = _score_from_distance(df.get("dist_nearest_school_km", pd.Series(np.nan, index=df.index)), 0.5, 1.5, 3.0, 7.0)
+    commercial = _score_from_distance(df.get("dist_nearest_mall_km", pd.Series(np.nan, index=df.index)), 1.0, 3.0, 7.0, 15.0)
+    employment = _score_from_distance(df.get("dist_nearest_it_hub_km", pd.Series(np.nan, index=df.index)), 1.0, 3.0, 8.0, 15.0)
+
+    metro_raw = df.get("metro_accessibility_score", pd.Series(np.nan, index=df.index))
+    metro = _normalise_score(metro_raw, default=50.0)
+    if metro.fillna(0).gt(0).mean() <= 0.25:
+        metro = _score_from_distance(df.get("dist_nearest_metro_km", pd.Series(np.nan, index=df.index)), 0.5, 2.0, 5.0, 10.0)
+
+    rebuilt = (
+        healthcare * 0.20 +
+        education * 0.20 +
+        metro * 0.25 +
+        commercial * 0.15 +
+        employment * 0.20
+    ).round(2)
+
+    if rebuilt.fillna(0).gt(0).mean() <= 0.25:
+        fallback_parts = [
+            _normalise_score(df.get("builder_reputation_score", pd.Series(np.nan, index=df.index)), default=55.0),
+            _normalise_score(df.get("infrastructure_impact_score", pd.Series(np.nan, index=df.index)), default=50.0),
+        ]
+        price_rank = df.get("locality_price_rank")
+        if price_rank is not None:
+            fallback_parts.append(_normalise_score(price_rank, default=50.0))
+        rebuilt = pd.concat(fallback_parts, axis=1).mean(axis=1).round(2)
+
+    df["score_healthcare"] = healthcare.round(2)
+    df["score_education"] = education.round(2)
+    df["score_metro"] = metro.round(2)
+    df["score_commercial"] = commercial.round(2)
+    df["score_employment"] = employment.round(2)
+    df["livability_index"] = rebuilt.clip(0, 100)
     return df
 
 
@@ -294,7 +370,7 @@ def _load_shap_importance() -> pd.DataFrame:
         except Exception:
             pass
 
-    # Labelled fallback — only used when Module 4 has not been run yet
+    # Labelled fallback â€” only used when Module 4 has not been run yet
     return pd.DataFrame({
         "Feature": [
             "Hospital Access", "Distance to Metro", "Builder Price Premium",
@@ -306,11 +382,11 @@ def _load_shap_importance() -> pd.DataFrame:
     }).sort_values("Mean_SHAP", ascending=True)
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 # DATA CORRECTION UTILITIES
-# Call these to fix wrong scraped values — edits flow through the DataFrame
+# Call these to fix wrong scraped values â€” edits flow through the DataFrame
 # so every chart, table and chatbot response updates automatically.
-# ─────────────────────────────────────────────────────────────────────────────
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 def fix_locality_price(df: pd.DataFrame, locality: str, new_median: float) -> pd.DataFrame:
     """
@@ -330,7 +406,7 @@ def fix_locality_price(df: pd.DataFrame, locality: str, new_median: float) -> pd
     df.loc[mask, "price_per_sqft"] *= scale
     df.loc[mask, "price_inr"]      *= scale
     df.loc[mask, "price_cr"]        = df.loc[mask, "price_inr"] / 1e7
-    logger.info(f"[Fix] {locality}: prices rescaled ×{scale:.3f} → median ₹{new_median:,}/sqft")
+    logger.info(f"[Fix] {locality}: prices rescaled Ã—{scale:.3f} â†’ median â‚¹{new_median:,}/sqft")
     return df
 
 
@@ -344,7 +420,7 @@ def fix_roi_estimate(df: pd.DataFrame, locality: str, correct_roi_pct: float) ->
     """
     df = df.copy()
     df.loc[df["locality"] == locality, "roi_5yr_estimate"] = correct_roi_pct
-    logger.info(f"[Fix] {locality}: roi_5yr_estimate → {correct_roi_pct}%")
+    logger.info(f"[Fix] {locality}: roi_5yr_estimate â†’ {correct_roi_pct}%")
     return df
 
 
@@ -358,7 +434,7 @@ def fix_risk_score(df: pd.DataFrame, locality: str, correct_risk: float) -> pd.D
     """
     df = df.copy()
     df.loc[df["locality"] == locality, "investment_risk_score"] = correct_risk
-    logger.info(f"[Fix] {locality}: investment_risk_score → {correct_risk}")
+    logger.info(f"[Fix] {locality}: investment_risk_score â†’ {correct_risk}")
     return df
 
 
@@ -377,5 +453,6 @@ def remove_outliers(df: pd.DataFrame,
     hi = df[col].quantile(upper_pct / 100)
     before = len(df)
     df     = df[(df[col] >= lo) & (df[col] <= hi)].copy()
-    logger.info(f"[Fix] Removed {before - len(df)} outliers from '{col}' (kept ₹{lo:,.0f}–₹{hi:,.0f})")
+    logger.info(f"[Fix] Removed {before - len(df)} outliers from '{col}' (kept â‚¹{lo:,.0f}â€“â‚¹{hi:,.0f})")
     return df
+
