@@ -1,297 +1,964 @@
-"""pages/ai_advisor.py — Embedded AI Chatbot Page"""
+"""
+app.py
+=======
+Module 5 — Streamlit Dashboard Entry Point
+
+AI-Powered Real Estate Investment Intelligence System
+Gurgaon NCR Property Market Analytics
+
+Run:
+  streamlit run app.py
+  streamlit run app.py --server.port 8501 --theme.base dark
+"""
+
 import streamlit as st
-import re
 
-QUICK_PROMPTS = [
-    "Should I buy a 3BHK in Sector 56 for ₹1.2 Cr?",
-    "What is the 5-year ROI forecast for Golf Course Road?",
-    "Compare DLF Phase 5 and Sohna Road",
-    "What are the risks in Sector 82?",
-    "Find 3BHK under ₹1.5 Cr in Gurgaon with good metro access",
-    "Why is Golf Course Road priced higher than Sohna Road?",
-]
+# ── MUST be first Streamlit call ──────────────────────────────────────────────
+st.set_page_config(
+    page_title="PropIQ — Real Estate Intelligence",
+    page_icon="🏘️",
+    layout="wide",
+    initial_sidebar_state="expanded",
+    menu_items={
+        "Get Help": "mailto:2024da04221@wilp.bits-pilani.ac.in",
+        "About": "PropIQ — AI Real Estate Intelligence by Abhishek (2024DA04221) | M.Tech Data Science, BITS Pilani",
+    },
+)
 
-# ── No hardcoded profiles. All figures come from the live DataFrame passed
-#    to render_ai_advisor(data). _get_profile() does a groupby lookup.
-_ADVISOR_DF: "pd.DataFrame | None" = None   # set at render time
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent))
+sys.path.insert(0, str(Path(__file__).parent / "module4_xai_chatbot"))
+sys.path.insert(0, str(Path(__file__).parent / "module3_models"))
+sys.path.insert(0, str(Path(__file__).parent / "module2_feature_engineering"))
+
+from utils.dashboard_data import load_dashboard_data
+from components.sidebar import render_sidebar
+from components.header import render_header
 
 
-def _get_profile(loc: str) -> dict:
+# ─────────────────────────────────────────────────────────────────────────────
+# DESIGN SYSTEM — AI INTELLIGENCE TERMINAL
+# Palette: Midnight base · Cyan signal · Amber data · Emerald gain · Rose risk
+# Type: Space Grotesk (display/numerics) · Inter (body) · JetBrains Mono (data)
+# Signature: glowing scan-line grid background + live-pulse data rings on KPIs
+# ─────────────────────────────────────────────────────────────────────────────
+st.markdown(
     """
-    Compute locality stats on-the-fly from the scraped DataFrame.
-    Falls back to dataset-wide medians if locality is not found.
-    """
-    import pandas as pd
-    df = _ADVISOR_DF
-    if df is None or loc not in df["locality"].values:
-        if df is not None:
-            return dict(
-                price     = int(df["price_per_sqft"].median()),
-                roi       = round(float(df["roi_5yr_estimate"].median()), 1),
-                risk      = "Medium",
-                risk_score= round(float(df["investment_risk_score"].median()), 1),
-                livability= round(float(df["livability_index"].median()), 1),
-            )
-        return dict(price=9500, roi=40, risk="Medium", risk_score=40, livability=70)
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
 
-    row = df[df["locality"] == loc]
-    risk_val = round(float(row["investment_risk_score"].mean()), 1)
-    return dict(
-        price     = int(row["price_per_sqft"].median()),
-        roi       = round(float(row["roi_5yr_estimate"].mean()), 1),
-        risk      = "Low" if risk_val < 30 else "High" if risk_val >= 55 else "Medium",
-        risk_score= risk_val,
-        livability= round(float(row["livability_index"].mean()), 1),
-    )
+<style>
+/* ═══════════════════════════════════════════════
+   TOKEN SYSTEM
+═══════════════════════════════════════════════ */
+:root {
+    /* Base surfaces */
+    --bg-void:      #030810;
+    --bg-base:      #060f1e;
+    --bg-raised:    #0a1628;
+    --bg-card:      #0d1d35;
+    --bg-card-hi:   #112240;
+    --bg-glass:     rgba(13, 29, 53, 0.72);
+
+    /* Signals */
+    --cyan:         #00d4ff;
+    --cyan-dim:     rgba(0, 212, 255, 0.15);
+    --cyan-glow:    rgba(0, 212, 255, 0.35);
+    --amber:        #f59e0b;
+    --amber-dim:    rgba(245, 158, 11, 0.14);
+    --amber-glow:   rgba(245, 158, 11, 0.30);
+    --emerald:      #10b981;
+    --emerald-dim:  rgba(16, 185, 129, 0.13);
+    --emerald-glow: rgba(16, 185, 129, 0.30);
+    --rose:         #f43f5e;
+    --rose-dim:     rgba(244, 63, 94, 0.13);
+    --violet:       #8b5cf6;
+    --violet-dim:   rgba(139, 92, 246, 0.14);
+
+    /* Text */
+    --text-hi:      #f0f6ff;
+    --text-body:    #94a3b8;
+    --text-dim:     #475569;
+    --text-data:    #00d4ff;
+
+    /* Structure */
+    --border:       rgba(0, 212, 255, 0.10);
+    --border-hi:    rgba(0, 212, 255, 0.28);
+    --radius-sm:    6px;
+    --radius:       10px;
+    --radius-lg:    16px;
+    --shadow-card:  0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(0,212,255,0.06);
+    --shadow-glow:  0 0 40px rgba(0, 212, 255, 0.10);
+}
+
+/* ═══════════════════════════════════════════════
+   GLOBAL RESET
+═══════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body, [class*="css"], .stApp {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ═══════════════════════════════════════════════
+   SIGNATURE ELEMENT — SCAN-LINE GRID BACKGROUND
+   A pulsing intelligence-terminal atmosphere
+═══════════════════════════════════════════════ */
+.stApp {
+    background-color: var(--bg-void);
+    background-image:
+        /* Subtle dot grid */
+        radial-gradient(circle, rgba(0,212,255,0.06) 1px, transparent 1px),
+        /* Depth gradient */
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,212,255,0.04) 0%, transparent 70%);
+    background-size: 28px 28px, 100% 100%;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+/* Horizontal scan-line overlay */
+.stApp::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 212, 255, 0.012) 2px,
+        rgba(0, 212, 255, 0.012) 4px
+    );
+}
+
+/* ═══════════════════════════════════════════════
+   SIDEBAR
+═══════════════════════════════════════════════ */
+[data-testid="stSidebar"] {
+    background: var(--bg-base) !important;
+    border-right: 1px solid var(--border-hi) !important;
+    box-shadow: 4px 0 32px rgba(0, 0, 0, 0.6) !important;
+}
+
+[data-testid="stSidebar"] > div:first-child {
+    padding-top: 0 !important;
+}
+
+[data-testid="stSidebar"] * {
+    color: var(--text-body) !important;
+    font-family: 'Inter', sans-serif !important;
+}
+
+/* Sidebar section labels */
+[data-testid="stSidebar"] .stMarkdown h3 {
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 9px !important;
+    letter-spacing: 3px !important;
+    text-transform: uppercase !important;
+    color: var(--cyan) !important;
+    margin-bottom: 8px !important;
+    opacity: 0.8;
+}
+
+/* Nav buttons in sidebar */
+[data-testid="stSidebar"] .stButton > button {
+    width: 100% !important;
+    background: transparent !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius-sm) !important;
+    color: var(--text-body) !important;
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 500 !important;
+    font-size: 13px !important;
+    padding: 10px 14px !important;
+    text-align: left !important;
+    letter-spacing: 0.02em !important;
+    transition: all 0.18s ease !important;
+    margin-bottom: 4px !important;
+}
+
+[data-testid="stSidebar"] .stButton > button:hover {
+    background: var(--cyan-dim) !important;
+    border-color: var(--border-hi) !important;
+    color: var(--cyan) !important;
+    transform: translateX(3px) !important;
+}
+
+/* ═══════════════════════════════════════════════
+   MAIN CONTENT AREA
+═══════════════════════════════════════════════ */
+.main .block-container {
+    padding: 1.5rem 2rem 3rem !important;
+    max-width: 1600px !important;
+}
+
+/* ═══════════════════════════════════════════════
+   METRIC CARDS — Glowing data rings
+═══════════════════════════════════════════════ */
+.iq-metric {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px 20px 18px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.iq-metric::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.iq-metric.cyan::before  { background: linear-gradient(90deg, transparent, var(--cyan), transparent); }
+.iq-metric.amber::before { background: linear-gradient(90deg, transparent, var(--amber), transparent); }
+.iq-metric.emerald::before { background: linear-gradient(90deg, transparent, var(--emerald), transparent); }
+.iq-metric.rose::before  { background: linear-gradient(90deg, transparent, var(--rose), transparent); }
+.iq-metric.violet::before { background: linear-gradient(90deg, transparent, var(--violet), transparent); }
+
+.iq-metric:hover {
+    border-color: var(--border-hi);
+    box-shadow: var(--shadow-card);
+}
+
+/* Pulse ring — signature data-alive element */
+.iq-metric::after {
+    content: '';
+    position: absolute;
+    right: 18px; top: 20px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--emerald);
+    box-shadow: 0 0 0 0 var(--emerald-glow);
+    animation: pulse-ring 2.8s ease-in-out infinite;
+}
+.iq-metric.amber::after { background: var(--amber); box-shadow: 0 0 0 0 var(--amber-glow); }
+.iq-metric.cyan::after  { background: var(--cyan);  box-shadow: 0 0 0 0 var(--cyan-glow); }
+.iq-metric.rose::after  { background: var(--rose);  animation: none; opacity: 0.6; }
+
+@keyframes pulse-ring {
+    0%   { box-shadow: 0 0 0 0 rgba(16,185,129,0.5); }
+    60%  { box-shadow: 0 0 0 10px rgba(16,185,129,0); }
+    100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); }
+}
+
+.iq-metric-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 10px;
+}
+
+.iq-metric-value {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2.1rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--text-hi);
+    margin-bottom: 6px;
+    letter-spacing: -0.02em;
+}
+
+.iq-metric-value.cyan   { color: var(--cyan); }
+.iq-metric-value.amber  { color: var(--amber); }
+.iq-metric-value.emerald { color: var(--emerald); }
+.iq-metric-value.rose   { color: var(--rose); }
+
+.iq-metric-delta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 400;
+}
+.delta-up   { color: var(--emerald); }
+.delta-dn   { color: var(--rose); }
+.delta-flat { color: var(--text-dim); }
+
+/* ═══════════════════════════════════════════════
+   GLASS PANELS — Content containers
+═══════════════════════════════════════════════ */
+.iq-panel {
+    background: var(--bg-glass);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: var(--shadow-card);
+    margin-bottom: 20px;
+}
+
+.iq-panel-sm {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+}
+
+/* ═══════════════════════════════════════════════
+   SECTION HEADERS
+═══════════════════════════════════════════════ */
+.iq-section-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+}
+
+.iq-section-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    opacity: 0.8;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.iq-section-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-hi);
+    letter-spacing: -0.01em;
+}
+
+.iq-section-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--cyan);
+    box-shadow: 0 0 8px var(--cyan-glow);
+    flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════════
+   PROPERTY CARDS
+═══════════════════════════════════════════════ */
+.prop-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.prop-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--cyan);
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.prop-card:hover {
+    border-color: var(--border-hi);
+    background: var(--bg-card-hi);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-card);
+}
+
+.prop-card:hover::before { opacity: 1; }
+
+/* ═══════════════════════════════════════════════
+   GRADE BADGES — Investment intelligence signals
+═══════════════════════════════════════════════ */
+.iq-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+.iq-badge-A  {
+    background: var(--emerald-dim);
+    color: var(--emerald);
+    border: 1px solid rgba(16,185,129,0.25);
+}
+.iq-badge-B  {
+    background: var(--cyan-dim);
+    color: var(--cyan);
+    border: 1px solid rgba(0,212,255,0.22);
+}
+.iq-badge-C  {
+    background: var(--amber-dim);
+    color: var(--amber);
+    border: 1px solid rgba(245,158,11,0.22);
+}
+.iq-badge-D  {
+    background: var(--rose-dim);
+    color: var(--rose);
+    border: 1px solid rgba(244,63,94,0.22);
+}
+.iq-badge-buy    { background: var(--emerald-dim); color: var(--emerald); border: 1px solid rgba(16,185,129,0.25); }
+.iq-badge-hold   { background: var(--amber-dim);   color: var(--amber);   border: 1px solid rgba(245,158,11,0.22); }
+.iq-badge-avoid  { background: var(--rose-dim);    color: var(--rose);    border: 1px solid rgba(244,63,94,0.22); }
+
+/* ═══════════════════════════════════════════════
+   DATA TABLE
+═══════════════════════════════════════════════ */
+[data-testid="stDataFrame"] {
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius) !important;
+    overflow: hidden !important;
+}
+
+[data-testid="stDataFrame"] th {
+    background: var(--bg-raised) !important;
+    color: var(--text-dim) !important;
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 10px !important;
+    letter-spacing: 1.5px !important;
+    text-transform: uppercase !important;
+    border-bottom: 1px solid var(--border-hi) !important;
+}
+
+[data-testid="stDataFrame"] td {
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 12px !important;
+    color: var(--text-body) !important;
+    border-bottom: 1px solid var(--border) !important;
+}
+
+[data-testid="stDataFrame"] tr:hover td {
+    background: var(--cyan-dim) !important;
+}
+
+/* ═══════════════════════════════════════════════
+   TABS — Intelligence module selector
+═══════════════════════════════════════════════ */
+.stTabs [data-baseweb="tab-list"] {
+    background: var(--bg-raised) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius) !important;
+    padding: 4px !important;
+    gap: 2px !important;
+}
+
+.stTabs [data-baseweb="tab"] {
+    font-family: 'Space Grotesk', sans-serif !important;
+    font-weight: 500 !important;
+    font-size: 13px !important;
+    border-radius: var(--radius-sm) !important;
+    color: var(--text-dim) !important;
+    padding: 8px 18px !important;
+    transition: all 0.15s !important;
+    letter-spacing: 0.01em !important;
+}
+
+.stTabs [aria-selected="true"] {
+    background: var(--cyan-dim) !important;
+    color: var(--cyan) !important;
+    border: 1px solid var(--border-hi) !important;
+}
+
+.stTabs [data-baseweb="tab"]:hover:not([aria-selected="true"]) {
+    background: rgba(255,255,255,0.04) !important;
+    color: var(--text-body) !important;
+}
+
+/* ═══════════════════════════════════════════════
+   FORM CONTROLS
+═══════════════════════════════════════════════ */
+/* Labels */
+.stSlider label, .stSelectbox label, .stMultiSelect label,
+.stTextInput label, .stNumberInput label {
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 10px !important;
+    font-weight: 500 !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase !important;
+    color: var(--text-dim) !important;
+}
+
+/* Input fields */
+.stTextInput input, .stNumberInput input {
+    background: var(--bg-raised) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius-sm) !important;
+    color: var(--text-hi) !important;
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 13px !important;
+    transition: border-color 0.2s !important;
+}
+.stTextInput input:focus, .stNumberInput input:focus {
+    border-color: var(--border-hi) !important;
+    box-shadow: 0 0 0 3px var(--cyan-dim) !important;
+}
+
+/* Selectboxes */
+.stSelectbox > div > div, .stMultiSelect > div > div {
+    background: var(--bg-raised) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius-sm) !important;
+    color: var(--text-hi) !important;
+}
+
+/* Sliders */
+.stSlider > div > div > div > div {
+    background: var(--cyan) !important;
+}
+.stSlider [data-baseweb="slider"] > div:first-child {
+    background: var(--border) !important;
+}
+
+/* Slider value label */
+.stSlider [data-testid="stTickBar"] {
+    color: var(--text-dim) !important;
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 10px !important;
+}
+
+/* ═══════════════════════════════════════════════
+   BUTTONS
+═══════════════════════════════════════════════ */
+.stButton > button {
+    background: transparent !important;
+    border: 1px solid var(--border-hi) !important;
+    border-radius: var(--radius-sm) !important;
+    color: var(--cyan) !important;
+    font-family: 'Space Grotesk', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 13px !important;
+    letter-spacing: 0.03em !important;
+    padding: 9px 20px !important;
+    transition: all 0.18s ease !important;
+}
+
+.stButton > button:hover {
+    background: var(--cyan-dim) !important;
+    border-color: var(--cyan) !important;
+    box-shadow: 0 0 16px var(--cyan-glow) !important;
+}
+
+/* Primary CTA button */
+.stButton > button[kind="primary"] {
+    background: linear-gradient(135deg, rgba(0,212,255,0.2), rgba(0,212,255,0.08)) !important;
+    border-color: var(--cyan) !important;
+    box-shadow: 0 0 20px var(--cyan-glow) !important;
+}
+
+/* ═══════════════════════════════════════════════
+   CHAT INTERFACE — AI Advisor
+═══════════════════════════════════════════════ */
+.chat-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 4px 0;
+}
+
+.chat-user {
+    align-self: flex-end;
+    max-width: 75%;
+    background: var(--bg-card-hi);
+    border: 1px solid var(--border-hi);
+    border-radius: 12px 12px 4px 12px;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--text-hi);
+    line-height: 1.6;
+}
+
+.chat-bot {
+    align-self: flex-start;
+    max-width: 85%;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--cyan);
+    border-radius: 4px 12px 12px 12px;
+    padding: 14px 18px;
+    font-size: 13px;
+    color: var(--text-body);
+    line-height: 1.7;
+}
+
+.chat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-dim);
+    margin-bottom: 6px;
+}
+
+.chat-label.bot { color: var(--cyan); opacity: 0.8; }
+
+/* Thinking animation */
+.iq-thinking {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 16px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--cyan);
+    border-radius: 4px 12px 12px 12px;
+}
+
+.iq-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--cyan);
+    animation: iq-bounce 1.1s ease-in-out infinite;
+}
+.iq-dot:nth-child(2) { animation-delay: 0.18s; }
+.iq-dot:nth-child(3) { animation-delay: 0.36s; }
+
+@keyframes iq-bounce {
+    0%, 100% { opacity: 0.3; transform: translateY(0); }
+    50%       { opacity: 1;   transform: translateY(-4px); }
+}
+
+/* Quick-question chips */
+.iq-chip {
+    display: inline-block;
+    padding: 6px 14px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: all 0.18s;
+    margin: 4px;
+}
+.iq-chip:hover {
+    border-color: var(--border-hi);
+    color: var(--cyan);
+    background: var(--cyan-dim);
+}
+
+/* ═══════════════════════════════════════════════
+   MAP CONTAINER
+═══════════════════════════════════════════════ */
+[data-testid="stDeckGlJsonChart"],
+.folium-map {
+    border-radius: var(--radius) !important;
+    border: 1px solid var(--border) !important;
+    overflow: hidden !important;
+}
+
+/* ═══════════════════════════════════════════════
+   PLOTLY CHARTS
+═══════════════════════════════════════════════ */
+.js-plotly-plot {
+    border-radius: var(--radius) !important;
+}
+
+.js-plotly-plot .plotly {
+    background: transparent !important;
+}
+
+/* ═══════════════════════════════════════════════
+   SHAP / XAI BARS
+═══════════════════════════════════════════════ */
+.shap-row {
+    display: grid;
+    grid-template-columns: 160px 1fr 80px;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+}
+.shap-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--text-body);
+}
+.shap-bar-wrap {
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+}
+.shap-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--cyan), var(--violet));
+}
+.shap-val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--cyan);
+    text-align: right;
+}
+
+/* ═══════════════════════════════════════════════
+   STATUS INDICATORS
+═══════════════════════════════════════════════ */
+.iq-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+.iq-status-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+.iq-status.live .iq-status-dot {
+    background: var(--emerald);
+    box-shadow: 0 0 0 0 var(--emerald-glow);
+    animation: pulse-ring 2.8s ease-in-out infinite;
+}
+.iq-status.live { color: var(--emerald); }
+.iq-status.warn .iq-status-dot { background: var(--amber); }
+.iq-status.warn { color: var(--amber); }
+.iq-status.err  .iq-status-dot { background: var(--rose); }
+.iq-status.err  { color: var(--rose); }
+
+/* ═══════════════════════════════════════════════
+   SCORE RING (circular progress for investment score)
+═══════════════════════════════════════════════ */
+.iq-score-ring {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+.iq-score-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--cyan);
+    line-height: 1;
+}
+.iq-score-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+}
+
+/* ═══════════════════════════════════════════════
+   DIVIDERS & SPACING UTILITIES
+═══════════════════════════════════════════════ */
+.iq-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 20px 0;
+}
+
+.iq-mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-data);
+}
+
+.iq-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    opacity: 0.75;
+}
+
+/* ═══════════════════════════════════════════════
+   SPINNERS & LOADING
+═══════════════════════════════════════════════ */
+.stSpinner > div {
+    border-color: var(--cyan) transparent transparent transparent !important;
+}
+
+/* ═══════════════════════════════════════════════
+   STREAMLIT NATIVE OVERRIDES
+═══════════════════════════════════════════════ */
+/* st.metric boxes */
+[data-testid="metric-container"] {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius) !important;
+    padding: 18px 20px !important;
+}
+[data-testid="metric-container"] label {
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 9px !important;
+    letter-spacing: 2.5px !important;
+    text-transform: uppercase !important;
+    color: var(--text-dim) !important;
+}
+[data-testid="metric-container"] [data-testid="stMetricValue"] {
+    font-family: 'Space Grotesk', sans-serif !important;
+    font-size: 1.9rem !important;
+    font-weight: 700 !important;
+    color: var(--text-hi) !important;
+    letter-spacing: -0.02em !important;
+}
+[data-testid="metric-container"] [data-testid="stMetricDelta"] {
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 11px !important;
+}
+
+/* Positive/negative delta colours */
+[data-testid="stMetricDelta"][data-direction="positive"] { color: var(--emerald) !important; }
+[data-testid="stMetricDelta"][data-direction="negative"] { color: var(--rose) !important; }
+
+/* st.info / st.warning / st.success / st.error */
+[data-testid="stAlert"] {
+    border-radius: var(--radius-sm) !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 13px !important;
+}
+
+/* st.expander */
+.streamlit-expanderHeader {
+    background: var(--bg-raised) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius-sm) !important;
+    font-family: 'Space Grotesk', sans-serif !important;
+    font-weight: 600 !important;
+    color: var(--text-body) !important;
+}
+
+/* st.progress */
+.stProgress > div > div > div {
+    background: linear-gradient(90deg, var(--cyan), var(--violet)) !important;
+    border-radius: 3px !important;
+}
+.stProgress > div > div {
+    background: var(--border) !important;
+    border-radius: 3px !important;
+    height: 6px !important;
+}
+
+/* Checkbox */
+.stCheckbox span { color: var(--text-body) !important; }
+.stCheckbox [data-testid="stCheckbox"] div {
+    background: var(--cyan) !important;
+    border-color: var(--cyan) !important;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--bg-base); }
+::-webkit-scrollbar-thumb { background: var(--border-hi); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--cyan); }
+
+/* ═══════════════════════════════════════════════
+   HIDE STREAMLIT CHROME
+═══════════════════════════════════════════════ */
+#MainMenu          { visibility: hidden; }
+footer             { visibility: hidden; }
+.stDeployButton    { display: none; }
+[data-testid="stToolbar"] { display: none; }
+
+/* ═══════════════════════════════════════════════
+   ANIMATIONS
+═══════════════════════════════════════════════ */
+@keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.iq-animate {
+    animation: fadeSlideUp 0.4s ease forwards;
+}
+
+/* Staggered delays for card grids */
+.iq-animate-1 { animation-delay: 0.05s; opacity: 0; }
+.iq-animate-2 { animation-delay: 0.10s; opacity: 0; }
+.iq-animate-3 { animation-delay: 0.15s; opacity: 0; }
+.iq-animate-4 { animation-delay: 0.20s; opacity: 0; }
+
+/* Glow pulse for live data badges */
+@keyframes glow-pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.5; }
+}
+.iq-live-glow { animation: glow-pulse 2s ease-in-out infinite; }
+
+</style>
+""",
+    unsafe_allow_html=True,
+)
 
 
-def _generate_response(message: str) -> str:
-    """Rule-based AI response engine (replaces LangChain when not available)."""
-    msg   = message.lower()
-
-    # ── ROI / forecast query
-    if any(kw in msg for kw in ["roi", "return", "forecast", "appreciate", "grow", "5 year", "5-year"]):
-        loc = _extract_locality(msg)
-        p   = _get_profile(loc)
-        price_5yr = round(p["price"] * (1 + p["roi"]/100))
-        return (
-            f"## 📈 5-Year ROI Forecast — {loc}\n\n"
-            f"| Metric | Value |\n|---|---|\n"
-            f"| Current Avg Price/sqft | ₹{p['price']:,} |\n"
-            f"| Projected Price (5yr)  | ₹{price_5yr:,} |\n"
-            f"| 5-Year ROI Estimate    | **{p['roi']}%** |\n"
-            f"| Annual CAGR            | {p['roi']/5:.1f}% |\n"
-            f"| Risk Level             | {p['risk']} |\n\n"
-            f"**Growth Catalysts:**\n"
-            f"- Metro extension / RRTS corridor connectivity\n"
-            f"- IT hub expansion and employment growth\n"
-            f"- Smart City infrastructure investment\n\n"
-            f"> ⚠️ Figures sourced from your scraped data ({p['price']:,} = scraped median). "
-            f"95% CI band is ±{int(p['roi']/4)}% around the central estimate."
-        )
-
-    # ── Risk assessment
-    if any(kw in msg for kw in ["risk", "safe", "dangerous", "risky", "how safe"]):
-        loc = _extract_locality(msg)
-        p   = _get_profile(loc)
-        var = round(p["risk_score"] * -0.4, 1)
-        return (
-            f"## 🎯 Bayesian Risk Assessment — {loc}\n\n"
-            f"**Overall Risk Score:** {p['risk_score']}/100 — **{p['risk']} Risk**\n\n"
-            f"| Risk Dimension | Score |\n|---|---|\n"
-            f"| Price Volatility | {p['risk_score'] + 3:.0f}/100 |\n"
-            f"| Builder Default Risk | {max(10, p['risk_score'] - 15):.0f}/100 |\n"
-            f"| Market Liquidity | {p['risk_score'] - 5:.0f}/100 |\n"
-            f"| Overvaluation Risk | {p['risk_score'] + 8:.0f}/100 |\n"
-            f"| Infra Dependency | {p['risk_score'] + 12:.0f}/100 |\n\n"
-            f"**5% Value-at-Risk:** {var}% (worst-case loss at 5th percentile)\n\n"
-            f"**Recommendation:** {'Suitable for conservative investors ✅' if p['risk'] == 'Low' else 'Suitable for moderate-risk investors ✅' if p['risk'] == 'Medium' else '⚠️ High risk — suitable for investors with long horizon only'}\n\n"
-            f"> All figures computed from your scraped data ({p['risk_score']} = avg risk score across {loc} listings)."
-        )
-
-    # ── Locality comparison
-    if any(kw in msg for kw in ["compare", "vs", "versus", "better between", "difference between"]):
-        locs = _extract_two_localities(msg)
-        loc1, loc2 = locs
-        p1 = _get_profile(loc1)
-        p2 = _get_profile(loc2)
-        better_roi  = loc1 if p1["roi"]       > p2["roi"]       else loc2
-        safer       = loc1 if p1["risk_score"] < p2["risk_score"] else loc2
-        more_live   = loc1 if p1["livability"] > p2["livability"] else loc2
-        return (
-            f"## ⚖️ Locality Comparison\n\n"
-            f"| Metric | {loc1} | {loc2} |\n|---|---|---|\n"
-            f"| Avg Price/sqft | ₹{p1['price']:,} | ₹{p2['price']:,} |\n"
-            f"| 5-Year ROI | {p1['roi']}% | {p2['roi']}% |\n"
-            f"| Risk Level | {p1['risk']} ({p1['risk_score']}) | {p2['risk']} ({p2['risk_score']}) |\n"
-            f"| Livability Index | {p1['livability']}/100 | {p2['livability']}/100 |\n\n"
-            f"**🏆 Verdict:**\n"
-            f"- Better ROI potential: **{better_roi}**\n"
-            f"- Lower risk: **{safer}**\n"
-            f"- Better livability: **{more_live}**\n\n"
-            f"> All figures sourced from your scraped listings data."
-        )
-
-    # ── Price prediction / valuation
-    if any(kw in msg for kw in ["price", "cost", "worth", "value", "how much", "predict"]):
-        loc   = _extract_locality(msg)
-        bhk_m = re.search(r"(\d)\s*bhk", msg)
-        bhk   = int(bhk_m.group(1)) if bhk_m else 3
-        p     = _get_profile(loc)
-        area  = bhk * 500
-        ppsf  = p["price"] * {1:0.85, 2:0.95, 3:1.0, 4:1.08, 5:1.15}.get(bhk, 1.0)
-        total = ppsf * area / 1e7
-        return (
-            f"## 🤖 Price Estimate\n\n"
-            f"**{bhk} BHK in {loc}**\n\n"
-            f"| | |\n|---|---|\n"
-            f"| Scraped Median/sqft | **₹{p['price']:,}** |\n"
-            f"| BHK-adjusted/sqft   | **₹{ppsf:,.0f}** |\n"
-            f"| Estimated Area | {area:,} sqft |\n"
-            f"| **Total Price** | **₹{total:.2f} Cr** |\n"
-            f"| 95% CI | ₹{ppsf*0.92:,.0f} – ₹{ppsf*1.08:,.0f}/sqft |\n\n"
-            f"> Use the **Price Predictor** page for a full ML model prediction with SHAP breakdown."
-        )
-
-    # ── Property search
-    if any(kw in msg for kw in ["find", "search", "show", "list", "properties", "under", "below"]):
-        budget_m = re.search(r"(\d+(?:\.\d+)?)\s*(?:cr|crore)", msg)
-        bhk_m    = re.search(r"(\d)\s*bhk", msg)
-        budget   = float(budget_m.group(1)) if budget_m else 1.5
-        bhk      = int(bhk_m.group(1)) if bhk_m else 3
-        df       = _ADVISOR_DF
-        if df is not None:
-            mask   = (df["bhk_count"] == bhk) & (df["price_cr"] <= budget * 1.1)
-            subset = df[mask].groupby("locality").agg(
-                median_price_sqft=("price_per_sqft","median"),
-                avg_roi=("roi_5yr_estimate","mean"),
-                avg_risk=("investment_risk_score","mean"),
-                count=("price_per_sqft","count"),
-            ).reset_index().sort_values("avg_roi", ascending=False)
-            if len(subset):
-                lines = [f"## 🔍 {bhk}BHK Properties Under ₹{budget} Cr — from your scraped data\n",
-                         f"Found {len(subset)} matching localities:\n"]
-                for _, r in subset.head(5).iterrows():
-                    risk_lbl = "Low" if r["avg_risk"] < 30 else "High" if r["avg_risk"] >= 55 else "Medium"
-                    lines.append(f"- **{r['locality']}** — ₹{r['median_price_sqft']:,.0f}/sqft | "
-                                 f"ROI: {r['avg_roi']:.1f}% | Risk: {risk_lbl} | {int(r['count'])} listings")
-                return "\n".join(lines)
-        return f"No {bhk}BHK properties found under ₹{budget} Cr in current data. Try adjusting budget or BHK."
-
-    # ── SHAP explanation
-    if any(kw in msg for kw in ["why", "explain", "reason", "factor", "drive", "what makes"]):
-        loc      = _extract_locality(msg)
-        p        = _get_profile(loc)
-        baseline = int(_ADVISOR_DF["price_per_sqft"].median()) if _ADVISOR_DF is not None else 9500
-        diff     = p["price"] - baseline
-        return (
-            f"## 🧠 SHAP Explanation — {loc}\n\n"
-            f"Properties in **{loc}** are priced at ₹{p['price']:,}/sqft "
-            f"(vs dataset baseline ₹{baseline:,}/sqft — sourced from scraped data):\n\n"
-            f"| Feature | Contribution | Reason |\n|---|---|---|\n"
-            f"| Locality vs Baseline | {'+'if diff>=0 else ''}{diff:,} | Locality median vs full-dataset median |\n"
-            f"| Livability ({p['livability']:.0f}/100) | +₹{int((p['livability']-60)*12):,} | Amenity access premium |\n"
-            f"| Metro Accessibility | +₹{int(p['livability']*9):,} | Connectivity score |\n"
-            f"| Builder Reputation | +₹450 | Tier presence in locality |\n"
-            f"| Infrastructure Impact | +₹380 | Planned projects nearby |\n\n"
-            f"> All baseline figures come from your scraped data. "
-            f"SHAP satisfies Efficiency, Symmetry, and Dummy axioms (Lundberg & Lee, NeurIPS 2017)."
-        )
-
-    # ── Default
-    df_ref    = _ADVISOR_DF
-    n_listings  = f"{len(df_ref):,}" if df_ref is not None else "N/A"
-    n_localities = str(df_ref["locality"].nunique()) if df_ref is not None else "N/A"
-    return (
-        "## 🏘️ PropIQ Real Estate Advisor\n\n"
-        f"I have access to **{n_listings} scraped listings** across **{n_localities} localities** in your dataset.\n\n"
-        "Try asking:\n\n"
-        "- **Price prediction** — *'What is the price of a 3BHK in Sector 56?'*\n"
-        "- **ROI forecast** — *'What is the 5-year ROI for Golf Course Road?'*\n"
-        "- **Risk assessment** — *'How risky is Sector 82?'*\n"
-        "- **Comparisons** — *'Compare DLF Phase 5 and Sohna Road'*\n"
-        "- **Property search** — *'Find 3BHK under ₹1.5 Cr in Gurgaon'*\n"
-        "- **SHAP explanations** — *'Why is Golf Course Road so expensive?'*"
-    )
+# ─────────────────────────────────────────────────────────────────────────────
+# SESSION STATE INIT
+# ─────────────────────────────────────────────────────────────────────────────
+if "data_loaded" not in st.session_state:
+    st.session_state.data_loaded = False
+if "chat_history" not in st.session_state:
+    st.session_state.chat_history = []
+if "active_page" not in st.session_state:
+    st.session_state.active_page = "Market Overview"
 
 
-def _extract_locality(text: str) -> str:
-    """Extract locality from text using real df localities where available."""
-    text_lower = text.lower()
-    if _ADVISOR_DF is not None:
-        for loc in sorted(_ADVISOR_DF["locality"].unique(), key=len, reverse=True):
-            if loc.lower() in text_lower:
-                return loc
-    # Pattern fallback
-    for pattern, name in [
-        ("golf course","Golf Course Road"), ("dlf phase 5","DLF Phase 5"),
-        ("cyber city","Cyber City"),        ("mg road","MG Road"),
-        ("sector 82","Sector 82"),          ("sector 56","Sector 56"),
-        ("sohna road","Sohna Road"),        ("palam vihar","Palam Vihar"),
-    ]:
-        if pattern in text_lower:
-            return name
-    return "Sector 56"
+# ─────────────────────────────────────────────────────────────────────────────
+# LOAD DATA
+# ─────────────────────────────────────────────────────────────────────────────
+@st.cache_data(show_spinner=False, ttl=3600)
+def get_data():
+    return load_dashboard_data()
 
 
-def _extract_two_localities(text: str) -> tuple:
-    text_lower = text.lower()
-    found = []
-    if _ADVISOR_DF is not None:
-        for loc in sorted(_ADVISOR_DF["locality"].unique(), key=len, reverse=True):
-            if loc.lower() in text_lower:
-                found.append(loc)
-            if len(found) == 2:
-                break
-    if len(found) < 2:
-        found = [_extract_locality(text), "Sohna Road"]
-    return found[0], found[1]
+with st.spinner("Initialising PropIQ Intelligence Engine…"):
+    data = get_data()
+    st.session_state.data_loaded = True
 
 
-def render_ai_advisor(data: dict):
-    global _ADVISOR_DF
-    _ADVISOR_DF = data["listings"]   # wire live df — all responses now read from real scraped data
-    st.markdown('<div class="section-header">💬 AI Investment Advisor</div>', unsafe_allow_html=True)
-    st.markdown(
-        "<div style='color:#94a3b8; font-size:0.88rem; margin-bottom:16px;'>"
-        "Ask anything about Gurgaon NCR property investment. Powered by LangChain + XGBoost + LSTM + Bayesian Risk.</div>",
-        unsafe_allow_html=True,
-    )
+# ─────────────────────────────────────────────────────────────────────────────
+# LAYOUT
+# ─────────────────────────────────────────────────────────────────────────────
+render_header()
+page = render_sidebar()
 
-    # ── Quick prompt buttons
-    st.markdown("**💡 Quick questions:**")
-    qcols = st.columns(3)
-    for i, prompt in enumerate(QUICK_PROMPTS):
-        with qcols[i % 3]:
-            if st.button(prompt[:48] + ("…" if len(prompt) > 48 else ""),
-                         key=f"qp_{i}", use_container_width=True):
-                st.session_state.chat_history.append({"role": "user", "content": prompt})
-                response = _generate_response(prompt)
-                st.session_state.chat_history.append({"role": "assistant", "content": response})
+# ─────────────────────────────────────────────────────────────────────────────
+# PAGE ROUTING
+# ─────────────────────────────────────────────────────────────────────────────
+if page == "Market Overview":
+    from pages.market_overview import render_market_overview
+    render_market_overview(data)
 
-    st.markdown("---")
+elif page == "Property Explorer":
+    from pages.property_explorer import render_property_explorer
+    render_property_explorer(data)
 
-    # ── Conversation display
-    chat_container = st.container()
-    with chat_container:
-        if not st.session_state.get("chat_history"):
-            st.markdown("""
-            <div style="text-align:center; padding:40px; color:#64748b;">
-                <div style="font-size:2rem; margin-bottom:8px;">🏘️</div>
-                <div style="font-family:'Syne',sans-serif; font-size:1rem; color:#94a3b8;">
-                    Start a conversation above or type your question below
-                </div>
-            </div>""", unsafe_allow_html=True)
-        else:
-            for turn in st.session_state.chat_history:
-                if turn["role"] == "user":
-                    st.markdown(f"""
-                    <div class="chat-user">
-                        <div class="chat-label">You</div>
-                        {turn['content']}
-                    </div>""", unsafe_allow_html=True)
-                else:
-                    st.markdown(f'<div class="chat-label" style="margin-top:16px;">🤖 PropIQ Advisor</div>',
-                                unsafe_allow_html=True)
-                    st.markdown(turn["content"])
-                    st.markdown("---")
+elif page == "Investment Analysis":
+    from pages.investment_analysis import render_investment_analysis
+    render_investment_analysis(data)
 
-    # ── Input box
-    col_in, col_btn, col_clr = st.columns([5, 1, 1])
-    with col_in:
-        user_input = st.text_input("Ask about any Gurgaon locality, property, or investment question...",
-                                   key="advisor_input", label_visibility="collapsed",
-                                   placeholder="e.g. Should I buy in DLF Phase 5 for ₹2 Cr?")
-    with col_btn:
-        send = st.button("Send →", use_container_width=True)
-    with col_clr:
-        if st.button("Clear", use_container_width=True):
-            st.session_state.chat_history = []
-            st.rerun()
+elif page == "Price Predictor":
+    from pages.price_predictor import render_price_predictor
+    render_price_predictor(data)
 
-    if send and user_input.strip():
-        st.session_state.chat_history.append({"role": "user", "content": user_input})
-        with st.spinner("Analysing..."):
-            response = _generate_response(user_input)
-        st.session_state.chat_history.append({"role": "assistant", "content": response})
-        st.rerun()
+elif page == "AI Advisor":
+    from pages.ai_advisor import render_ai_advisor
+    render_ai_advisor(data)
+
+elif page == "XAI Explorer":
+    from pages.xai_explorer import render_xai_explorer
+    render_xai_explorer(data)
