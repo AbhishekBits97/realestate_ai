@@ -3,15 +3,15 @@ name: Update data.json from CSV
 on:
   push:
     paths:
-      - "listings_investment_scored.csv"   # triggers only when CSV changes
+      - "listings_investment_scored.csv"
       - "feature_matrix.csv"
-  workflow_dispatch:                        # also allows manual trigger from GitHub UI
+  workflow_dispatch:
 
 jobs:
   generate:
     runs-on: ubuntu-latest
     permissions:
-      contents: write                       # needed to commit data.json back
+      contents: write
 
     steps:
       - name: Checkout repo
@@ -33,3 +33,8 @@ jobs:
           git diff --cached --quiet && echo "No changes to commit" || \
             git commit -m "chore: auto-update data.json [skip ci]"
           git push
+
+      - name: Purge jsDelivr cache
+        run: |
+          curl -s "https://purge.jsdelivr.net/gh/AbhishekBits97/realestate_ai@main/data.json" \
+            -o /dev/null -w "jsDelivr purge status: %{http_code}\n"
